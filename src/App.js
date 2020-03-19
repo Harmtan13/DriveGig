@@ -1,26 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
+import {
+  BrowserRouter as Router, 
+  Route,
+  Switch
+} from 'react-router-dom'
 import './App.css';
+import {Link} from 'react-router-dom';
+
+import Home from './components/Home';
+import Shift from './components/shift/Shift';
+import Gasform from './components/gas/GasForm';
+import Stats from './components/stats/Stats';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <>
+    <Router>
+      <header>
+        <Link to='/'>
+          <h1>DriveGig</h1>
+        </Link>
       </header>
-    </div>
+
+      <div className='container'>
+        <Switch>
+          <Route exact path='/' component = {Home}/>
+          <Route exact path='/shift' component={Shift}></Route>
+          <Route path='/gas' component={Gasform}></Route>
+          <Route path='/stats' component={Stats}></Route>
+        </Switch>
+      </div>
+    </Router>
+    </>
   );
 }
+
 
 export default App;
