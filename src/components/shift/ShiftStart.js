@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function ShiftStart({ history, odometer, setOdometer}) {
+export default function ShiftStart({history, odometer, setOdometer}) {
 
   return (
     <div>
@@ -20,7 +20,7 @@ export default function ShiftStart({ history, odometer, setOdometer}) {
 
       <button
         type='submit'
-        onClick={() => history.push('/')}
+        onClick={() => history.push('/shift/main')}
       >
         Clock In
       </button>

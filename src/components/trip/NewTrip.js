@@ -1,10 +1,6 @@
 import React from 'react'
 
-export default function Trips({history}) {
-  const startTrip = () => {
-    history.push('./shift/trips')
-  }
-
+export default function NewTrip({history}) {
   return (
     <div>
       <h1>Hello from Trip!</h1>
@@ -16,7 +12,7 @@ export default function Trips({history}) {
         <option value="ubereats">Uber Eats</option>
       </select>
 
-      <button>
+      <button onClick={() => history.push('/shift/trip')}>
         Start Trip
       </button>
 
