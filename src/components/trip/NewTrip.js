@@ -16,8 +16,12 @@ export default function NewTrip({history}) {
         Start Trip
       </button>
 
-      <button>
+      <button onClick={() => history.push('/shift/paused')}>
         Pause Shift
+      </button>
+
+      <button onClick={() => history.push('/shift/end')}>
+        End Shift
       </button>
     </div>
   )

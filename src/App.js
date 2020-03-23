@@ -27,7 +27,7 @@ function App() {
           <Route exact path='/' component = {Home}/>
           <Route path='/shift' component={Shift}></Route>
           <Route path='/gas' component={Gasform}></Route>
-          <Route path='/stats' component={Stats}></Route>
+          <Route path='/statistics' component={Stats}></Route>
         </Switch>
       </div>
     </Router>

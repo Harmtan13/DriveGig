@@ -30,7 +30,7 @@ export default function TripStart({history, offer, setOffer, odometer, setOdomet
           />
       </label>
 
-      <button onClick={() => history.push('/')}>Head for Pickup</button>
+      <button onClick={() => history.push('/shift/trip/pickup')}>Head for Pickup</button>
 
     </div>
   )
