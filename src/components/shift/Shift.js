@@ -3,104 +3,64 @@ import {
   Route,
   Switch
 } from 'react-router-dom'
-import ShiftStart from './ShiftStart';
-import ShiftPause from './ShiftPause';
-import ShiftEnd from './ShiftEnd';
-import NewTrip from './../trip/NewTrip';
-import TripStart from '../trip/TripStart';
-import Pickup from '../trip/Pickup';
-import Departure from '../trip/Departure';
-import TripEnd from '../trip/TripEnd';
+import StartShift from './StartShift';
+import PauseShift from './PauseShift';
+import EndShift from './EndShift';
+import MainShift from './MainShift';
+import Trip from '../trip/Trip';
+
 
 export default function Shift({history}) {
-  const [shiftOdometer, setShiftOdometer] = useState('');
-  const [offer, setOffer] = useState('');
-  const [tripOdometer, setripOdometer] = useState('');
+  const [shift, setShift] = useState(JSON.parse(localStorage.getItem('shift')) || {
+    odometer: []
+  });
 
   return (
     <>
       <Switch>
+        <Route
+            exact
+            path='/shift'
+            render = {() => (
+              <StartShift
+                shift = {shift}
+                setShift = {setShift}
+            />
+            )}
+          />
+
           <Route
-              exact
-              
-              path='/shift'
-              render = {() => (
-                <ShiftStart 
-                  odometer={shiftOdometer} 
-                  setOdometer={setShiftOdometer}
-                  history={history} 
+            path='/shift/main' 
+            render= {() => (
+              <MainShift
+              shift= {shift}
               />
-              )}
-            />
+            )}
+          />
 
-            <Route
-              path='/shift/main' 
-              render= {() => (
-                <NewTrip
-                  history={history} 
-                />
-              )}
-            />
+          <Route
+            path='/shift/trip'
+            render = {() => (
+              <Trip
+              />
+            )}
+          />
 
-            <Route
-              path='/shift/paused'
-              render = { () => (
-                <ShiftPause
-                  history={history} 
-                />
-              )}
-            />
+          <Route
+            path='/shift/paused'
+            render = { () => (
+              <PauseShift
+              />
+            )}
+          />
 
-
-            <Route
-              path='/shift/end'
-              render = { () => (
-                <ShiftEnd
-                  history={history} 
-                />
-              )}
-            />
-
-            <Route
-              exact
-              path='/shift/trip'
-              render = {() => (
-                <TripStart
-                  history={history} 
-                  offer={offer} 
-                  setOffer={setOffer}
-                  tripOdometer = {tripOdometer}
-                  setripOdometer = {setripOdometer}
-                />
-              )}
-            />
-
-            <Route
-              path='/shift/trip/pickup'
-              render = {() => (
-                <Pickup
-                  history={history}
-                />
-              )}
-            />
-
-            <Route
-              path='/shift/trip/departure'
-              render = {() => (
-                <Departure
-                  history={history}
-                />
-              )}
-            />
-
-            <Route
-              path='/shift/trip/delivery'
-              render = { () => (
-                <TripEnd
-                  history={history}
-                />
-              )}
-            />
+          <Route
+            path='/shift/end'
+            render = { () => (
+              <EndShift
+              />
+            )}
+          />
         </Switch>
     </>
   )

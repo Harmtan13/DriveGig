@@ -5,7 +5,12 @@ export default function Departure({history}) {
     <div>
       <button 
         onClick={() => history.push('/shift/trip/delivery')}>
-        Head out
+        Head Out
+      </button>
+
+      <button 
+        onClick={() => history.push('/shift/trip')}>
+        Add-on Trip
       </button>
     </div>
   )

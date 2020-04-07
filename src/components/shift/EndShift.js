@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ShiftEnd({history}) {
+export default function EndShift({history}) {
   return (
     <div>
       <label htmlFor="odometer-end">

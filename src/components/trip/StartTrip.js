@@ -1,8 +1,19 @@
-import React from 'react'
+import React, {useState} from 'react'
 
-export default function TripStart({history, offer, setOffer, odometer, setOdometer}) {
+export default function StartTrip({history}) {
+  const [offer, setOffer] = useState('');
+  const [tripOdometer, setripOdometer] = useState('');
+
   return (
+
     <div>
+        <select>
+          <option value="doordash">DoorDash</option>
+          <option value="grubhub">GrubHub</option>
+          <option value="postmates">PostMates</option>
+          <option value="ubereats">Uber Eats</option>
+        </select>
+
       <label htmlFor="offer">
         <p>Offer Amount</p>
 
@@ -25,8 +36,8 @@ export default function TripStart({history, offer, setOffer, odometer, setOdomet
             type="number" 
             name="-odometer" 
             placeholder="000000"
-            onChange={(e) => setOdometer(e.target.value)}
-            value={odometer}
+            onChange={(e) => setripOdometer(e.target.value)}
+            value={tripOdometer}
           />
       </label>
 

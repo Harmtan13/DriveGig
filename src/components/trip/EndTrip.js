@@ -1,11 +1,11 @@
 import React from 'react'
 
-export default function TripEnd({history}) {
+export default function EndTrip({history}) {
   return (
     <div>
 
     <label htmlFor="odometer">
-      <p>Offer Amount</p>
+      <p>Final Amount</p>
 
       <input 
           type="number" 
@@ -20,7 +20,7 @@ export default function TripEnd({history}) {
       <br/><br/>
 
     <label htmlFor="payout">
-      <p>Offer Amount</p>
+      <p>Odometer-</p>
 
       <input 
           type="number" 

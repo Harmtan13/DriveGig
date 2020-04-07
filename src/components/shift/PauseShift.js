@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ShiftPause({history}) {
+export default function PauseShift({history}) {
   return (
     <div>
       <button onClick={() => history.push('/shift/main')}>

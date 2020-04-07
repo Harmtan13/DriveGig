@@ -1,28 +1,13 @@
 import React from 'react'
 
-export default function NewTrip({history}) {
+export default function NewTrip({history, odometer}) {
   return (
-    <div>
-      <h1>Hello from Trip!</h1>
-
-      <select>
-        <option value="doordash">DoorDash</option>
-        <option value="grubhub">GrubHub</option>
-        <option value="postmates">PostMates</option>
-        <option value="ubereats">Uber Eats</option>
-      </select>
-
-      <button onClick={() => history.push('/shift/trip')}>
+    <>
+      <button 
+        onClick={() => history.push('/shift/trip')}
+      >
         Start Trip
       </button>
-
-      <button onClick={() => history.push('/shift/paused')}>
-        Pause Shift
-      </button>
-
-      <button onClick={() => history.push('/shift/end')}>
-        End Shift
-      </button>
-    </div>
+    </>
   )
 }
