@@ -1,39 +1,23 @@
-import React from 'react';
-import {
-  BrowserRouter as Router, 
-  Route,
-  Switch
-} from 'react-router-dom'
+import React, { useState } from 'react';
+
 import './App.css';
-import {Link} from 'react-router-dom';
+import AppRouter from './AppRouter';
 
-import Home from './components/Home';
-import Shift from './components/shift/Shift';
-import Gasform from './components/gas/GasForm';
-import Stats from './components/stats/Stats';
+export default function App() {
+  const [shift, setShift] = useState(JSON.parse(localStorage.getItem('shift')) || {
+    odometer: []
+  });
 
-function App() {
+  const shiftState = {
+    shift, 
+    setShift
+  }
+
   return (
     <>
-    <Router>
-      <header>
-        <Link to='/'>
-          <h1>DriveGig</h1>
-        </Link>
-      </header>
-
-      <div className='container'>
-        <Switch>
-          <Route exact path='/' component = {Home}/>
-          <Route path='/shift' component={Shift}></Route>
-          <Route path='/gas' component={Gasform}></Route>
-          <Route path='/statistics' component={Stats}></Route>
-        </Switch>
-      </div>
-    </Router>
+      <AppRouter
+        {...shiftState}
+      />
     </>
   );
 }
-
-
-export default App;

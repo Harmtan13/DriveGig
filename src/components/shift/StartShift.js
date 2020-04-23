@@ -1,24 +1,23 @@
 import React, { useState } from 'react';
-import {useHistory} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
-export default function ShiftStart(props) {
-  const {shift, setShift} = props;
-  const history = useHistory();
+export default function ShiftStart(shiftState) {
+  const {shift, setShift} = shiftState;
 
-  const [odometerStart, setOdometerStart] = useState(shift.odometer[0]);
+  const [odometerStart, setOdometerStart] = useState(shift.odometer[0] || '');
 
-  const addOdometerStart = () => {
-    const odometer = [...shift.odometer, [odometerStart]];
-    const updatedShift = {...shift, odometer};
+  const updateShift = () => {
+    const odometer = [Number(odometerStart)];
+    const timeStamp = [Date.now()];
+    const updatedShift = {...shift, odometer, timeStamp};
 
     setShift(updatedShift);
     localStorage.setItem('shift', JSON.stringify(updatedShift));
-
-    history.push('/shift/main')
+    console.log(updatedShift);
   }
 
   return (
-    <div>
+    <>
       <label htmlFor="odometer-start">
 
         <p>{odometerStart}</p>
@@ -33,13 +32,15 @@ export default function ShiftStart(props) {
         />
       </label>
 
-      <button
-        type='submit'
-        onClick={() => addOdometerStart()}
-        disabled = {!odometerStart}
-      >
-        Clock In
-      </button>
-    </div>
+      <Link to='/shift/main'>
+        <button
+          type='submit'
+          onClick={() => updateShift()}
+          disabled = {!odometerStart}
+        >
+          Clock In
+        </button>
+      </Link>
+    </>
   )
 }

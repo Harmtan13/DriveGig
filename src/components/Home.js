@@ -20,7 +20,7 @@ export default function Home() {
           </Button>
         </Link>
 
-        <Link to='/stats'>
+        <Link to='/statistics'>
           <Button>
             Statistics
           </Button>
