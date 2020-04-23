@@ -5,7 +5,8 @@ import AppRouter from './AppRouter';
 
 export default function App() {
   const [shift, setShift] = useState(JSON.parse(localStorage.getItem('shift')) || {
-    odometer: []
+    odometer: [],
+    timeStamps: [],
   });
 
   const shiftState = {

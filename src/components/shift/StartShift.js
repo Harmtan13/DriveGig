@@ -1,19 +1,16 @@
 import React, { useState } from 'react';
 import {Link} from 'react-router-dom';
 
-export default function ShiftStart(shiftState) {
-  const {shift, setShift} = shiftState;
-
+export default function ShiftStart({shift, setShift}) {
   const [odometerStart, setOdometerStart] = useState(shift.odometer[0] || '');
 
-  const updateShift = () => {
+  const startShift = () => {
     const odometer = [Number(odometerStart)];
-    const timeStamp = [Date.now()];
-    const updatedShift = {...shift, odometer, timeStamp};
+    const timeStamps = [Date.now()];
+    const updatedShift = {...shift, odometer, timeStamps};
 
     setShift(updatedShift);
     localStorage.setItem('shift', JSON.stringify(updatedShift));
-    console.log(updatedShift);
   }
 
   return (
@@ -35,7 +32,7 @@ export default function ShiftStart(shiftState) {
       <Link to='/shift/main'>
         <button
           type='submit'
-          onClick={() => updateShift()}
+          onClick={startShift}
           disabled = {!odometerStart}
         >
           Clock In
