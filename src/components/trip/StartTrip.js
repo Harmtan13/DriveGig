@@ -1,8 +1,9 @@
-import React, {useState} from 'react'
+import React, {useState} from 'react';
+import { Link } from 'react-router-dom';
 
 export default function StartTrip({history}) {
-  const [offer, setOffer] = useState('');
-  const [tripOdometer, setripOdometer] = useState('');
+  const [provider, setProvider] = useState('');
+  const [odometer, setOdometer] = useState('');
 
   return (
 
@@ -14,34 +15,30 @@ export default function StartTrip({history}) {
           <option value="ubereats">Uber Eats</option>
         </select>
 
-      <label htmlFor="offer">
-        <p>Offer Amount</p>
-
-        <input 
-            type="number" 
-            name="offered-pay" 
-            placeholder="000000"
-            onChange={(e) => setOffer(e.target.value)}
-            value={offer}
-          />
-      </label>  
-
       <br/>
       <br/>
         
       <label htmlFor="odometer">
         <p>Current Odometer</p>
+        <p>{odometer}</p>
 
         <input 
             type="number" 
             name="-odometer" 
             placeholder="000000"
-            onChange={(e) => setripOdometer(e.target.value)}
-            value={tripOdometer}
+            onChange={(e) => setOdometer(e.target.value)}
+            value={odometer}
           />
       </label>
 
-      <button onClick={() => history.push('/shift/trip/pickup')}>Head for Pickup</button>
+      <br/>
+      <br/>
+
+      <Link to='trip/pickup'>
+        <button>
+          Head for Pickup
+        </button>
+      </Link>
 
     </div>
   )

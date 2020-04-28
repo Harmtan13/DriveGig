@@ -1,15 +1,30 @@
-import {
+import React, {useState} from 'react'
+import { 
   Route,
   Switch
 } from 'react-router-dom'
+
 import StartTrip from './StartTrip';
 import Pickup from './Pickup';
-import Departure from '../trip/Departure';
+import Departure from './Departure';
 import EndTrip from './EndTrip';
 
-import React from 'react'
+export default function Trip() {
+  const [trip, setTrip] = useState(JSON.parse(localStorage.getItem('trip')) || { orderProvider: '',
+    odometer: [],
+    timeStamps: [],
+    pay: {
+      provider: '',
+      tip: '',
+      total: ''
+    }
+  });
 
-export default function Trip({history}) {
+  const tripState = {
+    trip, 
+    setTrip
+  }
+
   return (
     <>
       <Switch>
@@ -18,7 +33,7 @@ export default function Trip({history}) {
             path='/shift/trip'
             render = {() => (
               <StartTrip
-                history={history}
+                {...tripState}
               />
             )}
           />
@@ -27,7 +42,7 @@ export default function Trip({history}) {
             path='/shift/trip/pickup'
             render = {() => (
               <Pickup
-                history={history}
+                {...tripState}
               />
             )}
           />
@@ -36,7 +51,7 @@ export default function Trip({history}) {
             path='/shift/trip/departure'
             render = {() => (
               <Departure
-                history={history}
+                {...tripState}
               />
             )}
           />
@@ -45,7 +60,7 @@ export default function Trip({history}) {
             path='/shift/trip/delivery'
             render = { () => (
               <EndTrip
-                history={history}
+                {...tripState}
               />
             )}
           />

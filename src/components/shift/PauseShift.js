@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import { determinePlacement, addTimeStamp } from '../../helpers/AppHelpers'
 
 export default function PauseShift({shift, setShift}) {
-  console.log({shift});
+  console.log(shift);
   const resumeShift = () => {
     addTimeStamp(determinePlacement, setShift, shift, 1)
   }
