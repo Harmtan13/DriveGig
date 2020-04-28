@@ -1,4 +1,14 @@
-function validateDataStamp(shift, timeStamp, placement = 0) {
+function addTimeStamp(placementFunction, setShift, shift, placement = 0) {
+  const timeStamp = Date.now();
+  const timeStamps = placementFunction(shift, timeStamp, placement);
+
+  let updatedShift = {...shift, timeStamps};
+
+  setShift(updatedShift);
+  localStorage.setItem('shift', JSON.stringify(updatedShift));
+}
+
+function determinePlacement(shift, timeStamp, placement = 0) {
   const determinePlacement = placement === 0 ? 0 : 1;
   const stampLength = shift.timeStamps.length;
   const placementEquation = stampLength % 2 !== determinePlacement;
@@ -14,4 +24,5 @@ function validateDataStamp(shift, timeStamp, placement = 0) {
   return placementEquation ? attachStamp() : replaceStamp();
 }
 
-export { validateDataStamp }
+
+export { determinePlacement, addTimeStamp }

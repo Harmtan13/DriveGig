@@ -1,18 +1,13 @@
 import React from 'react'
 import NewTrip from '../trip/NewTrip';
-import { validateDataStamp } from '../../helpers/AppHelpers'
+import { determinePlacement, addTimeStamp} from '../../helpers/AppHelpers'
 import { Link } from 'react-router-dom';
 
 export default function MainShift({shift, setShift}) {
+  console.log(shift);
 
   const pauseShift = () => {
-    const timeStamp = Date.now();
-    const timeStamps = validateDataStamp(shift, timeStamp);
-
-    let updatedShift = {...shift, timeStamps};
-
-    setShift(updatedShift);
-    localStorage.setItem('shift', JSON.stringify(updatedShift));
+    addTimeStamp(determinePlacement, setShift, shift);
   }
 
   return (

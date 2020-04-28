@@ -8,6 +8,7 @@ import MainShift from './MainShift';
 import Trip from '../trip/Trip';
 
 export default function ShiftRouter(shiftState) {
+
   return (
     <>
       <Route
