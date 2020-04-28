@@ -4,7 +4,7 @@ import { validateDataStamp } from '../../helpers/AppHelpers'
 import { Link } from 'react-router-dom';
 
 export default function MainShift({shift, setShift}) {
-  console.log(shift);
+
   const pauseShift = () => {
     const timeStamp = Date.now();
     const timeStamps = validateDataStamp(shift, timeStamp);
@@ -19,7 +19,7 @@ export default function MainShift({shift, setShift}) {
     <div>
       <h1>Hello from Trip!</h1>
 
-    <Link to='/shift/main'>
+    <Link to="paused">
       <button 
         onClick = {pauseShift}
       >

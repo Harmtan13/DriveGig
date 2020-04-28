@@ -24,7 +24,7 @@ export default function ShiftRouter(shiftState) {
         path='/shift/main' 
         render= {() => (
           <MainShift
-          {...shiftState}
+            {...shiftState}
           />
         )}
       />
@@ -41,6 +41,7 @@ export default function ShiftRouter(shiftState) {
         path='/shift/paused'
         render = { () => (
           <PauseShift
+            {...shiftState}
           />
         )}
       />
