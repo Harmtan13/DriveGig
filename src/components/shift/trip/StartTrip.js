@@ -9,7 +9,7 @@ export default function StartTrip({trip, setTrip}) {
     const odometer = [Number(odometerStart)];
     const driveTime = [Date.now()];
     const orderProvider = provider;
-    const updatedTrip = {...trip, odometer, timeStamps, orderProvider};
+    const updatedTrip = {...trip, odometer, driveTime, orderProvider};
 
     setTrip(updatedTrip);
     localStorage.setItem('trip', JSON.stringify(updatedTrip));

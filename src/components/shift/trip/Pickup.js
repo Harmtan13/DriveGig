@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function Pickup({trip, setTrip}) {
   console.log(trip);
-  const tripPickup = () => {
+  const updateTripPickup = () => {
     const pickupTime = Date.now();
     const driveTime = [...trip.driveTime, pickupTime];
     const waitTime = [pickupTime]
@@ -18,7 +18,7 @@ export default function Pickup({trip, setTrip}) {
       <Link to='departure'>
         <button 
           type='submit'
-          onClick={tripPickup}
+          onClick={updateTripPickup}
         >
           Arrived For Pickup
         </button>
