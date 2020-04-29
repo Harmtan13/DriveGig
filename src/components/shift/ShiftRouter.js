@@ -5,7 +5,7 @@ import StartShift from './StartShift';
 import PauseShift from './PauseShift';
 import EndShift from './EndShift';
 import MainShift from './MainShift';
-import Trip from '../trip/TripRouter';
+import Trip from './trip/TripRouter';
 
 export default function ShiftRouter(shiftState) {
 

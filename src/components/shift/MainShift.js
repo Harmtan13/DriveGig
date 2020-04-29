@@ -1,5 +1,5 @@
 import React from 'react'
-import NewTrip from '../trip/NewTrip';
+import NewTrip from './trip/NewTrip';
 import { determinePlacement, addTimeStamp} from '../../helpers/AppHelpers'
 import { Link } from 'react-router-dom';
 

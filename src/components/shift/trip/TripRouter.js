@@ -3,16 +3,16 @@ import {
   Route,
   Switch
 } from 'react-router-dom'
-
 import StartTrip from './StartTrip';
 import Pickup from './Pickup';
 import Departure from './Departure';
 import EndTrip from './EndTrip';
 
-export default function Trip() {
+export default function Trip({shift, setShift}) {
   const [trip, setTrip] = useState(JSON.parse(localStorage.getItem('trip')) || { orderProvider: '',
     odometer: [],
-    timeStamps: [],
+    driveTime: [],
+    waitTime: [],
     pay: {
       provider: '',
       tip: '',
