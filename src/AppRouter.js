@@ -7,9 +7,13 @@ import {
 
 import Nav from './Nav';
 import Home from './components/Home';
-import ShiftRouter from './components/shift/ShiftRouter';
 import Gasform from './components/gas/GasForm';
 import Stats from './components/stats/Stats';
+import StartShift from './components/shift/StartShift';
+import MainShift from './components/shift/MainShift'
+import PauseShift from './components/shift/PauseShift';
+import EndShift from './components/shift/EndShift';
+import Trip from './components/shift/trip/TripRouter';
 
 export default function AppRouter(shiftState) {
   return (
@@ -17,37 +21,37 @@ export default function AppRouter(shiftState) {
     <Nav/>
       <div className="container">
         <Switch>
-          <Route exact 
-            path='/' 
-            render={() => (
-              <Home
-                {...shiftState}
-              />
-            )}
-          />
+          <Route exact path='/'>
+            <Home {...shiftState}/>
+          </Route>
 
-          <Route
-            path='/shift' 
-            render={() => (
-              <ShiftRouter
-                {...shiftState}
-              />
-            )}
-          />
+          <Route path='/start-shift' >
+            <StartShift {...shiftState} />
+          </Route>
 
-          <Route 
-            path='/gas' 
-            component={Gasform}
-          />
+          <Route exact path='/shift' >
+            <MainShift {...shiftState} />
+          </Route>
 
-          <Route 
-            path='/statistics' 
-            render={() => (
-              <Stats
-                {...shiftState}
-              />
-            )}
-          />
+          <Route path='/shift/start-trip'>
+            <Trip/>
+          </Route>
+
+          <Route path='/shift-paused'>
+            <PauseShift {...shiftState}/>
+          </Route>
+
+          <Route path='/end-shift'>
+            <EndShift/>
+          </Route>
+
+          <Route path='/gas'>
+            <Gasform/>
+          </Route>
+
+          <Route path='/statistics'>
+            <Stats/>
+          </Route>
         </Switch>
       </div>
   </Router>

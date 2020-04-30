@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {Link} from 'react-router-dom';
 
-export default function ShiftStart({shift, setShift}) {
+export default function StartShift({shift, setShift}) {
   const [odometerStart, setOdometerStart] = useState(shift.odometer[0] || '');
 
   const startShift = () => {

@@ -1,35 +1,34 @@
-import React from 'react';
+import React from 'react'
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function Home() {
   return (
-    <div>
-      <ButtonWrapper className='wrapper'>
-        <h1>Welcome to Drive-Gig</h1>
+  <div>
+    <ButtonWrapper className='wrapper'>
+      <h1>Welcome to Drive-Gig</h1>
 
-        <Link to='/shift'>
-          <Button>
-            Start Shift
-          </Button>
-        </Link>
+      <Link to='/start-shift'>
+        <Button>
+          Start Shift
+        </Button>
+      </Link>
 
-        <Link to='/gas'>
-          <Button background="yellow" color='black'>
-            Gas Fillup
-          </Button>
-        </Link>
+      <Link to='/gas'>
+        <Button background="yellow" color='black'>
+          Gas Fillup
+        </Button>
+      </Link>
 
-        <Link to='/statistics'>
-          <Button>
-            Statistics
-          </Button>
-        </Link>
-      </ButtonWrapper>
-    </div>
+      <Link to='/statistics'>
+        <Button>
+          Statistics
+        </Button>
+      </Link>
+    </ButtonWrapper>
+  </div>
   )
 }
-
 const ButtonWrapper = styled.div`
 display: grid;
 `
