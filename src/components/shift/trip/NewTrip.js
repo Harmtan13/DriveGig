@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default function NewTrip({history, odometer}) {
   return (
     <>
-      <Link to="trip">
+      <Link to="/start-trip">
         <button>
           Start Trip
         </button>

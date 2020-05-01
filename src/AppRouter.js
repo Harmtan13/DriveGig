@@ -9,11 +9,11 @@ import Nav from './Nav';
 import Home from './components/Home';
 import Gasform from './components/gas/GasForm';
 import Stats from './components/stats/Stats';
-import StartShift from './components/shift/StartShift';
-import MainShift from './components/shift/MainShift'
-import PauseShift from './components/shift/PauseShift';
-import EndShift from './components/shift/EndShift';
-import Trip from './components/shift/trip/TripRouter';
+import StartShift from './components/shift/01-StartShift';
+import MainShift from './components/shift/02-MainShift'
+import PauseShift from './components/shift/03-PauseShift';
+import EndShift from './components/shift/04-EndShift';
+// import Trip from './components/shift/trip/01-TripRouter';
 
 export default function AppRouter(shiftState) {
   return (
@@ -33,9 +33,9 @@ export default function AppRouter(shiftState) {
             <MainShift {...shiftState} />
           </Route>
 
-          <Route path='/shift/start-trip'>
+          {/* <Route path='/shift'>
             <Trip/>
-          </Route>
+          </Route> */}
 
           <Route path='/shift-paused'>
             <PauseShift {...shiftState}/>

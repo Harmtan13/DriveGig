@@ -10,7 +10,7 @@ export default function PauseShift({shift, setShift}) {
   
   return (
     <div>
-      <Link to='main'>
+      <Link to='/shift'>
         <button
           onClick={resumeShift}
         >

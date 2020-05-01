@@ -3,9 +3,9 @@ import {
   Route,
   Switch
 } from 'react-router-dom'
-import StartTrip from './StartTrip';
-import Pickup from './Pickup';
-import Departure from './Departure';
+import StartTrip from './02-StartTrip';
+import Pickup from './03-Pickup';
+import Departure from './04-Departure';
 import EndTrip from './EndTrip';
 
 export default function Trip({shift, setShift}) {
@@ -30,7 +30,7 @@ export default function Trip({shift, setShift}) {
       <Switch>
           <Route
             exact
-            path='/shift/trip'
+            path='start-trip'
             render = {() => (
               <StartTrip
                 {...tripState}
@@ -39,7 +39,7 @@ export default function Trip({shift, setShift}) {
           />
         
           <Route
-            path='/shift/trip/pickup'
+            path='/start-trip/pickup'
             render = {() => (
               <Pickup
                 {...tripState}
