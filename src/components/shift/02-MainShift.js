@@ -1,10 +1,10 @@
 import React from 'react'
 import { determinePlacement, addTimeStamp} from '../../helpers/AppHelpers'
-import { Link } from 'react-router-dom';
-import NewTrip from './trip/NewTrip';
+import NewTrip from './trip/00-NewTrip';
 import { 
   Route,
-  Switch
+  Switch,
+  Link
 } from 'react-router-dom'
 
 import ShiftRouter from './trip/01-TripRouter';

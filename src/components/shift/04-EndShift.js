@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 export default function EndShift({history}) {
   return (
@@ -19,7 +20,11 @@ export default function EndShift({history}) {
       <br/>
 
       <center>
-      <button onClick={() => history.push('/statistics')}>Clock Out</button>
+        <Link to='/statistics'>
+          <button>
+            Clock Out
+          </button>
+        </Link>
       </center>
       
     </div>

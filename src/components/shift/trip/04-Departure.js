@@ -15,7 +15,7 @@ export default function Departure({trip, setTrip}) {
 
   return (
     <div>
-      <Link to='delivery'>
+      <Link to='/shift/delivery'>
         <button 
           onClick={updateTripDeparture}
         >
@@ -23,7 +23,7 @@ export default function Departure({trip, setTrip}) {
         </button>
       </Link>
 
-      <Link to='trip'>
+      <Link to='/shift/trip'>
         <button 
           // onClick={() => history.push('/shift/trip')}
         >

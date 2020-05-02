@@ -2,9 +2,9 @@ import React, { useState } from 'react';
   import {
   BrowserRouter as Router, 
   Route,
-  Switch 
+  Switch,
+  Link
   } from 'react-router-dom'
-import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
 import createShift from './helpers/CreateShift';

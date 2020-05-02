@@ -6,7 +6,7 @@ import {
 import StartTrip from './02-StartTrip';
 import Pickup from './03-Pickup';
 import Departure from './04-Departure';
-import EndTrip from './EndTrip';
+import EndTrip from './06-EndTrip';
 
 export default function TripRouter({shift, setShift}) {
   const [trip, setTrip] = useState(JSON.parse(localStorage.getItem('trip')) || { orderProvider: '',

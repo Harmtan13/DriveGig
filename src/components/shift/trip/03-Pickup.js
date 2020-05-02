@@ -15,7 +15,7 @@ export default function Pickup({trip, setTrip}) {
 
   return (
     <div>
-      <Link to='departure'>
+      <Link to='/shift/departure'>
         <button 
           type='submit'
           onClick={updateTripPickup}

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 export default function EndTrip({history}) {
   return (
@@ -34,9 +35,11 @@ export default function EndTrip({history}) {
       <br/><br/>
 
      <center>
-       <button onClick = {() => history.push('/shift/main')}>
-         Delivered
-       </button>
+       <Link to='/shift'>
+        <button>
+          Delivered
+        </button>
+       </Link>
      </center>
 
     </div>
