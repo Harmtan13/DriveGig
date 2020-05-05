@@ -10,7 +10,7 @@ import {
 import ShiftRouter from './trip/01-TripRouter';
 
 export default function MainShift({shift, setShift}) {
-  console.log(shift); 
+  // console.log(shift); 
 
   const pauseShift = () => {
     addTimeStamp(determinePlacement, setShift, shift);
