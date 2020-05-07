@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Pickup({trips, trip, setTrip}) {
+export default function Pickup({trips, trip, setTrip, updateTrips}) {
   console.log(trips);
+
   const updateTripPickup = () => {
     const pickupTime = Date.now();
     const driveTime = [...trip.driveTime, pickupTime];
@@ -10,7 +11,7 @@ export default function Pickup({trips, trip, setTrip}) {
     const updatedTrip = {...trip, driveTime, waitTime}
 
     setTrip(updatedTrip);
-    localStorage.setItem('trips', JSON.stringify([...trips, updatedTrip]));
+    updateTrips(updatedTrip);
   }
 
   return (

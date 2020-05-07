@@ -5,7 +5,9 @@ import createTrip from './../../../helpers/CreateTrip';
 import StartTrip from './02-StartTrip';
 import Pickup from './03-Pickup';
 import Departure from './04-Departure';
+import Trips from './05-Trips';
 import EndTrip from './06-EndTrip';
+import {updateTripsHelper} from './../../../helpers/TripHelpers';
 
 export default function TripRouter({shift, setShift}) {
   const [trips, setTrips] = useState(JSON.parse(localStorage.getItem('trips')) || []);
@@ -13,11 +15,16 @@ export default function TripRouter({shift, setShift}) {
 
   const [trip, setTrip] = useState( currentTrip || createTrip(trips));
 
+  const updateTrips = (trip) => {
+    updateTripsHelper(setTrips, trip, trips);
+  }
+
   const tripState = {
     trips,
     setTrips,
     trip, 
-    setTrip
+    setTrip,
+    updateTrips
   }
 
   return (
@@ -32,6 +39,10 @@ export default function TripRouter({shift, setShift}) {
 
       <Route path='/shift/departure'>
         <Departure {...tripState} />
+      </Route>
+
+      <Route path='/shift/trips'>
+        <Trips {...tripState} />
       </Route>
     
       <Route path='/shift/delivery'>

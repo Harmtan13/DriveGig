@@ -1,6 +1,8 @@
 const createTrip = (trips) => {
     let id = trips.length;
     let orderProvider = '';
+    let diner = '';
+    let restaurant = '';
     let odometer = [];
     let driveTime = [];
     let waitTime = [];
@@ -10,7 +12,7 @@ const createTrip = (trips) => {
       total: ''
   }
 
-  return {id, orderProvider, odometer, driveTime, waitTime, pay}
+  return {id, orderProvider, diner, restaurant, odometer, driveTime, waitTime, pay}
 }
 
 export default createTrip;
