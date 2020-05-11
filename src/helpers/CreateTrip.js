@@ -8,11 +8,11 @@ const createTrip = (trips) => {
     let waitTime = [];
     let pay = {
       provider: '',
-      tip: '',
-      total: ''
-  }
+      tip: ''
+    }
+    let completed = false;
 
-  return {id, orderProvider, diner, restaurant, odometer, driveTime, waitTime, pay}
+  return {id, orderProvider, diner, restaurant, odometer, driveTime, waitTime, pay, completed}
 }
 
 export default createTrip;

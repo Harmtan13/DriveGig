@@ -26,7 +26,7 @@ export default function AppRouter(shiftState) {
       </Route>
 
       <Route path='/end-shift'>
-        <EndShift/>
+        <EndShift {...shiftState}/>
       </Route>
 
       <Route path='/gas'>

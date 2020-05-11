@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom';
 
 export default function Departure({trips, trip, setTrip, updateTrips}) {
   const maxTrips = trips.length <= 1;
-  console.log(maxTrips);
 
   const updateTripDeparture = () => {
     const departureTime = Date.now();

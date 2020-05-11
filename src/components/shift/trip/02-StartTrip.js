@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 export default function StartTrip({trips, trip, setTrip, updateTrips}) {
   const [provider, setProvider] = useState(trip.orderProvider);
   const [odometerStart, setOdometerStart] = useState(trip.odometer[0] || '');
-  console.log(trips);
 
   const startTrip = () => {
     const odometer = [Number(odometerStart)];

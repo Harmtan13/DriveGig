@@ -1,19 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 
-export default function EndTrip({trips, setTrips}) {
+export default function EndTrip({trip, setTrip}) {
+  const [odometer, setOdometer] = useState('');
+  const [payout, setPayout] = useState('');
+  console.log(trip);
+
+  const endTrip = () => {
+
+  }
+
   return (
     <div>
 
     <label htmlFor="odometer">
-      <p>Final Amount</p>
-
+      <p>Odometer</p>
+      
       <input 
           type="number" 
           name="odometer" 
           placeholder="000000"
-          // onChange={(e) => setOffer(e.target.value)}
-          // value={offer}
+          value={odometer}
+          onChange={(e) => setOdometer(e.target.value)}
         />
     </label>
 
@@ -21,14 +29,14 @@ export default function EndTrip({trips, setTrips}) {
       <br/><br/>
 
     <label htmlFor="payout">
-      <p>Odometer-</p>
+      <p>Pay</p>
 
       <input 
           type="number" 
           name="payout" 
           placeholder="000000"
-          // onChange={(e) => setOffer(e.target.value)}
-          // value={offer}
+          value={payout}
+          onChange={(e) => setPayout(e.target.value)}
         />
     </label>
 
