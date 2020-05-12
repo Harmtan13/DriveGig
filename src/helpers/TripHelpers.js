@@ -5,6 +5,8 @@ const updateTripsHelper = (setTrips, trip, trips) => {
     return trip.id === lastTrip.id ? true : false
   }
 
+  console.log(determineTripPlacement());
+
   const updateTripsArray = () => {
     const updatedTrips = [...trips, trip];
 
@@ -13,7 +15,8 @@ const updateTripsHelper = (setTrips, trip, trips) => {
   }
 
   const replaceTripsArray = () => {
-    const updatedTrips = [...trips.slice(0,-1), trip];
+    const updatedTrips = [...trips];
+    updatedTrips[trip.id] = trip;
 
     setTrips(updatedTrips);
     localStorage.setItem('trips', JSON.stringify(updatedTrips));
@@ -22,4 +25,6 @@ const updateTripsHelper = (setTrips, trip, trips) => {
   return determineTripPlacement() ? replaceTripsArray() : updateTripsArray()
 }
 
-export {updateTripsHelper};
+const activeTripsHelper = trips => trips.filter(trip => trip.completed === false);
+
+export {updateTripsHelper, activeTripsHelper};

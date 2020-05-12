@@ -4,15 +4,14 @@ const createTrip = (trips) => {
     let diner = '';
     let restaurant = '';
     let odometer = [];
-    let driveTime = [];
-    let waitTime = [];
+    let timeStamps = [];
     let pay = {
       provider: '',
       tip: ''
     }
     let completed = false;
 
-  return {id, orderProvider, diner, restaurant, odometer, driveTime, waitTime, pay, completed}
+  return {id, orderProvider, diner, restaurant, odometer, timeStamps, pay, completed}
 }
 
 export default createTrip;

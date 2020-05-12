@@ -1,17 +1,16 @@
 import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 
-export default function StartTrip({trips, trip, setTrip, updateTrips}) {
+export default function StartTrip({trip, updateTrips}) {
   const [provider, setProvider] = useState(trip.orderProvider);
   const [odometerStart, setOdometerStart] = useState(trip.odometer[0] || '');
 
   const startTrip = () => {
     const odometer = [Number(odometerStart)];
-    const driveTime = [Date.now()];
+    const timeStamps = [Date.now()];
     const orderProvider = provider;
-    const updatedTrip = {...trip, odometer, driveTime, orderProvider};
+    const updatedTrip = {...trip, odometer, timeStamps, orderProvider};
 
-    setTrip(updatedTrip);
     updateTrips(updatedTrip);
   }
 
