@@ -21,10 +21,12 @@ export default function TripRouter() {
 
   const [trip, setTrip] = useState( currentTrip || createTrip(trips));
 
-  const updateTrips = (trip) => {
+  const updateTrips = (trip, updateTrip=true) => {
     updateTripsHelper(setTrips, trip, trips);
     
+    if (updateTrip) {
       setTrip(trip);
+    }
   }
 
   const tripState = {

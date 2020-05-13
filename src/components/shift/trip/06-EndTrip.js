@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-// import createTrip from './../../../helpers/CreateTrip';
 import {activeTripsHelper} from './../../../helpers/TripHelpers';
 
 export default function EndTrip({trips, trip, setTrip, updateTrips}) {
@@ -8,15 +7,15 @@ export default function EndTrip({trips, trip, setTrip, updateTrips}) {
   const [payout, setPayout] = useState('');
 
   const currentTrips = activeTripsHelper(trips);
-  let link = '/shift/trips';
   
-  // const determineLink = () => {
-  //   if (currentTrips) {
-  //     link = '/shift/trips';
-  //   }
-  // }
-
-  console.log(currentTrips);
+  const determineLink = () => {
+    console.log(currentTrips.length);
+    if (currentTrips.length > 1) {
+      return '/shift/trips';
+    } else {
+      return '/shift';
+    }
+  }
 
   const endTrip = () => {
     const endTime = Date.now();
@@ -25,7 +24,6 @@ export default function EndTrip({trips, trip, setTrip, updateTrips}) {
     const updatedTrip = {...trip, timeStamps, completed};
 
     updateTrips(updatedTrip, false);
-    // determineLink();
   }
 
   return (
@@ -61,7 +59,7 @@ export default function EndTrip({trips, trip, setTrip, updateTrips}) {
       <br/><br/>
 
      <center>
-       <Link to={link}>
+       <Link to={determineLink()}>
         <button onClick={endTrip}>
           Delivered
         </button>

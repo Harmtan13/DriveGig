@@ -1,6 +1,6 @@
 const updateTripsHelper = (setTrips, trip, trips) => {
   const determineTripPlacement = () => {
-    const tripMatch = trips.filter((eachTrip) => eachTrip.id === trip.id)
+    const tripMatch = trips.find((eachTrip) => eachTrip.id === trip.id)
 
     return tripMatch ? true : false
   }
