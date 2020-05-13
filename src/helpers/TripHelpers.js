@@ -1,11 +1,9 @@
 const updateTripsHelper = (setTrips, trip, trips) => {
   const determineTripPlacement = () => {
-    const lastTrip = trips.slice(-1).pop() || '';
+    const tripMatch = trips.filter((eachTrip) => eachTrip.id === trip.id)
 
-    return trip.id === lastTrip.id ? true : false
+    return tripMatch ? true : false
   }
-
-  console.log(determineTripPlacement());
 
   const updateTripsArray = () => {
     const updatedTrips = [...trips, trip];

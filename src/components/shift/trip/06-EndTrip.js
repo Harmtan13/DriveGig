@@ -17,8 +17,6 @@ export default function EndTrip({trips, trip, setTrip, updateTrips}) {
   // }
 
   console.log(currentTrips);
-  console.log(trip);
-  // console.log(determineLink());
 
   const endTrip = () => {
     const endTime = Date.now();
