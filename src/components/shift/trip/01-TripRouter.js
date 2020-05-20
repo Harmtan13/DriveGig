@@ -24,7 +24,7 @@ export default function TripRouter() {
     setTrips(trip);
     setLocalStorage({trip, trips, odometerStamps, timeStamps})
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [trip]);
+  }, [trip, odometerStamps, timeStamps]);
 
   const tripState = {
     trip,
