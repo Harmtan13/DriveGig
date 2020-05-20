@@ -1,15 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Pickup({trips, trip, setTrip, updateTrips}) {
+export default function Pickup({setTimeStamps}) {
 
   const updateTripPickup = () => {
     const pickupTime = Date.now();
-    const timeStamps = [...trip.timeStamps, pickupTime];
-    const waitTime = [pickupTime]
-    const updatedTrip = {...trip, timeStamps, waitTime}
 
-    updateTrips(updatedTrip);
+    setTimeStamps(pickupTime, 1);
   }
 
   return (
