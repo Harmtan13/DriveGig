@@ -15,6 +15,6 @@ const setLocalStorage = (state) => {
 }
 
 const activeTrips = getLocalStorage.trips.filter(trip => trip.completed === false);
-const currentTrip = activeTrips[activeTrips.length - 1];
+const currentTrip = getLocalStorage.trip;
 
 export {getLocalStorage, setLocalStorage, activeTrips, currentTrip};

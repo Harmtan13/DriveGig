@@ -1,8 +1,8 @@
 import {useState} from 'react';
-import {getLocalStorage} from './TripHelpers';
+import {activeTrips} from './TripHelpers';
 
 function useTrips() {
-  const [trips, setTrips] = useState(getLocalStorage.trips);
+  const [trips, setTrips] = useState(activeTrips);
 
   const updateTrip = (trip) => {
     const determineTripPlacement = () => {
