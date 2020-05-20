@@ -1,8 +1,8 @@
 import {useState} from 'react';
-import {storage} from './TripHelpers';
+import {getLocalStorage} from './TripHelpers';
 
 function useTrips() {
-  const [trips, setTrips] = useState(storage.trips);
+  const [trips, setTrips] = useState(getLocalStorage.trips);
 
   const updateTrip = (trip) => {
     const determineTripPlacement = () => {
@@ -16,14 +16,12 @@ function useTrips() {
       updatedTrips[trip.id] = trip;
   
       setTrips(updatedTrips);
-      localStorage.setItem('trips', JSON.stringify(updatedTrips));
     }
   
     const updateTripsArray = () => {
       const updatedTrips = [...trips, trip];
   
       setTrips(updatedTrips);
-      localStorage.setItem('trips', JSON.stringify(updatedTrips));
     }
   
     return determineTripPlacement() ? replaceTripsArray() : updateTripsArray()
