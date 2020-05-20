@@ -1,10 +1,10 @@
 const createTrip = (trips) => {
     let id = trips.length;
-    let orderProvider = '';
     let diner = '';
     let restaurant = '';
-    let odometer = [];
-    let timeStamps = [];
+    let orderProvider = '';
+    let odometer = [ [], [] ];
+    let timeStamps = [ [],[],[] ];
     let pay = {
       provider: '',
       tip: ''

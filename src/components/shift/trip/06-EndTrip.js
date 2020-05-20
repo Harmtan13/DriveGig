@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-import {activeTripsHelper} from './../../../helpers/TripHelpers';
 
 export default function EndTrip({trips, trip, setTrip, updateTrips}) {
   const [odometer, setOdometer] = useState('');
   const [payout, setPayout] = useState('');
 
-  const currentTrips = activeTripsHelper(trips);
+  const currentTrips = [];
+  // activeTripsHelper(trips);
   
   const determineLink = () => {
     console.log(currentTrips.length);
@@ -18,12 +18,12 @@ export default function EndTrip({trips, trip, setTrip, updateTrips}) {
   }
 
   const endTrip = () => {
-    const endTime = Date.now();
-    const timeStamps = [...trip.timeStamps, endTime];
-    const completed = true;
-    const updatedTrip = {...trip, timeStamps, completed};
+    // const endTime = Date.now();
+    // const timeStamps = [...trip.timeStamps, endTime];
+    // const completed = true;
+    // const updatedTrip = {...trip, timeStamps, completed};
 
-    updateTrips(updatedTrip, false);
+    // updateTrips(updatedTrip, false);
   }
 
   return (

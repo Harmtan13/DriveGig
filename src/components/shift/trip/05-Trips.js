@@ -1,13 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {activeTripsHelper} from './../../../helpers/TripHelpers';
+import {activeTrips} from '../../../helpers/trips/TripHelpers';
 
 export default function Trips({trips, setTrip}) {
   const setCurrentTrip = (id) => {
     setTrip(trips[id]);
   }
-
-  const activeTrips = activeTripsHelper(trips);
 
   return (
     <div>

@@ -1,24 +1,69 @@
 import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 
-export default function StartTrip({trip, updateTrips}) {
-  const [provider, setProvider] = useState(trip.orderProvider);
-  const [odometerStart, setOdometerStart] = useState(trip.odometer[0] || '');
+export default function StartTrip(
+  {trip, odometerStamps, setTrip, setOdometerStamps, setTimeStamps}) {
+
+  const tripOdometer = trip.odometer[0][0] || odometerStamps[0] || '';
+  const [orderProvider, setOrderProvider] = useState(trip.orderProvider);
+  const [odometerStart, setOdometerStart] = useState(tripOdometer);
+  const [diner, setDiner] = useState(trip.diner || '');
+  const [restaurant, setRestaurant] = useState(trip.restaurant || '');
 
   const startTrip = () => {
-    const odometer = [Number(odometerStart)];
-    const timeStamps = [Date.now()];
-    const orderProvider = provider;
-    const updatedTrip = {...trip, odometer, timeStamps, orderProvider};
+    const odometer = Number(odometerStart);
+    const timeStamp = Date.now();
+    const updatedTrip = {...trip, orderProvider, diner, restaurant};
 
-    updateTrips(updatedTrip);
+    setOdometerStamps(odometer, 0);
+    setTimeStamps(timeStamp, 0);
+    setTrip(updatedTrip);
   }
 
   return (
     <div>
+      <label htmlFor="diner">
+        <input 
+          type="text" 
+          name="diner" 
+          placeholder="Diner's Name"
+          onChange={(e) => setDiner(e.target.value)}
+          value={diner}
+        />
+      </label>
+
+      <br/>
+      <br/>
+
+      <label htmlFor="restaurant">
+        <input 
+          type="text" 
+          name="restaurant" 
+          placeholder="Restaurant Name"
+          onChange={(e) => setRestaurant(e.target.value)}
+          value={restaurant}
+        />
+      </label>
+
+      <br/>
+      <br/>
+
+      <label htmlFor="odometer">
+        <input 
+            type="number" 
+            name="odometer" 
+            placeholder="Current Odometer"
+            onChange={(e) => setOdometerStart(e.target.value)}
+            value={odometerStart}
+          />
+      </label>
+
+      <br/>
+      <br/>
+      
       <select
-        value={provider}
-        onChange={(e) => setProvider(e.target.value)}
+        value={orderProvider}
+        onChange={(e) => setOrderProvider(e.target.value)}
       >
         <option value="">Select Delivery Provider</option>
         <option value="doordash">DoorDash</option>
@@ -26,21 +71,6 @@ export default function StartTrip({trip, updateTrips}) {
         <option value="postmates">PostMates</option>
         <option value="ubereats">Uber Eats</option>
       </select>
-
-      <br/>
-      <br/>
-        
-      <label htmlFor="odometer">
-        <p>Current Odometer</p>
-
-        <input 
-            type="number" 
-            name="-odometer" 
-            placeholder="000000"
-            onChange={(e) => setOdometerStart(e.target.value)}
-            value={odometerStart}
-          />
-      </label>
 
       <br/>
       <br/>
