@@ -7,24 +7,16 @@ import Pickup from './03-Pickup';
 import Departure from './04-Departure';
 import Trips from './05-Trips';
 import EndTrip from './06-EndTrip';
-import { currentTrip, getLocalStorage, setLocalStorage } from '../../../helpers/trips/TripHelpers';
+import { stampManager, currentTrip, getLocalStorage, setLocalStorage } from '../../../helpers/trips/TripHelpers';
 import { useTrips, useStamps } from '../../../helpers/trips/customHooks';
 
 export default function TripRouter() {
   const [trips, setTrips] = useTrips();
   const [trip, setTrip] = useState(currentTrip || createTrip(trips));
-  const [odometerStamps, setOdometerStamps] = useStamps(
-    getLocalStorage.odometerStamps || []
-  );
-  const [timeStamps, setTimeStamps] = useStamps(
-    getLocalStorage.timeStamps || []
-  );
-
-  useEffect(() => {
-    setTrips(trip);
-    setLocalStorage({trip, trips, odometerStamps, timeStamps})
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [trip, odometerStamps, timeStamps]);
+  const [odometerStamps, setOdometerStamps] = useStamps(getLocalStorage.odometerStamps || []);
+  const [timeStamps, setTimeStamps] = useStamps(getLocalStorage.timeStamps || []);
+  const activeTrips = trips.filter(trip => trip.completed === false).length;
+  const [index, setIndex] = useState(activeTrips || 0);
 
   const tripState = {
     trip,
@@ -32,13 +24,31 @@ export default function TripRouter() {
     timeStamps,
     setTrip,
     setOdometerStamps,
-    setTimeStamps
+    setTimeStamps,
+    index,
+    setIndex, 
+    activeTrips
   }
+  
+  useEffect(() => {
+    stampManager({...tripState});
+    console.log({trip, trips, odometerStamps, timeStamps})
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [odometerStamps, timeStamps])
+
+  useEffect(() => {
+    setTrips(trip);
+    setLocalStorage({trip, trips, odometerStamps, timeStamps})
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [trip]);
 
   return (
     <>
       <Route exact path='/shift/start-trip'>
-        <StartTrip {...tripState}/>
+        <StartTrip 
+          {...tripState}
+        />
       </Route>
 
       <Route path='/shift/pickup'>
@@ -46,7 +56,9 @@ export default function TripRouter() {
       </Route>
 
       <Route path='/shift/departure'>
-        <Departure {...tripState} />
+        <Departure 
+          {...tripState}
+        />
       </Route>
 
       <Route path='/shift/trips'>
@@ -54,7 +66,9 @@ export default function TripRouter() {
       </Route>
     
       <Route path='/shift/delivery'>
-        <EndTrip {...tripState} />
+        <EndTrip 
+          {...tripState} 
+        />
       </Route>
     </>
   )

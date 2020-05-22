@@ -1,11 +1,10 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
 import createTrip from './../../../helpers/CreateTrip';
-import {activeTrips, getLocalStorage} from './../../../helpers/trips/TripHelpers'
+import {getLocalStorage} from './../../../helpers/trips/TripHelpers'
 
-export default function Departure({setTrip, setTime, setOdometer, odometer}) {
-  const maxTrips = !(activeTrips.length >= 2);
-  console.log(activeTrips.length, maxTrips);
+export default function Departure({setTrip, setTime, setOdometer, odometer, activeTrips}) {
+  const maxTrips = !(activeTrips >= 2);
 
   const updateTripDeparture = () => {
     // const departureTime = Date.now();

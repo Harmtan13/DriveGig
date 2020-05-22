@@ -9,13 +9,31 @@ const getLocalStorage = (() => {
 
 const setLocalStorage = (state) => {
   for (const [key, value] of Object.entries(state)) {
-    console.log(key, JSON.stringify(value));
     localStorage.setItem(key, JSON.stringify(value));
   }
 }
 
-const activeTrips = getLocalStorage.trips.filter(trip => trip.completed === false);
-
 const currentTrip = getLocalStorage.trip;
 
-export {getLocalStorage, setLocalStorage, activeTrips, currentTrip};
+function stampManager(args) {
+  const {
+    timeStamps,
+    odometerStamps,
+    trip,
+    // setTimeStamps, 
+    // setOdometerStamps,
+    setTrip
+  } = args
+
+
+  function addStampsToTrips() { 
+    const miles = [odometerStamps]
+    const time = [timeStamps]
+    const updatedTrip = {...trip, time, miles}
+    setTrip(updatedTrip)
+  }
+
+  addStampsToTrips()
+}
+
+export {getLocalStorage, setLocalStorage, currentTrip, stampManager};

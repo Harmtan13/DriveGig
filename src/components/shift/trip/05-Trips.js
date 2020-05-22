@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {activeTrips} from '../../../helpers/trips/TripHelpers';
 
-export default function Trips({trips, setTrip}) {
+export default function Trips({trips, setTrip, activeTrips}) {
   const setCurrentTrip = (id) => {
     setTrip(trips[id]);
   }
