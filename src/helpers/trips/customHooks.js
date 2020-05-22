@@ -41,4 +41,14 @@ function useStamps(initialState) {
   return [stamps, updateStamps];
 }
 
-export {useTrips, useStamps}
+function useIndex() {
+  const [index, setIndex] = useState(0)
+
+  const updateIndex = (tripCount) => (
+    tripCount <= 0 ? setIndex(0) : setIndex(tripCount - 1)
+  );
+
+  return [index, updateIndex]
+}
+
+export {useTrips, useStamps, useIndex}
