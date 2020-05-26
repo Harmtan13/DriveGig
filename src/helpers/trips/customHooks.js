@@ -29,26 +29,4 @@ function useTrips() {
   return [trips, updateTrip];
 }
 
-function useStamps(initialState) {
-  const [stamps, setStamps] = useState(initialState);
-
-  function updateStamps(stamp, index) {
-    const newStamp = [...stamps];
-    newStamp[index] = stamp;
-    setStamps(newStamp);
-  }
-  
-  return [stamps, updateStamps];
-}
-
-function useIndex(initialState) {
-  const [index, setIndex] = useState(initialState)
-
-  const updateIndex = (tripCount) => (
-    tripCount <= 0 ? setIndex(0) : setIndex(tripCount - 1)
-  );
-
-  return [index, updateIndex]
-}
-
-export {useTrips, useStamps, useIndex}
+export {useTrips}

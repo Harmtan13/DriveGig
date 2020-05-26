@@ -7,8 +7,8 @@ import Pickup from './03-Pickup';
 import Departure from './04-Departure';
 import Trips from './05-Trips';
 import EndTrip from './06-EndTrip';
-import { currentTrip, getLocalStorage, setLocalStorage } from '../../../helpers/trips/TripHelpers';
-import { useTrips, useStamps } from '../../../helpers/trips/customHooks';
+import { currentTrip, setLocalStorage } from '../../../helpers/trips/TripHelpers';
+import { useTrips } from '../../../helpers/trips/customHooks';
 
 export default function TripRouter() {
   const [trips, setTrips] = useTrips();
