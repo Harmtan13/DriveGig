@@ -41,8 +41,8 @@ function useStamps(initialState) {
   return [stamps, updateStamps];
 }
 
-function useIndex() {
-  const [index, setIndex] = useState(0)
+function useIndex(initialState) {
+  const [index, setIndex] = useState(initialState)
 
   const updateIndex = (tripCount) => (
     tripCount <= 0 ? setIndex(0) : setIndex(tripCount - 1)

@@ -7,38 +7,23 @@ import Pickup from './03-Pickup';
 import Departure from './04-Departure';
 import Trips from './05-Trips';
 import EndTrip from './06-EndTrip';
-import { stampManager, currentTrip, getLocalStorage, setLocalStorage } from '../../../helpers/trips/TripHelpers';
+import { currentTrip, getLocalStorage, setLocalStorage } from '../../../helpers/trips/TripHelpers';
 import { useTrips, useStamps } from '../../../helpers/trips/customHooks';
 
 export default function TripRouter() {
   const [trips, setTrips] = useTrips();
   const [trip, setTrip] = useState(currentTrip || createTrip(trips));
-  const [odometerStamps, setOdometerStamps] = useStamps(getLocalStorage.odometerStamps || []);
-  const [timeStamps, setTimeStamps] = useStamps(getLocalStorage.timeStamps || []);
   const activeTrips = trips.filter(trip => trip.completed === false).length;
-  const [index, setIndex] = useState(activeTrips || 0);
 
   const tripState = {
     trip,
-    odometerStamps,
-    timeStamps,
     setTrip,
-    setOdometerStamps,
-    setTimeStamps,
-    index,
-    setIndex, 
     activeTrips
   }
-  
-  useEffect(() => {
-    stampManager({...tripState});
-    console.log({trip, trips, odometerStamps, timeStamps})
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [odometerStamps, timeStamps])
 
   useEffect(() => {
     setTrips(trip);
-    setLocalStorage({trip, trips, odometerStamps, timeStamps})
+    setLocalStorage({trip, trips})
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [trip]);

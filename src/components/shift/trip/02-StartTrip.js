@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 
 export default function StartTrip(
-  {trip, odometerStamps, setTrip, setOdometerStamps, setTimeStamps, index, setIndex}) {
-  
-  const tripOdometer = odometerStamps[index] || '';
+  {trip, setTrip}) {
+
+  const tripOdometer = trip.miles[0] || '';
   const [orderProvider, setOrderProvider] = useState(trip.orderProvider);
   const [odometerStart, setOdometerStart] = useState(tripOdometer);
   const [diner, setDiner] = useState(trip.diner || '');
@@ -15,9 +15,6 @@ export default function StartTrip(
     const timeStamp = Date.now();
     const updatedTrip = {...trip, orderProvider, diner, restaurant};
 
-    setIndex(1);
-    setOdometerStamps(odometer, index);
-    setTimeStamps(timeStamp, index);
     setTrip(updatedTrip);
   }
 

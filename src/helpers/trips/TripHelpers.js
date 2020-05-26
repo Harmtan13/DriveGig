@@ -15,25 +15,46 @@ const setLocalStorage = (state) => {
 
 const currentTrip = getLocalStorage.trip;
 
-function stampManager(args) {
-  const {
-    timeStamps,
-    odometerStamps,
-    trip,
-    // setTimeStamps, 
-    // setOdometerStamps,
-    setTrip
-  } = args
+export {getLocalStorage, setLocalStorage, currentTrip};
 
 
-  function addStampsToTrips() { 
-    const miles = [odometerStamps]
-    const time = [timeStamps]
-    const updatedTrip = {...trip, time, miles}
-    setTrip(updatedTrip)
-  }
 
-  addStampsToTrips()
-}
 
-export {getLocalStorage, setLocalStorage, currentTrip, stampManager};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function stampManager(args) {
+//   const {
+//     timeStamps,
+//     odometerStamps,
+//     trip,
+//     // setTimeStamps, 
+//     // setOdometerStamps,
+//     setTrip
+//   } = args
+
+
+//   function addStampsToTrips(trip) { 
+//     // let {miles, time} = trip;
+
+//     let miles = [odometerStamps];
+//     let time = [timeStamps];
+//     console.log(miles, time);
+//     // const updatedTrip = {...trip, time, miles}
+//     // setTrip(updatedTrip);
+//   }
+
+//   addStampsToTrips(trip);
+// }
