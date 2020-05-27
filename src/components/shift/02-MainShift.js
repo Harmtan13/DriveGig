@@ -1,5 +1,5 @@
 import React from 'react'
-import { determinePlacement, addTimeStamp} from '../../helpers/AppHelpers'
+import {addTimeStamp} from '../../helpers/AppHelpers'
 import NewTrip from './trip/00-NewTrip';
 import { 
   Route,
@@ -13,7 +13,7 @@ export default function MainShift({shift, setShift}) {
   // console.log(shift); 
 
   const pauseShift = () => {
-    addTimeStamp(determinePlacement, setShift, shift);
+    addTimeStamp(setShift, shift);
   }
 
   return (
