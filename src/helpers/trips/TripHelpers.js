@@ -13,6 +13,12 @@ const setLocalStorage = (state) => {
   }
 }
 
-const currentTrip = getLocalStorage.trip;
+const createStamp = (title, stage, stampValue) => {
+  return {
+    title,
+    stage,
+    stampValue
+  }
+}
 
-export {getLocalStorage, setLocalStorage, currentTrip};
+export {getLocalStorage, setLocalStorage, createStamp};

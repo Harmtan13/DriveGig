@@ -3,8 +3,8 @@ const createTrip = (trips) => {
     let diner = '';
     let restaurant = '';
     let orderProvider = '';
-    let miles = [];
-    let time = [];
+    let miles = [ [], [], [] ];
+    let time = [ [], [] ]
     let pay = {
       provider: '',
       tip: ''
