@@ -33,33 +33,30 @@ function useTrips() {
 function useStamps(initialState) {
   const [stamps, setStamps] = useState({
     miles: {
-      title: 'miles',
       stage: 0,
-      stampSet: [5],
+      stampSet: [],
       },
 
       time: {
-        title: '',
         stage: 0,
-        stampSet: [5]
+        stampSet: []
       }
     }
   );
 
   const updateStamps = (stampInputs) => {
+    let updatedStamps = {...stamps}
 
     stampInputs.forEach((stamp) => {
       const {title, stage, stampValue} = stamp;
       const stampCopy = {...stamps[title]};
       const stampSet = [...stampCopy.stampSet.slice(-1), stampValue];
-      const newStamp = {...stampCopy, title, stage, stampSet};
+      const newStamp = {...stampCopy, stage, stampSet};
 
-      let updatedStamps = {...stamps}
       updatedStamps[title] = newStamp;
 
       setStamps(updatedStamps);
     })
-
   }
 
   return [stamps, updateStamps];
@@ -69,19 +66,34 @@ function useTrip() {
   const {trip: currentTrip, trips} = getLocalStorage;
   const [trip, setTrip] = useState(currentTrip || createTrip(trips));
   const [stamps, setStamps] = useStamps();
-  let tripData = {};
-
-  useEffect(() => {
-    console.log(stamps);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [stamps])
+  const [tripInfo, setTripInfo] = useState({});
 
   const updateTrip = (tripData) => {
     const {stampInputs, ...tripProps} = tripData;
 
-    tripData = tripProps;
+    setTripInfo(tripProps);
     setStamps(stampInputs);
   }
+
+  const setUpdatedTrip = () => {
+    let tripCopy = {...trip, ...tripInfo};
+
+    Object.entries(stamps).forEach(stamp => {
+      const stampName = stamp[0];
+      const stampInfo = stamp[1];
+
+      let updateStamp = [...tripCopy[stampName]]
+      updateStamp[stampInfo.stage] = stampInfo.stampSet;
+
+      tripCopy[stampName] = updateStamp;
+      setTrip(tripCopy);
+    });
+  }
+
+  useEffect(() => {
+    setUpdatedTrip();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stamps, tripInfo])
 
   return [trip, updateTrip]
 }
