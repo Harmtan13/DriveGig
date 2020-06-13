@@ -6,4 +6,4 @@
   * ~~Build TimeStamp for Ending Trip~~
   * ~~EndTrip Link Logic still needs built~~ (Works, but seems like it needs to be better)
   * Build in info Stamping for trips that are running simultaneously.
-  * Multi-Stamp bug seems to reset the stamp upon refresh of screen. Trips, is also behind trip when saving to localStorage.
+  * Multi-Stamp bug resetting on refresh has to do with not peristing the state in LocalStorage

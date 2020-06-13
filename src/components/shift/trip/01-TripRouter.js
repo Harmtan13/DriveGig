@@ -23,7 +23,6 @@ export default function TripRouter() {
   useEffect(() => {
     setTrips(trip);
     setLocalStorage({trip, trips})
-    console.log('trip noticed');
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [trip]);

@@ -78,7 +78,7 @@ export default function StartTrip({trip, setTrip}) {
       <br/>
       <br/>
 
-      <Link to='/shift/pickup'>
+      <Link to='/shift/start-trip'>
         <button
           onClick={startTrip}
         >

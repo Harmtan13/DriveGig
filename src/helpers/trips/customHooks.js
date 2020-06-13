@@ -31,6 +31,7 @@ function useTrips() {
 }
 
 function useStamps(initialState) {
+
   const [stamps, setStamps] = useState({
     miles: {
       stage: 0,
@@ -39,7 +40,7 @@ function useStamps(initialState) {
 
       time: {
         stage: 0,
-        stampSet: []
+        stampSet: [],
       }
     }
   );
@@ -73,6 +74,7 @@ function useTrip() {
 
     setTripInfo(tripProps);
     setStamps(stampInputs);
+    setUpdatedTrip();
   }
 
   const setUpdatedTrip = () => {
