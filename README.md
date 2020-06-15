@@ -6,3 +6,4 @@
   * ~~Build TimeStamp for Ending Trip~~
   * ~~EndTrip Link Logic still needs built~~ (Works, but seems like it needs to be better)
   * ~~Build in info Stamping for trips that are running simultaneously.~~
+  * Add Placement Index to Create Stamp & StampManager Logic.

@@ -1,17 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { createStamp } from './../../../helpers/trips/TripHelpers';
 
-export default function Pickup({setTimeStamps, index}) {
+export default function Pickup({setTrip}) {
 
   const updateTripPickup = () => {
-    const pickupTime = Date.now();
+    const timeStamp = createStamp('time', 0, Date.now());
+    const stampInputs = [timeStamp];
 
-    setTimeStamps(pickupTime, index);
+    const tripData = {
+      stampInputs
+    }
+
+    setTrip(tripData);
   }
 
   return (
     <div>
-      <Link to='/shift/departure'>
+      <Link to='/shift/pickup'>
         <button 
           type='submit'
           onClick={updateTripPickup}

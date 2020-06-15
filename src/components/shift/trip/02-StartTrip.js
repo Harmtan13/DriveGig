@@ -4,8 +4,6 @@ import { createStamp } from './../../../helpers/trips/TripHelpers';
 export default function StartTrip({trip, setTrip}) {
 
   const [orderProvider, setOrderProvider] = useState(trip.orderProvider);
-
-  // Bug in this grabs the first stamp when the stamps should be overwritten at a later point. 
   const [odometerStart, setOdometerStart] = useState(trip.miles[0][0] || '');
   const [diner, setDiner] = useState(trip.diner || '');
   const [restaurant, setRestaurant] = useState(trip.restaurant || '');
@@ -80,7 +78,7 @@ export default function StartTrip({trip, setTrip}) {
       <br/>
       <br/>
 
-      <Link to='/shift/start-trip'>
+      <Link to='/shift/pickup'>
         <button
           onClick={startTrip}
         >
