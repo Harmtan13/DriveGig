@@ -31,16 +31,17 @@ function useTrips() {
 }
 
 function useStamps(initialState) {
+  const trip = getLocalStorage?.trip;
 
   const [stamps, setStamps] = useState({
     miles: {
       stage: 0,
-      stampSet: [],
+      stampSet: trip?.miles[trip?.miles.length - 1] || [],
       },
 
       time: {
         stage: 0,
-        stampSet: [],
+        stampSet: trip?.time[trip?.time.length - 1] || [],
       }
     }
   );
@@ -75,6 +76,8 @@ function useTrip() {
     setTripInfo(tripProps);
     setStamps(stampInputs);
     setUpdatedTrip();
+
+    console.log(tripData);
   }
 
   const setUpdatedTrip = () => {
@@ -90,6 +93,7 @@ function useTrip() {
       tripCopy[stampName] = updateStamp;
       setTrip(tripCopy);
     });
+
   }
 
   useEffect(() => {
