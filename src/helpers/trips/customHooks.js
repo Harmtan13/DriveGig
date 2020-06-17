@@ -45,7 +45,7 @@ function useStamps(initialState) {
       }
     }
   );
-
+  
   const updateStamps = (stampInputs) => {
     let updatedStamps = {...stamps}
 
@@ -69,8 +69,9 @@ function useStamps(initialState) {
 }
 
 function useTrip(trips) {
+  const tripsCount = tripCounter(trips);
   const {trip: currentTrip} = getLocalStorage;
-  const [trip, setTrip] = useState(currentTrip || createTrip(tripCounter(trips).total));
+  const [trip, setTrip] = useState(currentTrip || createTrip(tripsCount.total));
   const [stamps, setStamps] = useStamps();
   const [tripInfo, setTripInfo] = useState({});
 
