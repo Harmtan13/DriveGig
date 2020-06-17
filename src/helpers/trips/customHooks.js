@@ -49,17 +49,19 @@ function useStamps(initialState) {
   const updateStamps = (stampInputs) => {
     let updatedStamps = {...stamps}
 
-    stampInputs.forEach((stamp) => {
-      const {title, stage, placement, stampValue} = stamp;
-      const stampCopy = {...stamps[title]};
-      const stampSet = [...stampCopy.stampSet.slice(-1)];
-      stampSet[placement] = stampValue;
-      const newStamp = {...stampCopy, stage, stampSet};
-
-      updatedStamps[title] = newStamp;
-
-      setStamps(updatedStamps);
-    })
+    if (stampInputs) {
+      stampInputs.forEach((stamp) => {
+        const {title, stage, placement, stampValue} = stamp;
+        const stampCopy = {...stamps[title]};
+        const stampSet = [...stampCopy.stampSet.slice(-1)];
+        stampSet[placement] = stampValue;
+        const newStamp = {...stampCopy, stage, stampSet};
+  
+        updatedStamps[title] = newStamp;
+  
+        setStamps(updatedStamps);
+      })
+    }
     console.log(stampInputs);
   }
 
