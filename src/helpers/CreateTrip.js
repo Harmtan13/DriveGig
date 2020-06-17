@@ -1,5 +1,5 @@
-const createTrip = (trips) => {
-    let id = trips.length;
+const createTrip = (totalTrips) => {
+    let id = totalTrips;
     let diner = '';
     let restaurant = '';
     let orderProvider = '';
