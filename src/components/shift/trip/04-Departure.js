@@ -1,25 +1,29 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
 import createTrip from './../../../helpers/CreateTrip';
-import {getLocalStorage} from './../../../helpers/trips/TripHelpers'
+import { createStamp } from './../../../helpers/trips/TripHelpers';
 
-export default function Departure({setTrip, setTime, setOdometer, odometer, activeTrips}) {
-  const maxTrips = !(activeTrips >= 2);
+export default function Departure({trip, setTrip, tripsCounter}) {
+  const maxTrips = !(tripsCounter.activeTrips >= 2);
 
   const updateTripDeparture = () => {
-    // const departureTime = Date.now();
-    // const timeStamps = [...trip.timeStamps, departureTime];
+    const timeStamp = createStamp('time', Date.now(), 0, 1);
+    const stampInputs = [timeStamp];
+
+    const tripData = {
+      stampInputs
+    }
+
+    setTrip(tripData);
   }
 
   const addTrip = () => {
-    setTrip(createTrip(getLocalStorage.trips));
+    setTrip(createTrip(tripsCounter.totalTrips));
   }
 
   const headOutLink = () => {
     return maxTrips ? '/shift/delivery' : '/shift/trips'
   }
-
-  console.log(headOutLink());
 
   return (
     <div>
