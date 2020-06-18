@@ -11,21 +11,22 @@ import { useTrip, useTrips, } from '../../../helpers/trips/customHooks';
 
 export default function TripRouter() {
   const [trips, setTrips] = useTrips();
-  const [trip, setTrip] = useTrip(trips);
+  const [trip, updateTrip, setTrip, ] = useTrip(trips);
 
   const tripsCounter = tripCounter(trips);
 
   const tripState = {
     trip,
-    setTrip,
+    updateTrip,
     tripsCounter
   }
 
   useEffect(() => {
     setTrips(trip);
-    setLocalStorage({trip, trips})
-    console.log(trips);
+    setLocalStorage({trip, trips});
 
+    console.log('Trip', trip);
+    console.log('Trips', trips);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [trip]);
 
@@ -44,6 +45,7 @@ export default function TripRouter() {
       <Route path='/shift/departure'>
         <Departure 
           {...tripState}
+          setTrip = {setTrip}
         />
       </Route>
 

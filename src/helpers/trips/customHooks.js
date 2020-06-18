@@ -45,7 +45,7 @@ function useStamps(initialState) {
       }
     }
   );
-  
+
   const updateStamps = (stampInputs) => {
     let updatedStamps = {...stamps}
 
@@ -81,8 +81,6 @@ function useTrip(trips) {
     setTripInfo(tripProps);
     setStamps(stampInputs);
     setUpdatedTrip();
-
-    console.log(tripData);
   }
 
   const setUpdatedTrip = () => {
@@ -106,7 +104,7 @@ function useTrip(trips) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stamps, tripInfo])
 
-  return [trip, updateTrip]
+  return [trip, updateTrip, setTrip]
 }
 
 export {useTrip, useTrips}

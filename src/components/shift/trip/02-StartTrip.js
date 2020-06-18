@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import { createStamp } from './../../../helpers/trips/TripHelpers';
 
-export default function StartTrip({trip, setTrip, tripsCounter}) {
+export default function StartTrip({trip, updateTrip, tripsCounter}) {
   const [orderProvider, setOrderProvider] = useState(trip.orderProvider);
   const [odometerStart, setOdometerStart] = useState(trip.miles[0][0] || '');
   const [diner, setDiner] = useState(trip.diner || '');
@@ -28,7 +28,7 @@ export default function StartTrip({trip, setTrip, tripsCounter}) {
       stampInputs
     };
 
-    setTrip(tripData);
+    updateTrip(tripData);
   }
 
   return (
