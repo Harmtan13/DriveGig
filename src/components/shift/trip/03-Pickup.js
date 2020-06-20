@@ -5,7 +5,7 @@ import { createStamp } from './../../../helpers/trips/TripHelpers';
 export default function Pickup({updateTrip}) {
 
   const updateTripPickup = () => {
-    const timeStamp = createStamp('time', Date.now(), 0, 1);
+    const timeStamp = createStamp('time', Date.now(), 0);
     const stampInputs = [timeStamp];
 
     const tripData = {

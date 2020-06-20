@@ -13,7 +13,7 @@ const setLocalStorage = (state) => {
   }
 }
 
-const createStamp = (title, stampValue, stage, placement = 0) => {
+const createStamp = (title, stampValue, stage, addOn = '', placement = 1) => {
   return {
     title,
     stage,

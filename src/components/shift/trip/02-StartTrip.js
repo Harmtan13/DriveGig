@@ -10,9 +10,9 @@ export default function StartTrip({trip, updateTrip, tripsCounter}) {
 
   const determineTimeStamp = () => {
     if (tripsCounter.active <=1) {
-      return createStamp('time', Date.now(), 0)
+      return createStamp('time', Date.now(), 0, 0)
     } else {
-      return createStamp('time', Date.now(), 0, 1)
+      return createStamp('time', Date.now(), 0)
     }
   }
 
