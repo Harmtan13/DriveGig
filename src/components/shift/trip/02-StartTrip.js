@@ -1,80 +1,88 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { createStamp } from './../../../helpers/trips/TripHelpers';
+import { createStamp } from '../../../helpers/trips/TripHelpers';
 
-export default function StartTrip({trip, updateTrip, tripsCounter}) {
+export default function StartTrip({ trip, updateTrip, tripsCounter }) {
   const [orderProvider, setOrderProvider] = useState(trip.orderProvider);
   const [odometerStart, setOdometerStart] = useState(trip.miles[0][0] || '');
   const [diner, setDiner] = useState(trip.diner || '');
   const [restaurant, setRestaurant] = useState(trip.restaurant || '');
 
   const determineTimeStamp = () => {
-    if (tripsCounter.active <=1) {
-      return createStamp('time', Date.now(), 0, 0)
+    const activeTrips = tripsCounter.active;
+    let time, odom;
+
+    if (activeTrips <= 1) {
+      time = createStamp('time', Date.now(), 0, 0);
+      odom = createStamp('miles', odometerStart, 0, 0);
     } else {
-      return createStamp('time', Date.now(), 0)
+      time = createStamp('time', Date.now(), 1);
+      odom = createStamp('miles', odometerStart, 0);
     }
-  }
+
+    return { time, odom };
+  };
 
   const startTrip = () => {
-    const timeStamp = determineTimeStamp();
-    const odomStamp = createStamp('miles', odometerStart, 0);
+    const determineStamps = determineTimeStamp();
+    const timeStamp = determineStamps.time;
+    const odomStamp = determineStamps.odom;
     const stampInputs = [timeStamp, odomStamp];
 
     const tripData = {
       diner,
       restaurant,
       orderProvider,
-      stampInputs
+      stampInputs,
     };
 
     updateTrip(tripData);
-  }
+  };
 
   return (
     <div>
       <label htmlFor="diner">
-        <input 
-          type="text" 
-          name="diner" 
+        <input
+          type="text"
+          name="diner"
           placeholder="Diner's Name"
-          onChange={(e) => setDiner(e.target.value)}
+          onChange={e => setDiner(e.target.value)}
           value={diner}
         />
       </label>
 
-      <br/>
-      <br/>
+      <br />
+      <br />
 
       <label htmlFor="restaurant">
-        <input 
-          type="text" 
-          name="restaurant" 
+        <input
+          type="text"
+          name="restaurant"
           placeholder="Restaurant Name"
-          onChange={(e) => setRestaurant(e.target.value)}
+          onChange={e => setRestaurant(e.target.value)}
           value={restaurant}
         />
       </label>
 
-      <br/>
-      <br/>
+      <br />
+      <br />
 
       <label htmlFor="odometer">
-        <input 
-            type="number" 
-            name="odometer" 
-            placeholder="Current Odometer"
-            onChange={(e) => setOdometerStart(e.target.value)}
-            value={odometerStart}
-          />
+        <input
+          type="number"
+          name="odometer"
+          placeholder="Current Odometer"
+          onChange={e => setOdometerStart(e.target.value)}
+          value={odometerStart}
+        />
       </label>
 
-      <br/>
-      <br/>
-      
+      <br />
+      <br />
+
       <select
         value={orderProvider}
-        onChange={(e) => setOrderProvider(e.target.value)}
+        onChange={e => setOrderProvider(e.target.value)}
       >
         <option value="">Select Delivery Provider</option>
         <option value="doordash">DoorDash</option>
@@ -83,17 +91,12 @@ export default function StartTrip({trip, updateTrip, tripsCounter}) {
         <option value="ubereats">Uber Eats</option>
       </select>
 
-      <br/>
-      <br/>
+      <br />
+      <br />
 
-      <Link to='/shift/pickup'>
-        <button
-          onClick={startTrip}
-        >
-          Head for Pickup
-        </button>
+      <Link to="/shift/pickup">
+        <button onClick={startTrip}>Head for Pickup</button>
       </Link>
-
     </div>
-  )
+  );
 }

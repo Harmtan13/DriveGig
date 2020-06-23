@@ -1,0 +1,9 @@
+{
+  "extends": [
+    "wesbos"
+  ],
+  "rules": {
+    "no-console": 2,
+    "one-var": 0
+  }
+}

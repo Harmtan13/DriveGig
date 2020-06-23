@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom';
 
 import StartTrip from './02-StartTrip';
@@ -6,58 +6,52 @@ import Pickup from './03-Pickup';
 import Departure from './04-Departure';
 import Trips from './05-Trips';
 import EndTrip from './06-EndTrip';
-import { setLocalStorage, tripCounter } from '../../../helpers/trips/TripHelpers';
-import { useTrip, useTrips, } from '../../../helpers/trips/customHooks';
+import {
+  setLocalStorage,
+  tripCounter,
+} from '../../../helpers/trips/TripHelpers';
+import { useTrip, useTrips } from '../../../helpers/trips/customHooks';
 
 export default function TripRouter() {
   const [trips, setTrips] = useTrips();
-  const [trip, updateTrip, setTrip, ] = useTrip(trips);
+  const [trip, updateTrip, setTrip] = useTrip(trips);
 
   const tripsCounter = tripCounter(trips);
 
   const tripState = {
     trip,
     updateTrip,
-    tripsCounter
-  }
+    tripsCounter,
+  };
 
   useEffect(() => {
     setTrips(trip);
-    setLocalStorage({trip, trips});
+    setLocalStorage({ trip, trips });
 
-    console.log('Trip', trip);
-    console.log('Trips', trips);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [trip]);
 
   return (
     <>
-      <Route exact path='/shift/start-trip'>
-        <StartTrip 
-          {...tripState}
-        />
+      <Route exact path="/shift/start-trip">
+        <StartTrip {...tripState} />
       </Route>
 
-      <Route path='/shift/pickup'>
+      <Route path="/shift/pickup">
         <Pickup {...tripState} />
       </Route>
 
-      <Route path='/shift/departure'>
-        <Departure 
-          {...tripState}
-          setTrip = {setTrip}
-        />
+      <Route path="/shift/departure">
+        <Departure {...tripState} setTrip={setTrip} />
       </Route>
 
-      <Route path='/shift/trips'>
+      <Route path="/shift/trips">
         <Trips {...tripState} />
       </Route>
-    
-      <Route path='/shift/delivery'>
-        <EndTrip 
-          {...tripState} 
-        />
+
+      <Route path="/shift/delivery">
+        <EndTrip {...tripState} />
       </Route>
     </>
-  )
+  );
 }
