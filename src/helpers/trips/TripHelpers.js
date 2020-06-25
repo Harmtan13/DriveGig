@@ -13,11 +13,18 @@ const setLocalStorage = state => {
   }
 };
 
-const createStamp = (title, stampValue, stage, placement = 1, addOn = '') => ({
+const createStamp = ({
   title,
+  stampValue,
+  stage,
+  placement = 1,
+  addOn = false,
+}) => ({
+  title,
+  stampValue,
   stage,
   placement,
-  stampValue,
+  addOn,
 });
 
 const tripCounter = trips => {

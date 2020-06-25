@@ -3,7 +3,8 @@
     "wesbos"
   ],
   "rules": {
-    "no-console": 2,
-    "one-var": 0
+    "no-console": 0,
+    "one-var": 0,
+    "react/prop-types": 0
   }
 }

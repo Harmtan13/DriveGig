@@ -45,20 +45,20 @@ function useStamps() {
     },
   });
 
-  console.log(stamps);
-
   const updateStamps = stampInputs => {
     const updatedStamps = { ...stamps };
 
+    console.log(stamps);
+
     if (stampInputs) {
       stampInputs.forEach(stamp => {
-        const { title, stage, placement, stampValue } = stamp;
+        const { title, stage, placement, stampValue, addOn } = stamp;
         const stampCopy = { ...stamps[title] };
         const stampSet = [...stampCopy.stampSet.slice(-1)];
         stampSet[placement] = stampValue;
         const newStamp = { ...stampCopy, stage, stampSet };
 
-        console.log('placement', placement);
+        console.log('AddOn', stamp.addOn);
 
         updatedStamps[title] = newStamp;
 
