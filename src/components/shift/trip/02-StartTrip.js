@@ -7,19 +7,13 @@ export default function StartTrip({ trip, updateTrip, tripsCounter }) {
   const [odometerStart, setOdometerStart] = useState(trip.miles[0][0] || '');
   const [diner, setDiner] = useState(trip.diner || '');
   const [restaurant, setRestaurant] = useState(trip.restaurant || '');
-
-  const determineAddOn = (title, stampValue, stage) => {
-    const isAddOn = tripsCounter.active <= 1;
-    const basicStampInfo = { title, stampValue, stage };
-    const addOnStampInfo = { ...basicStampInfo, placement: 0 };
-    const freshStampInfo = { ...basicStampInfo, addOn: true };
-
-    return isAddOn ? addOnStampInfo : freshStampInfo;
-  };
+  const isAddOn = tripsCounter.active > 1;
 
   const startTrip = () => {
-    const timeStamp = determineAddOn('time', Date.now(), 0);
-    const odomStamp = determineAddOn('miles', odometerStart, 0);
+    const placement = !isAddOn ? 0 : 1; 
+
+    const timeStamp = createStamp('time', Date.now(), 0, isAddOn, placement);
+    const odomStamp = createStamp('miles', odometerStart, 0, isAddOn, placement);
     const stampInputs = [timeStamp, odomStamp];
 
     const tripData = {

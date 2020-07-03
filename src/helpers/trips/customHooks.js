@@ -48,17 +48,13 @@ function useStamps() {
   const updateStamps = stampInputs => {
     const updatedStamps = { ...stamps };
 
-    console.log(stamps);
-
     if (stampInputs) {
       stampInputs.forEach(stamp => {
-        const { title, stage, placement, stampValue, addOn } = stamp;
+        const { title, stage, placement, stampValue} = stamp;
         const stampCopy = { ...stamps[title] };
         const stampSet = [...stampCopy.stampSet.slice(-1)];
         stampSet[placement] = stampValue;
         const newStamp = { ...stampCopy, stage, stampSet };
-
-        console.log('AddOn', stamp.addOn);
 
         updatedStamps[title] = newStamp;
 
@@ -102,7 +98,6 @@ function useTrip(trips) {
 
   useEffect(() => {
     setUpdatedTrip();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stamps, tripInfo]);
 
   return [trip, updateTrip, setTrip];
