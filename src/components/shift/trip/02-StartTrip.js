@@ -10,7 +10,7 @@ export default function StartTrip({ trip, updateTrip, tripsCounter }) {
   const isAddOn = tripsCounter.active > 1;
 
   const startTrip = () => {
-    const placement = !isAddOn ? 0 : 1; 
+    const placement = !isAddOn ? 0 : 1;
 
     const timeStamp = createStamp('time', Date.now(), 0, isAddOn, placement);
     const odomStamp = createStamp('miles', odometerStart, 0, isAddOn, placement);
@@ -21,6 +21,7 @@ export default function StartTrip({ trip, updateTrip, tripsCounter }) {
       restaurant,
       orderProvider,
       stampInputs,
+      isAddOn,
     };
 
     updateTrip(tripData);
@@ -81,7 +82,7 @@ export default function StartTrip({ trip, updateTrip, tripsCounter }) {
       <br />
       <br />
 
-      <Link to="/shift/pickup">
+      <Link to="/shift/start-trip">
         <button onClick={startTrip}>Head for Pickup</button>
       </Link>
     </div>

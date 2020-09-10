@@ -5,7 +5,7 @@ import createTrip from '../CreateTrip';
 function useTrips() {
   const [trips, setTrips] = useState(getLocalStorage.trips);
 
-  const updateTrips = trip => {
+  const updateTrips = (trip) => {
     const determineTripPlacement = () => {
       const tripMatch = trips.find(eachTrip => eachTrip.id === trip.id);
 
@@ -45,14 +45,14 @@ function useStamps() {
     },
   });
 
-  const updateStamps = stampInputs => {
+  const updateStamps = (stampInputs) => {
     const updatedStamps = { ...stamps };
 
     if (stampInputs) {
-      stampInputs.forEach(stamp => {
-        const { title, stage, placement, stampValue} = stamp;
+      stampInputs.forEach((stamp) => {
+        const { title, stage, placement, stampValue } = stamp;
         const stampCopy = { ...stamps[title] };
-        const stampSet = [...stampCopy.stampSet.slice(-1)];
+        const stampSet = [...stampCopy.stampSet];
         stampSet[placement] = stampValue;
         const newStamp = { ...stampCopy, stage, stampSet };
 
@@ -73,10 +73,10 @@ function useTrip(trips) {
   const [stamps, setStamps] = useStamps();
   const [tripInfo, setTripInfo] = useState({});
 
-  const setUpdatedTrip = () => {
-    const tripCopy = { ...trip, ...tripInfo };
+  const setUpdatedTrip = (workingTrip) => {
+    const tripCopy = workingTrip;
 
-    Object.entries(stamps).forEach(stamp => {
+    Object.entries(stamps).forEach((stamp) => {
       const stampName = stamp[0];
       const stampInfo = stamp[1];
 
@@ -88,12 +88,25 @@ function useTrip(trips) {
     });
   };
 
-  const updateTrip = tripData => {
-    const { stampInputs, ...tripProps } = tripData;
+  const updateTrip = (tripData) => {
+    const { stampInputs, isAddOn, ...tripProps } = tripData;
 
-    setTripInfo(tripProps);
-    setStamps(stampInputs);
-    setUpdatedTrip();
+    const standardSequence = () => {
+      const tripCopy = { ...trip, ...tripInfo };
+
+      setTripInfo(tripProps);
+      setStamps(stampInputs);
+      setUpdatedTrip(tripCopy);
+    };
+
+    const addOnSequence = () => {
+      const initialTrip = getLocalStorage.trips[0];
+      console.log(initialTrip);
+
+      standardSequence();
+    };
+
+    return !isAddOn ? standardSequence() : addOnSequence();
   };
 
   useEffect(() => {

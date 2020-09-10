@@ -7,24 +7,21 @@ const getLocalStorage = (() => {
   return { trips, trip, timeStamps, odometerStamps };
 })();
 
-const setLocalStorage = state => {
+const setLocalStorage = (state) => {
   for (const [key, value] of Object.entries(state)) {
     localStorage.setItem(key, JSON.stringify(value));
   }
 };
 
-const createStamp = (title, stampValue, stage, isAddOn, placement = 1) => {
+const createStamp = (title, stampValue, stage, isAddOn, placement = 1) => ({
+  title,
+  stampValue,
+  stage,
+  placement,
+  isAddOn,
+});
 
-  return ({
-    title,
-    stampValue,
-    stage,
-    placement,
-    isAddOn
-  });
-};
-
-const tripCounter = trips => {
+const tripCounter = (trips) => {
   const active = trips.filter(trip => trip.completed === false).length;
   const total = trips.length;
 
