@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route } from 'react-router-dom';
 
 import StartTrip from './02-StartTrip';
@@ -31,23 +31,26 @@ export default function TripRouter() {
 
   return (
     <>
-      <Route exact path="/shift/start-trip">
+      <Route exact path = "/shift/start-trip">
         <StartTrip {...tripState} />
       </Route>
 
-      <Route path="/shift/pickup">
+      <Route path = "/shift/pickup">
         <Pickup {...tripState} />
       </Route>
 
-      <Route path="/shift/departure">
-        <Departure {...tripState} setTrip={setTrip} />
+      <Route path = "/shift/departure">
+        <Departure
+          {...tripState}
+          setTrip = {setTrip}
+        />
       </Route>
 
-      <Route path="/shift/trips">
+      <Route path = "/shift/trips">
         <Trips {...tripState} />
       </Route>
 
-      <Route path="/shift/delivery">
+      <Route path = "/shift/delivery">
         <EndTrip {...tripState} />
       </Route>
     </>

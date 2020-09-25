@@ -9,6 +9,7 @@ export default function StartTrip({ trip, updateTrip, tripsCounter }) {
   const [restaurant, setRestaurant] = useState(trip.restaurant || '');
   const isAddOn = tripsCounter.active > 1;
 
+
   const startTrip = () => {
     const placement = !isAddOn ? 0 : 1;
 
@@ -29,39 +30,39 @@ export default function StartTrip({ trip, updateTrip, tripsCounter }) {
 
   return (
     <div>
-      <label htmlFor="diner">
+      <label htmlFor = "diner">
         <input
-          type="text"
-          name="diner"
-          placeholder="Diner's Name"
-          onChange={e => setDiner(e.target.value)}
-          value={diner}
+          type = "text"
+          name = "diner"
+          placeholder = "Diner's Name"
+          onChange = {e => setDiner(e.target.value)}
+          value = {diner}
         />
       </label>
 
       <br />
       <br />
 
-      <label htmlFor="restaurant">
+      <label htmlFor = "restaurant">
         <input
-          type="text"
-          name="restaurant"
-          placeholder="Restaurant Name"
-          onChange={e => setRestaurant(e.target.value)}
-          value={restaurant}
+          type = "text"
+          name = "restaurant"
+          placeholder = "Restaurant Name"
+          onChange = {e => setRestaurant(e.target.value)}
+          value = {restaurant}
         />
       </label>
 
       <br />
       <br />
 
-      <label htmlFor="odometer">
+      <label htmlFor = "odometer">
         <input
-          type="number"
-          name="odometer"
-          placeholder="Current Odometer"
-          onChange={e => setOdometerStart(e.target.value)}
-          value={odometerStart}
+          type = "number"
+          name = "odometer"
+          placeholder = "Current Odometer"
+          onChange = {e => setOdometerStart(e.target.value)}
+          value = {odometerStart}
         />
       </label>
 
@@ -69,21 +70,21 @@ export default function StartTrip({ trip, updateTrip, tripsCounter }) {
       <br />
 
       <select
-        value={orderProvider}
-        onChange={e => setOrderProvider(e.target.value)}
+        value = {orderProvider}
+        onChange = {e => setOrderProvider(e.target.value)}
       >
-        <option value="">Select Delivery Provider</option>
-        <option value="doordash">DoorDash</option>
-        <option value="grubhub">GrubHub</option>
-        <option value="postmates">PostMates</option>
-        <option value="ubereats">Uber Eats</option>
+        <option value = "">Select Delivery Provider</option>
+        <option value = "doordash">DoorDash</option>
+        <option value = "grubhub">GrubHub</option>
+        <option value = "postmates">PostMates</option>
+        <option value = "ubereats">Uber Eats</option>
       </select>
 
       <br />
       <br />
 
-      <Link to="/shift/start-trip">
-        <button onClick={startTrip}>Head for Pickup</button>
+      <Link to = "/shift/start-trip">
+        <button onClick = {startTrip}>Head for Pickup</button>
       </Link>
     </div>
   );

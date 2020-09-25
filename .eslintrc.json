@@ -21,6 +21,7 @@
     "react/prop-types": 0,
     "react/jsx-filename-extension": 0,
     "object-curly-newline": 0,
-    "no-restricted-syntax": 0
+    "no-restricted-syntax": 0,
+    "react/jsx-equals-spacing": [2, "always"]
   }
 }
