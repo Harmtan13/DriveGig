@@ -61,6 +61,7 @@ function useStamps() {
         setStamps(updatedStamps);
       });
     }
+    console.log(stamps);
   };
 
   return [stamps, updateStamps];
@@ -98,8 +99,11 @@ function useTrip(trips) {
     };
 
     const addOnTrip = () => {
-      // const workingtrip = { ...getLocalStorage.trips[0] };
-      console.log('Add On Trip');
+      const tripsCopy = { ...getLocalStorage.trips };
+      tripsCopy[0] = parseStamps(tripsCopy[0]);
+
+      setLocalStorage({ trips: tripsCopy });
+      console.log('Addon');
     };
 
     return isAddOn ? addOnTrip() : singleTrip();

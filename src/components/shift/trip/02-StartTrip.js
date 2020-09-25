@@ -83,7 +83,7 @@ export default function StartTrip({ trip, updateTrip, tripsCounter }) {
       <br />
       <br />
 
-      <Link to = "/shift/start-trip">
+      <Link to = "/shift/pickup">
         <button onClick = {startTrip}>Head for Pickup</button>
       </Link>
     </div>

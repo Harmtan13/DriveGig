@@ -7,7 +7,7 @@ export default function Departure({ setTrip, updateTrip, tripsCounter }) {
   const maxTrips = !(tripsCounter.active >= 2);
 
   const updateTripDeparture = () => {
-    const timeStamp = createStamp('time', Date.now(), 0);
+    const timeStamp = createStamp('time', Date.now(), 1);
     const stampInputs = [timeStamp];
 
     const tripData = {
