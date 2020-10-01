@@ -75,38 +75,18 @@ function useTrip(trips) {
   const [tripInfo, setTripInfo] = useState({});
 
   const setUpdatedTrip = () => {
-    const { isAddOn, ...tripInfoCopy } = tripInfo;
+    const tripCopy = { ...trip, ...tripInfo };
 
-    function parseStamps(workingTrip) {
-      const tripCopy = workingTrip;
+    Object.entries(stamps).forEach((stamp) => {
+      const stampName = stamp[0];
+      const stampInfo = stamp[1];
 
-      Object.entries(stamps).forEach((stamp) => {
-        const stampName = stamp[0];
-        const stampInfo = stamp[1];
+      const updateStamp = [...tripCopy[stampName]];
+      updateStamp[stampInfo.stage] = stampInfo.stampSet;
 
-        const updateStamp = [...tripCopy[stampName]];
-        updateStamp[stampInfo.stage] = stampInfo.stampSet;
-
-        tripCopy[stampName] = updateStamp;
-      });
-
-      return tripCopy;
-    }
-
-    const singleTrip = () => {
-      const workingtrip = { ...trip, ...tripInfoCopy };
-      setTrip(parseStamps(workingtrip));
-    };
-
-    const addOnTrip = () => {
-      const tripsCopy = { ...getLocalStorage.trips };
-      tripsCopy[0] = parseStamps(tripsCopy[0]);
-
-      setLocalStorage({ trips: tripsCopy });
-      console.log('Addon');
-    };
-
-    return isAddOn ? addOnTrip() : singleTrip();
+      tripCopy[stampName] = updateStamp;
+      setTrip(tripCopy);
+    });
   };
 
   const updateTrip = (tripData) => {

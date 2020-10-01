@@ -13,8 +13,8 @@ export default function StartTrip({ trip, updateTrip, tripsCounter }) {
   const startTrip = () => {
     const placement = !isAddOn ? 0 : 1;
 
-    const timeStamp = createStamp('time', Date.now(), 0, isAddOn, placement);
-    const odomStamp = createStamp('miles', odometerStart, 0, isAddOn, placement);
+    const timeStamp = createStamp('time', Date.now(), 0, placement);
+    const odomStamp = createStamp('miles', odometerStart, 0, placement);
     const stampInputs = [timeStamp, odomStamp];
 
     const tripData = {
@@ -22,7 +22,6 @@ export default function StartTrip({ trip, updateTrip, tripsCounter }) {
       restaurant,
       orderProvider,
       stampInputs,
-      isAddOn,
     };
 
     updateTrip(tripData);
@@ -56,18 +55,20 @@ export default function StartTrip({ trip, updateTrip, tripsCounter }) {
       <br />
       <br />
 
-      <label htmlFor = "odometer">
-        <input
-          type = "number"
-          name = "odometer"
-          placeholder = "Current Odometer"
-          onChange = {e => setOdometerStart(e.target.value)}
-          value = {odometerStart}
-        />
-      </label>
+      {!isAddOn && (
+        <label htmlFor = "odometer">
+          <input
+            type = "number"
+            name = "odometer"
+            placeholder = "Current Odometer"
+            onChange = {e => setOdometerStart(e.target.value)}
+            value = {odometerStart}
+          />
+        </label>
+      )}
 
-      <br />
-      <br />
+      {!isAddOn && (<br />)}
+      {!isAddOn && (<br />)}
 
       <select
         value = {orderProvider}

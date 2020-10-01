@@ -1,18 +1,18 @@
 const createTrip = (totalTrips) => {
-    let id = totalTrips;
-    let diner = '';
-    let restaurant = '';
-    let orderProvider = '';
-    let miles = [ [] ];
-    let time = [ [] ]
-    let pay = {
-      provider: '',
-      tip: ''
-    }
-    let completed = false;
+  const id = totalTrips;
+  const diner = '';
+  const restaurant = '';
+  const orderProvider = '';
+  const miles = [[]];
+  const time = [[]];
+  const pay = {
+    provider: '',
+    tip: '',
+  };
+  const completed = false;
 
-  return {id, orderProvider, diner, restaurant, miles, time, pay, completed}
-}
+  return { id, orderProvider, diner, restaurant, miles, time, pay, completed };
+};
 
 export default createTrip;
 

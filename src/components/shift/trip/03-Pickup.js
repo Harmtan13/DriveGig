@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createStamp } from '../../../helpers/trips/TripHelpers';
 
-export default function Pickup({ updateTrip }) {
+export default function Pickup({ trip, updateTrip }) {
+  const [odometerStart, setOdometerStart] = useState(trip.miles[0][0] || '');
+
   const updateTripPickup = () => {
     const timeStamp = createStamp('time', Date.now(), 0);
-    const stampInputs = [timeStamp];
+    const odomStamp = createStamp('miles', odometerStart, 0);
+    const stampInputs = [timeStamp, odomStamp];
 
     const tripData = {
       stampInputs,
@@ -16,8 +19,20 @@ export default function Pickup({ updateTrip }) {
 
   return (
     <div>
-      <Link to="/shift/departure">
-        <button type="submit" onClick={updateTripPickup}>
+      <label htmlFor = "odometer">
+        <input
+          type = "number"
+          name = "odometer"
+          placeholder = "Current Odometer"
+          onChange = {e => setOdometerStart(e.target.value)}
+          value = {odometerStart}
+        />
+      </label>
+
+      <br />
+      <br />
+      <Link to = "/shift/departure">
+        <button type = "submit" onClick = {updateTripPickup}>
           Arrived For Pickup
         </button>
       </Link>
