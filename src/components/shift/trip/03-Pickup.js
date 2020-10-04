@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { createStamp } from '../../../helpers/trips/TripHelpers';
 
 export default function Pickup({ trip, updateTrip }) {
-  const [odometerStart, setOdometerStart] = useState(trip.miles[0][0] || '');
+  const [odometerStart, setOdometerStart] = useState(trip.miles[0][1] || '');
 
   const updateTripPickup = () => {
     const timeStamp = createStamp('time', Date.now(), 0);

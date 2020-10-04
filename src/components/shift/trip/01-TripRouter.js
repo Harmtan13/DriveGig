@@ -25,6 +25,7 @@ export default function TripRouter() {
   };
 
   useEffect(() => {
+    // console.log(trip);
     setTrips(trip);
     setLocalStorage({ trip, trips });
   }, [trip]);
