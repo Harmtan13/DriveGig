@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route } from 'react-router-dom';
 
 import StartTrip from './02-StartTrip';
@@ -8,15 +8,16 @@ import Trips from './05-Trips';
 import EndTrip from './06-EndTrip';
 import {
   setLocalStorage,
-  tripCounter,
+  tripSort,
 } from '../../../helpers/trips/TripHelpers';
 import { useTrip, useTrips } from '../../../helpers/trips/customHooks';
+import createTrip from '../../../helpers/CreateTrip';
 
 export default function TripRouter() {
   const [trips, setTrips] = useTrips();
   const [trip, updateTrip, setTrip] = useTrip(trips);
-
-  const tripsCounter = tripCounter(trips);
+  const isAddOn = trip?.time[1].length === 2;
+  const tripsCounter = tripSort(trips);
 
   const tripState = {
     trip,
@@ -25,15 +26,24 @@ export default function TripRouter() {
   };
 
   useEffect(() => {
-    // console.log(trip);
     setTrips(trip);
-    setLocalStorage({ trip, trips });
   }, [trip]);
+
+  useEffect(() => {
+    setLocalStorage({ trip, trips });
+  }, [trips]);
+
+  useEffect(() => {
+    if (isAddOn) setTrip(createTrip(tripsCounter.totalTrips));
+  }, [isAddOn]);
 
   return (
     <>
       <Route exact path = "/shift/start-trip">
-        <StartTrip {...tripState} />
+        <StartTrip
+          {...tripState}
+          isAddOn = {isAddOn}
+        />
       </Route>
 
       <Route path = "/shift/pickup">
@@ -43,7 +53,6 @@ export default function TripRouter() {
       <Route path = "/shift/departure">
         <Departure
           {...tripState}
-          setTrip = {setTrip}
         />
       </Route>
 

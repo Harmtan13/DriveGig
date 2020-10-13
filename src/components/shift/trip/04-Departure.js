@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import createTrip from '../../../helpers/CreateTrip';
 import { createStamp } from '../../../helpers/trips/TripHelpers';
 
-export default function Departure({ setTrip, updateTrip, tripsCounter }) {
-  const maxTrips = !(tripsCounter.active >= 2);
+export default function Departure({ updateTrip, tripsCounter, setIsAddOn }) {
+  const maxTrips = !(tripsCounter.active.length >= 2);
 
+  // Updates Current Trip
   const updateTripDeparture = () => {
     const timeStamp = createStamp('time', Date.now(), 1);
     const stampInputs = [timeStamp];
@@ -14,11 +14,14 @@ export default function Departure({ setTrip, updateTrip, tripsCounter }) {
       stampInputs,
     };
 
+    // Calls SetState in the background after parsing tripData
     updateTrip(tripData);
   };
 
+  // Updates Current Trip then Resets to a blank slate
   const addTrip = () => {
-    setTrip(createTrip(tripsCounter.totalTrips));
+    updateTripDeparture();
+    // setIsAddOn(true);
   };
 
   const headOutLink = () => (maxTrips ? '/shift/delivery' : '/shift/trips');

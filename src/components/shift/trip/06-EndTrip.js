@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import { createStamp } from '../../../helpers/trips/TripHelpers';
 
 export default function EndTrip({ trip, updateTrip }) {
-  const [odometer, setOdometer] = useState('');
-  const [payout, setPayout] = useState('');
+  const [odometer, setOdometer] = useState(trip.miles[1][1] || '');
+  const [providerPay, setProviderPay] = useState(trip.pay.provider || '');
+  const [tip, setTip] = useState(trip.pay.tip || '');
 
   const currentTrips = [];
   // activeTripsHelper(trips);
@@ -17,14 +18,19 @@ export default function EndTrip({ trip, updateTrip }) {
   };
 
   const endTrip = () => {
-    const timeStamp = createStamp('time', Date.now(), 1);
-    const odomStamp = createStamp('miles', odometer, 2);
+    const timeStamp = createStamp('time', Date.now(), 2);
+    const odomStamp = createStamp('miles', odometer, 1);
     const completed = true;
+    const pay = {
+      provider: providerPay,
+      tip,
+    };
     const stampInputs = [timeStamp, odomStamp];
 
     const tripData = {
       completed,
       stampInputs,
+      pay,
     };
 
     updateTrip(tripData);
@@ -49,15 +55,32 @@ export default function EndTrip({ trip, updateTrip }) {
       <br />
       <br />
 
-      <label htmlFor = "payout">
-        <p>Pay</p>
+      <h3>Pay</h3>
+
+      <label htmlFor = "provider">
+        <p>Provider</p>
 
         <input
           type = "number"
-          name = "payout"
+          name = "provider"
           placeholder = "000000"
-          value = {payout}
-          onChange = {e => setPayout(e.target.value)}
+          value = {providerPay}
+          onChange = {e => setProviderPay(e.target.value)}
+        />
+      </label>
+
+      <br />
+      <br />
+
+      <label htmlFor = "tip">
+        <p>Tip</p>
+
+        <input
+          type = "number"
+          name = "tip"
+          placeholder = "000000"
+          value = {tip}
+          onChange = {e => setTip(e.target.value)}
         />
       </label>
 
@@ -65,7 +88,7 @@ export default function EndTrip({ trip, updateTrip }) {
       <br />
 
       <center>
-        <Link to = {determineLink()}>
+        <Link to = "/shift/delivery">
           <button onClick = {endTrip}>
             Delivered
           </button>

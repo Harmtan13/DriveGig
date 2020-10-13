@@ -3,18 +3,18 @@ import { Link } from 'react-router-dom';
 import { createStamp } from '../../../helpers/trips/TripHelpers';
 
 export default function StartTrip({ trip, updateTrip, tripsCounter }) {
-  const [orderProvider, setOrderProvider] = useState(trip.orderProvider);
-  const [odometerStart, setOdometerStart] = useState(trip.miles[0][0] || '');
-  const [diner, setDiner] = useState(trip.diner || '');
-  const [restaurant, setRestaurant] = useState(trip.restaurant || '');
-  const isAddOn = tripsCounter.active > 1;
+  const isAddOn = tripsCounter.active.length >= 2;
+  const formValue = value => (isAddOn ? '' : value);
+  console.log(formValue('penis'));
 
+  const [orderProvider, setOrderProvider] = useState(formValue(trip.orderProvider));
+  const [odometerStart, setOdometerStart] = useState(formValue(trip.miles[0][0]) || '');
+  const [diner, setDiner] = useState(formValue(trip.diner) || '');
+  const [restaurant, setRestaurant] = useState(formValue(trip.restaurant) || '');
 
   const startTrip = () => {
-    const placement = !isAddOn ? 0 : 1;
-
-    const timeStamp = createStamp('time', Date.now(), 0, placement);
-    const odomStamp = createStamp('miles', odometerStart, 0, placement);
+    const timeStamp = createStamp('time', Date.now(), 0, 0);
+    const odomStamp = createStamp('miles', odometerStart, 0, 0);
     const stampInputs = [timeStamp, odomStamp];
 
     const tripData = {
@@ -29,6 +29,9 @@ export default function StartTrip({ trip, updateTrip, tripsCounter }) {
 
   return (
     <div>
+
+      <h1>{formValue('penis')}</h1>
+
       <label htmlFor = "diner">
         <input
           type = "text"

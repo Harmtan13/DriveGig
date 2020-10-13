@@ -20,11 +20,11 @@ const createStamp = (title, stampValue, stage, placement = 1) => ({
   placement,
 });
 
-const tripCounter = (trips) => {
-  const active = trips.filter(trip => trip.completed === false).length;
-  const total = trips.length;
+const tripSort = (trips) => {
+  const active = trips.filter(trip => trip.completed === false);
+  const total = trips;
 
   return { active, total };
 };
 
-export { getLocalStorage, setLocalStorage, createStamp, tripCounter };
+export { getLocalStorage, setLocalStorage, createStamp, tripSort };

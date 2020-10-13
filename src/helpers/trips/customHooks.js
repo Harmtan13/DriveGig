@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getLocalStorage, tripCounter, setLocalStorage } from './TripHelpers';
+import { getLocalStorage, tripSort } from './TripHelpers';
 import createTrip from '../CreateTrip';
 
 function useTrips() {
@@ -53,9 +53,7 @@ function useStamps() {
         const { title, stage, placement, stampValue } = stamp;
         const stampCopy = { ...stamps[title] };
         const stampSet = [...stampCopy.stampSet.slice(-1)];
-        console.log(stampSet);
         stampSet[placement] = stampValue;
-        console.log(stampSet);
         const newStamp = { ...stampCopy, stage, stampSet };
 
         updatedStamps[title] = newStamp;
@@ -69,9 +67,9 @@ function useStamps() {
 }
 
 function useTrip(trips) {
-  const tripsCount = tripCounter(trips);
+  const tripsCount = tripSort(trips);
   const { trip: currentTrip } = getLocalStorage;
-  const [trip, setTrip] = useState(currentTrip || createTrip(tripsCount.total));
+  const [trip, setTrip] = useState(currentTrip || createTrip(tripsCount.total.length));
   const [stamps, setStamps] = useStamps();
   const [tripInfo, setTripInfo] = useState({});
 
