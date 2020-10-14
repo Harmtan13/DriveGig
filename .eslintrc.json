@@ -28,9 +28,9 @@
       2,
       "always"
     ],
-    "eslint eol-last": [
+    "eol-last": [
       "error",
-      "always"
+      "never"
     ]
   }
 }

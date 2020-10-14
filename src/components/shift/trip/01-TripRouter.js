@@ -10,14 +10,14 @@ import {
   setLocalStorage,
   tripSort,
 } from '../../../helpers/trips/TripHelpers';
-import { useTrip, useTrips } from '../../../helpers/trips/customHooks';
+import { useTrip, useTrips, useStamps, useAddOn } from '../../../helpers/trips/customHooks';
 import createTrip from '../../../helpers/CreateTrip';
 
 export default function TripRouter() {
   const [trips, setTrips] = useTrips();
   const [trip, updateTrip, setTrip] = useTrip(trips);
-  const [isAddOn, setIsAddOn] = useState(false);
-  const addTripTrigger = trip?.time[1].length === 2;
+  const [isAddOn, setIsAddOn] = useAddOn();
+  const addTripTrigger = trip?.time[1] ? trip?.time[1].length === 2 : '';
   const tripsCounter = tripSort(trips);
 
   const tripState = {
@@ -26,12 +26,15 @@ export default function TripRouter() {
     tripsCounter,
   };
 
+  console.log();
+
   useEffect(() => {
     setTrips(trip);
   }, [trip]);
 
   useEffect(() => {
-    setLocalStorage({ trip, trips });
+    setLocalStorage({ trip, trips, isAddOn });
+    if (tripsCounter <= 1) setIsAddOn(false);
   }, [trips]);
 
   useEffect(() => {
@@ -44,6 +47,7 @@ export default function TripRouter() {
         <StartTrip
           {...tripState}
           isAddOn = {isAddOn}
+          setIsAddOn = {setIsAddOn}
         />
       </Route>
 

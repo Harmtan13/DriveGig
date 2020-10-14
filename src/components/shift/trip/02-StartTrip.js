@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createStamp } from '../../../helpers/trips/TripHelpers';
 
-export default function InitForm({ trip, updateTrip, isAddOn }) {
+export default function StartTrip({ trip, updateTrip, isAddOn }) {
   const formValue = value => (isAddOn ? '' : value);
 
   const [orderProvider, setOrderProvider] = useState(formValue(trip.orderProvider));

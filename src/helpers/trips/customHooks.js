@@ -41,15 +41,16 @@ function useStamps() {
 
     time: {
       stage: 0,
-      stampSet: trip?.time[trip?.time.length - 1] || [],
+      stampSet: trip?.miles[trip?.miles.length - 1] || [],
     },
   });
 
   const updateStamps = (stampInputs) => {
     const updatedStamps = { ...stamps };
 
-    if (stampInputs) {
-      stampInputs.forEach((stamp) => {
+
+    stampInputs.forEach((stamp) => {
+      if (stamp.stampValue) {
         const { title, stage, placement, stampValue } = stamp;
         const stampCopy = { ...stamps[title] };
         const stampSet = [...stampCopy.stampSet.slice(-1)];
@@ -59,8 +60,8 @@ function useStamps() {
         updatedStamps[title] = newStamp;
 
         setStamps(updatedStamps);
-      });
-    }
+      }
+    });
   };
 
   return [stamps, updateStamps];
@@ -103,4 +104,12 @@ function useTrip(trips) {
   return [trip, updateTrip, setTrip];
 }
 
-export { useTrip, useTrips };
+function useAddOn() {
+  const addOnStatus = getLocalStorage.isAddOn;
+  const [isAddOn, setIsAddOn] = useState(addOnStatus || false);
+
+  return [isAddOn, setIsAddOn];
+}
+
+
+export { useTrip, useTrips, useStamps, useAddOn };

@@ -3,8 +3,8 @@ const createTrip = (totalTrips) => {
   const diner = '';
   const restaurant = '';
   const orderProvider = '';
-  const miles = [[], []];
-  const time = [[], [], []];
+  const miles = [[]];
+  const time = [[]];
   const pay = {
     provider: '',
     tip: '',

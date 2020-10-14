@@ -1,10 +1,13 @@
 const getLocalStorage = (() => {
-  const trips = JSON.parse(localStorage.getItem('trips')) || [];
-  const trip = JSON.parse(localStorage.getItem('trip'));
-  const odometerStamps = JSON.parse(localStorage.getItem('odometerStamps'));
-  const timeStamps = JSON.parse(localStorage.getItem('timeStamps'));
+  const getLocalItem = item => JSON.parse(localStorage.getItem(item));
 
-  return { trips, trip, timeStamps, odometerStamps };
+  const trips = getLocalItem('trips') || [];
+  const trip = getLocalItem('trip');
+  const odometerStamps = getLocalItem('odometerStamps');
+  const timeStamps = getLocalItem('timeStamps');
+  const isAddOn = getLocalItem('isAddOn');
+
+  return { trips, trip, timeStamps, odometerStamps, isAddOn };
 })();
 
 const setLocalStorage = (state) => {
@@ -25,7 +28,7 @@ const tripSort = (trips) => {
   const completed = trips.filter(trip => trip.completed === true);
   const total = trips;
 
-  return { active, total };
+  return { active, total, completed };
 };
 
 export { getLocalStorage, setLocalStorage, createStamp, tripSort };
