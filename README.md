@@ -8,4 +8,4 @@
   * ~~Build in info Stamping for trips that are running simultaneously.~~
   * ~~Add Placement Index to Create Stamp & StampManager Logic.~~
   * ReWork StampManager (Page refreshes are deleting stamps in the manager & trip)
-  * Build Build seperate Add-On component that only renders when Add-On Tag is true
+  * ~~Build Build seperate Add-On component that only renders when Add-On Tag is true~~

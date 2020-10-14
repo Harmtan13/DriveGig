@@ -21,7 +21,7 @@ export default function Departure({ updateTrip, tripsCounter, setIsAddOn }) {
   // Updates Current Trip then Resets to a blank slate
   const addTrip = () => {
     updateTripDeparture();
-    // setIsAddOn(true);
+    setIsAddOn(true);
   };
 
   const headOutLink = () => (maxTrips ? '/shift/delivery' : '/shift/trips');

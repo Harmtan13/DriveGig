@@ -14,7 +14,9 @@
     "ecmaVersion": 11,
     "sourceType": "module"
   },
-  "plugins": ["react"],
+  "plugins": [
+    "react"
+  ],
   "rules": {
     "no-console": 0,
     "one-var": 0,
@@ -22,6 +24,13 @@
     "react/jsx-filename-extension": 0,
     "object-curly-newline": 0,
     "no-restricted-syntax": 0,
-    "react/jsx-equals-spacing": [2, "always"]
+    "react/jsx-equals-spacing": [
+      2,
+      "always"
+    ],
+    "eslint eol-last": [
+      "error",
+      "always"
+    ]
   }
 }

@@ -22,6 +22,7 @@ const createStamp = (title, stampValue, stage, placement = 1) => ({
 
 const tripSort = (trips) => {
   const active = trips.filter(trip => trip.completed === false);
+  const completed = trips.filter(trip => trip.completed === true);
   const total = trips;
 
   return { active, total };

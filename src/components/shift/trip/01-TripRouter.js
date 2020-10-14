@@ -16,7 +16,8 @@ import createTrip from '../../../helpers/CreateTrip';
 export default function TripRouter() {
   const [trips, setTrips] = useTrips();
   const [trip, updateTrip, setTrip] = useTrip(trips);
-  const isAddOn = trip?.time[1].length === 2;
+  const [isAddOn, setIsAddOn] = useState(false);
+  const addTripTrigger = trip?.time[1].length === 2;
   const tripsCounter = tripSort(trips);
 
   const tripState = {
@@ -34,8 +35,8 @@ export default function TripRouter() {
   }, [trips]);
 
   useEffect(() => {
-    if (isAddOn) setTrip(createTrip(tripsCounter.totalTrips));
-  }, [isAddOn]);
+    if (addTripTrigger) setTrip(createTrip(tripsCounter.totalTrips));
+  }, [addTripTrigger]);
 
   return (
     <>
@@ -53,6 +54,7 @@ export default function TripRouter() {
       <Route path = "/shift/departure">
         <Departure
           {...tripState}
+          setIsAddOn = {setIsAddOn}
         />
       </Route>
 

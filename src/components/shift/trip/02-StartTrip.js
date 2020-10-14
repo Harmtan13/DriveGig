@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createStamp } from '../../../helpers/trips/TripHelpers';
 
-export default function StartTrip({ trip, updateTrip, tripsCounter }) {
-  const isAddOn = tripsCounter.active.length >= 2;
+export default function InitForm({ trip, updateTrip, isAddOn }) {
   const formValue = value => (isAddOn ? '' : value);
-  console.log(formValue('penis'));
 
   const [orderProvider, setOrderProvider] = useState(formValue(trip.orderProvider));
   const [odometerStart, setOdometerStart] = useState(formValue(trip.miles[0][0]) || '');
@@ -29,9 +27,6 @@ export default function StartTrip({ trip, updateTrip, tripsCounter }) {
 
   return (
     <div>
-
-      <h1>{formValue('penis')}</h1>
-
       <label htmlFor = "diner">
         <input
           type = "text"
