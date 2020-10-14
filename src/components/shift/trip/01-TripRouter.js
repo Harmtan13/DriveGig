@@ -17,7 +17,7 @@ export default function TripRouter() {
   const [trips, setTrips] = useTrips();
   const [trip, updateTrip, setTrip] = useTrip(trips);
   const [isAddOn, setIsAddOn] = useAddOn();
-  const addTripTrigger = trip?.time[1] ? trip?.time[1].length === 2 : '';
+  const addTripTrigger = trips[0]?.time[1] ? trips[0]?.time[1].length === 2 : '';
   const tripsCounter = tripSort(trips);
 
   const tripState = {
@@ -26,19 +26,17 @@ export default function TripRouter() {
     tripsCounter,
   };
 
-  console.log();
-
   useEffect(() => {
     setTrips(trip);
   }, [trip]);
 
   useEffect(() => {
     setLocalStorage({ trip, trips, isAddOn });
-    if (tripsCounter <= 1) setIsAddOn(false);
+    // if (tripsCounter.total <= 1) setIsAddOn(false);
   }, [trips]);
 
   useEffect(() => {
-    if (addTripTrigger) setTrip(createTrip(tripsCounter.totalTrips));
+    if (addTripTrigger) setTrip(createTrip(tripsCounter.total.length));
   }, [addTripTrigger]);
 
   return (
