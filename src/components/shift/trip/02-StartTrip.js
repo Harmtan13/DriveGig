@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { createStamp } from '../../../helpers/trips/TripHelpers';
 
 export default function StartTrip({ trip, updateTrip, isAddOn, tripsCounter }) {
-  const showOdomInput = tripsCounter.active.length <= 1;
+  const showOdomInput = isAddOn || tripsCounter.active.length >= 2;
   console.log(showOdomInput);
   const formValue = value => (isAddOn ? '' : value);
 
@@ -54,7 +54,7 @@ export default function StartTrip({ trip, updateTrip, isAddOn, tripsCounter }) {
       <br />
       <br />
 
-      {showOdomInput && (
+      {!showOdomInput && (
         <label htmlFor = "odometer">
           <input
             type = "number"
@@ -66,8 +66,8 @@ export default function StartTrip({ trip, updateTrip, isAddOn, tripsCounter }) {
         </label>
       )}
 
-      {showOdomInput && (<br />)}
-      {showOdomInput && (<br />)}
+      {!showOdomInput && (<br />)}
+      {!showOdomInput && (<br />)}
 
       <select
         value = {orderProvider}
