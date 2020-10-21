@@ -10,6 +10,7 @@
   * ~~ReWork StampManager (Page refreshes are deleting stamps in the manager & trip)~~
   * ~~Build Build seperate Add-On component that only renders when Add-On Tag is true~~
   * ~~StampManager needs it's stamps stored seperatley. Remove dependence on current trip.~~
+  * StampManager needs a trigger to slice(-1) it's values so values can be overwritten properly in a correction is required.
 
 * Glitches 
   * ~~Infinite new Trip creation on start-trip refresh~~
