@@ -6,8 +6,9 @@ const getLocalStorage = (() => {
   const odometerStamps = getLocalItem('odometerStamps');
   const timeStamps = getLocalItem('timeStamps');
   const isAddOn = getLocalItem('isAddOn');
+  const stampData = getLocalItem('stamps');
 
-  return { trips, trip, timeStamps, odometerStamps, isAddOn };
+  return { trips, trip, timeStamps, odometerStamps, isAddOn, stampData };
 })();
 
 const setLocalStorage = (state) => {

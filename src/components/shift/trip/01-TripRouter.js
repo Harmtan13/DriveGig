@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom';
 
 import StartTrip from './02-StartTrip';
@@ -10,15 +10,18 @@ import {
   setLocalStorage,
   tripSort,
 } from '../../../helpers/trips/TripHelpers';
-import { useTrip, useTrips, useStamps, useAddOn } from '../../../helpers/trips/customHooks';
+import { useTrip, useTrips, useAddOn } from '../../../helpers/trips/customHooks';
 import createTrip from '../../../helpers/CreateTrip';
 
 export default function TripRouter() {
   const [trips, setTrips] = useTrips();
-  const [trip, updateTrip, setTrip] = useTrip(trips);
+  const [trip, updateTrip, setTrip, stamps] = useTrip(trips);
   const [isAddOn, setIsAddOn] = useAddOn();
   const addOnTrigger = trips[0]?.time[1] ? trips[0]?.time[1].length === 2 : '';
   const tripsCounter = tripSort(trips);
+
+  // console.log(stamps.miles.stampSet);
+  // console.log(stamps.time.stampSet);
 
   const tripState = {
     trip,
@@ -31,7 +34,7 @@ export default function TripRouter() {
   }, [trip]);
 
   useEffect(() => {
-    setLocalStorage({ trip, trips, isAddOn });
+    setLocalStorage({ trip, trips, isAddOn, stamps });
     // if (tripsCounter.total <= 1) setIsAddOn(false);
   }, [trips]);
 

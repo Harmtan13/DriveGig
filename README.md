@@ -9,7 +9,7 @@
   * ~~Add Placement Index to Create Stamp & StampManager Logic.~~
   * ~~ReWork StampManager (Page refreshes are deleting stamps in the manager & trip)~~
   * ~~Build Build seperate Add-On component that only renders when Add-On Tag is true~~
-  * StampManager needs it's stamps stored seperatley. Remove dependence on current trip.
+  * ~~StampManager needs it's stamps stored seperatley. Remove dependence on current trip.~~
 
 * Glitches 
   * ~~Infinite new Trip creation on start-trip refresh~~
