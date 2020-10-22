@@ -64,7 +64,10 @@ export default function TripRouter() {
       </Route>
 
       <Route path = "/shift/trips">
-        <Trips {...tripState} />
+        <Trips
+          {...tripState}
+          setTrip = {setTrip}
+        />
       </Route>
 
       <Route path = "/shift/delivery">

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Trips({ trips, setTrip, tripsCounter }) {
+export default function Trips({ setTrip, tripsCounter }) {
   const setCurrentTrip = (id) => {
-    setTrip(trips[id]);
+    setTrip(tripsCounter.active[id]);
   };
 
   return (
