@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createStamp } from '../../../helpers/trips/TripHelpers';
 
-export default function StartTrip({ trip, updateTrip, isAddOn, tripsCounter }) {
-  const showOdomInput = isAddOn || tripsCounter.active.length >= 2;
-  console.log(showOdomInput);
+export default function StartTrip({ trip, updateTrip, isAddOn, tripsCounter, stamps }) {
+  const newTrip = isAddOn || tripsCounter.active.length >= 2;
   const formValue = value => (isAddOn ? '' : value);
 
   const [orderProvider, setOrderProvider] = useState(formValue(trip.orderProvider));
@@ -12,9 +11,15 @@ export default function StartTrip({ trip, updateTrip, isAddOn, tripsCounter }) {
   const [diner, setDiner] = useState(formValue(trip.diner) || '');
   const [restaurant, setRestaurant] = useState(formValue(trip.restaurant) || '');
 
+  const determineStamp = () => {
+    const rollOverStamp = stamps.miles.stampSet.slice(-1)[0];
+
+    return newTrip ? rollOverStamp : odometerStart;
+  };
+
   const startTrip = () => {
     const timeStamp = createStamp('time', Date.now(), 0, 0);
-    const odomStamp = createStamp('miles', odometerStart, 0, 0);
+    const odomStamp = createStamp('miles', determineStamp(), 0, 0);
     const stampInputs = [timeStamp, odomStamp];
 
     const tripData = {
@@ -25,6 +30,8 @@ export default function StartTrip({ trip, updateTrip, isAddOn, tripsCounter }) {
     };
     updateTrip(tripData);
   };
+
+  createStamp('time', Date.now(), 0, 0);
 
   return (
     <div>
@@ -54,7 +61,7 @@ export default function StartTrip({ trip, updateTrip, isAddOn, tripsCounter }) {
       <br />
       <br />
 
-      {!showOdomInput && (
+      {!newTrip && (
         <label htmlFor = "odometer">
           <input
             type = "number"
@@ -66,8 +73,8 @@ export default function StartTrip({ trip, updateTrip, isAddOn, tripsCounter }) {
         </label>
       )}
 
-      {!showOdomInput && (<br />)}
-      {!showOdomInput && (<br />)}
+      {!newTrip && (<br />)}
+      {!newTrip && (<br />)}
 
       <select
         value = {orderProvider}

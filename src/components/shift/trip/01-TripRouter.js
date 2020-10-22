@@ -20,9 +20,6 @@ export default function TripRouter() {
   const addOnTrigger = trips[0]?.time[1] ? trips[0]?.time[1].length === 2 : '';
   const tripsCounter = tripSort(trips);
 
-  // console.log(stamps.miles.stampSet);
-  // console.log(stamps.time.stampSet);
-
   const tripState = {
     trip,
     updateTrip,
@@ -51,6 +48,7 @@ export default function TripRouter() {
         <StartTrip
           {...tripState}
           isAddOn = {isAddOn}
+          stamps = {stamps}
         />
       </Route>
 

@@ -18,8 +18,8 @@ export default function EndTrip({ trip, updateTrip }) {
   };
 
   const endTrip = () => {
-    const timeStamp = createStamp('time', Date.now(), 2);
-    const odomStamp = createStamp('miles', odometer, 1);
+    const timeStamp = createStamp('time', Date.now(), 2, 3);
+    const odomStamp = createStamp('miles', odometer, 1, 2);
     const completed = true;
     const pay = {
       provider: providerPay,

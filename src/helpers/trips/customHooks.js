@@ -36,18 +36,19 @@ function useStamps() {
   const [stamps, setStamps] = useState({
     miles: {
       stage: 0,
-      stampSet: stampData.miles.stampSet || [],
+      stampSet: stampData?.miles.stampSet || [],
     },
 
     time: {
       stage: 0,
-      stampSet: stampData.time.stampSet || [],
+      stampSet: stampData?.time.stampSet || [],
     },
   });
 
   const updateStamps = (stampInputs) => {
     const updatedStamps = { ...stamps };
 
+    console.log(stampInputs);
 
     stampInputs.forEach((stamp) => {
       if (stamp.stampValue) {
@@ -79,10 +80,10 @@ function useTrip(trips) {
 
     Object.entries(stamps).forEach((stamp) => {
       const stampName = stamp[0];
-      const stampInfo = stamp[1];
+      const { stage, stampSet } = stamp[1];
 
       const updateStamp = [...tripCopy[stampName]];
-      updateStamp[stampInfo.stage] = stampInfo.stampSet;
+      updateStamp[stage] = stampSet.slice(stage, stage + 2);
 
       tripCopy[stampName] = updateStamp;
       setTrip(tripCopy);
@@ -112,4 +113,4 @@ function useAddOn() {
 }
 
 
-export { useTrip, useTrips, useStamps, useAddOn };
+export { useTrip, useTrips, useAddOn };

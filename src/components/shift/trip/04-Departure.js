@@ -7,7 +7,7 @@ export default function Departure({ updateTrip, tripsCounter, setIsAddOn }) {
 
   // Updates Current Trip
   const updateTripDeparture = () => {
-    const timeStamp = createStamp('time', Date.now(), 1);
+    const timeStamp = createStamp('time', Date.now(), 1, 2);
     const stampInputs = [timeStamp];
 
     const tripData = {

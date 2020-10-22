@@ -6,8 +6,6 @@ export default function Trips({ trips, setTrip, tripsCounter }) {
     setTrip(trips[id]);
   };
 
-  console.log(tripsCounter.active);
-
   return (
     <div>
       <h1>Trips</h1>
