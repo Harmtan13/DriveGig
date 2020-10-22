@@ -5,7 +5,7 @@ export default function StartShift({ shift, setShift }) {
   const [odometerStart, setOdometerStart] = useState(shift.odometer[0] || '');
 
   const startShift = () => {
-    const odometer = [Number(odometerStart)];
+    const odometer = [odometerStart];
     const timeStamps = [Date.now()];
     const updatedShift = { ...shift, odometer, timeStamps };
 

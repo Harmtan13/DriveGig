@@ -1,3 +1,5 @@
+
+
 function determinePlacement(shift, timeStamp, placement = 0) {
   const determinePlacement = placement === 0 ? 0 : 1;
   const stampLength = shift.timeStamps.length;
@@ -8,7 +10,7 @@ function determinePlacement(shift, timeStamp, placement = 0) {
   }
 
   function replaceStamp() {
-    return [...shift.timeStamps.slice(0,-1), timeStamp]
+    return [...shift.timeStamps.slice(0, -1), timeStamp];
   }
 
   return placementEquation ? attachStamp() : replaceStamp();
@@ -18,10 +20,10 @@ function addTimeStamp(setShift, shift, placement = 0) {
   const timeStamp = Date.now();
   const timeStamps = determinePlacement(shift, timeStamp, placement);
 
-  let updatedShift = {...shift, timeStamps};
+  const updatedShift = { ...shift, timeStamps };
 
   setShift(updatedShift);
   localStorage.setItem('shift', JSON.stringify(updatedShift));
 }
 
-export { addTimeStamp }
+export { addTimeStamp };

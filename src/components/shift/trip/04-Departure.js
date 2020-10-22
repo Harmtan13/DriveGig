@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { createStamp } from '../../../helpers/trips/TripHelpers';
 
-export default function Departure({ updateTrip, tripsCounter, setIsAddOn }) {
-  const maxTrips = !(tripsCounter.active.length >= 2);
+export default function Departure({ updateTrip, tripsSort, setIsAddOn }) {
+  const maxTrips = !(tripsSort.active.length >= 2);
 
   // Updates Current Trip
   const updateTripDeparture = () => {

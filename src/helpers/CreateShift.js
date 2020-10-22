@@ -2,13 +2,15 @@ const createShift = () => {
   const odometer = [];
   const timeStamps = [];
   const trips = [];
+  const completed = false;
 
   return {
     odometer,
     timeStamps,
-    trips
-  }
-}
+    trips,
+    completed,
+  };
+};
 
 export default createShift;
 
@@ -20,10 +22,10 @@ export default createShift;
 //   let trips;
 
 //   return {
-//     date, 
-//     totalTime, 
-//     nonActiveTime, 
-//     mileage, 
+//     date,
+//     totalTime,
+//     nonActiveTime,
+//     mileage,
 //     trips
 //   }
 // }
