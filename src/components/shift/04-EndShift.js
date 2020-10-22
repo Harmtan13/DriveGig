@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function EndShift({ history }) {
+export default function EndShift({}) {
+  const endShift = () => {
+
+  };
+
   return (
     <div>
       <label htmlFor = "odometer-end">
