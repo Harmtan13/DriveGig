@@ -89,7 +89,7 @@ export default function EndTrip({ trip, updateTrip }) {
 
       <center>
         <Link to = "/shift/delivery">
-          <button onClick = {endTrip}>
+          <button type = "submit" onClick = {endTrip}>
             Delivered
           </button>
         </Link>
