@@ -19,3 +19,5 @@
   * ~~Infinite new Trip creation on start-trip refresh~~
   * ~~Start-Shift page is always showing blank after new Trip Creation~~
   * Pre-filled in Odom form on Pickup due to Auto Stamp fill-in
+  * Stamp overwrites are happening when pulling from localStorage on refresh on multiple trips
+  * Getting error after finalizing one one trip on multi-trip setup
