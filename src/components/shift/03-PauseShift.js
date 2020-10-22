@@ -1,22 +1,22 @@
-import React from 'react'
-import {Link} from 'react-router-dom';
-import { addTimeStamp } from '../../helpers/AppHelpers'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { addTimeStamp } from '../../helpers/AppHelpers';
 
-export default function PauseShift({shift, setShift}) {
+export default function PauseShift({ shift, setShift }) {
   console.log(shift);
   const resumeShift = () => {
-    addTimeStamp(setShift, shift, 1)
-  }
-  
+    addTimeStamp(setShift, shift, 1);
+  };
+
   return (
     <div>
-      <Link to='/shift'>
+      <Link to = "/shift">
         <button
-          onClick={resumeShift}
+          onClick = {resumeShift}
         >
           Resume Shift
         </button>
       </Link>
     </div>
-  )
+  );
 }

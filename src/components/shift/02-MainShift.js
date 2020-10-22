@@ -1,48 +1,48 @@
-import React from 'react'
-import {addTimeStamp} from '../../helpers/AppHelpers'
-import NewTrip from './trip/00-NewTrip';
-import { 
+import React from 'react';
+import {
   Route,
   Switch,
-  Link
-} from 'react-router-dom'
+  Link,
+} from 'react-router-dom';
+import { addTimeStamp } from '../../helpers/AppHelpers';
+import NewTrip from './trip/00-NewTrip';
 
 import ShiftRouter from './trip/01-TripRouter';
 
-export default function MainShift({shift, setShift}) {
-  // console.log(shift); 
+export default function MainShift({ shift, setShift }) {
+  // console.log(shift);
 
   const pauseShift = () => {
     addTimeStamp(setShift, shift);
-  }
+  };
 
   return (
     <Switch>
-      <Route exact path='/shift'>
+      <Route exact path = "/shift">
         <div>
           <h1>Hello from Trip!</h1>
 
-          <Link to="/shift-paused">
-            <button 
+          <Link to = "/shift-paused">
+            <button
               onClick = {pauseShift}
             >
               Pause Shift
             </button>
           </Link>
 
-          <Link to='/end-shift'>
-            <button 
-              onClick={() => console.log('Shift Paused')}
+          <Link to = "/end-shift">
+            <button
+              onClick = {() => console.log('Shift Paused')}
             >
               End Shift
             </button>
           </Link>
 
-          <NewTrip/>
+          <NewTrip />
         </div>
       </Route>
-      <ShiftRouter/>
+      <ShiftRouter />
 
     </Switch>
-  )
+  );
 }
