@@ -18,12 +18,12 @@ export default function TripRouter() {
   const [trip, updateTrip, setTrip, stamps] = useTrip(trips);
   const [isAddOn, setIsAddOn] = useAddOn();
   const addOnTrigger = trips[0]?.time[1] ? trips[0]?.time[1].length === 2 : '';
-  const tripsCounter = tripSort(trips);
+  const tripsSort = tripSort(trips);
 
   const tripState = {
     trip,
     updateTrip,
-    tripsCounter,
+    tripsSort,
   };
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export default function TripRouter() {
 
   useEffect(() => {
     if (addOnTrigger && isAddOn) {
-      setTrip(createTrip(tripsCounter.total.length));
+      setTrip(createTrip(tripsSort.total.length));
       setIsAddOn(false);
     }
   }, [addOnTrigger]);

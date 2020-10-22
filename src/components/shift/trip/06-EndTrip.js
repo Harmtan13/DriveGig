@@ -2,20 +2,15 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createStamp } from '../../../helpers/trips/TripHelpers';
 
-export default function EndTrip({ trip, updateTrip }) {
+export default function EndTrip({ trip, updateTrip, tripsSort }) {
   const [odometer, setOdometer] = useState(trip.miles[1][1] || '');
   const [providerPay, setProviderPay] = useState(trip.pay.provider || '');
   const [tip, setTip] = useState(trip.pay.tip || '');
 
-  const currentTrips = [];
-  // activeTripsHelper(trips);
+  const currentTrips = tripsSort.active.length > 1;
 
-  const determineLink = () => {
-    if (currentTrips.length > 1) {
-      return '/shift/trips';
-    }
-    return '/shift';
-  };
+
+  const determineLink = () => (currentTrips ? '/shift/trips' : '/shift');
 
   const endTrip = () => {
     const timeStamp = createStamp('time', Date.now(), 2, 3);
@@ -88,7 +83,7 @@ export default function EndTrip({ trip, updateTrip }) {
       <br />
 
       <center>
-        <Link to = "/shift/delivery">
+        <Link to = {determineLink()}>
           <button type = "submit" onClick = {endTrip}>
             Delivered
           </button>
