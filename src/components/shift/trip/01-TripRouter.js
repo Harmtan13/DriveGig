@@ -15,7 +15,7 @@ import createTrip from '../../../helpers/CreateTrip';
 
 export default function TripRouter() {
   const [trips, setTrips] = useTrips();
-  const [trip, updateTrip, setTrip, stamps] = useTrip(trips);
+  const [trip, updateTrip, setTrip, stamps, setStamps] = useTrip(trips);
   const [isAddOn, setIsAddOn] = useAddOn();
   const addOnTrigger = trips[0]?.time[1] ? trips[0]?.time[1].length === 2 : '';
   const tripsSort = tripSort(trips);
@@ -32,7 +32,6 @@ export default function TripRouter() {
 
   useEffect(() => {
     setLocalStorage({ trip, trips, isAddOn, stamps });
-    // if (tripsCounter.total <= 1) setIsAddOn(false);
   }, [trips]);
 
   useEffect(() => {
@@ -67,6 +66,7 @@ export default function TripRouter() {
         <Trips
           {...tripState}
           setTrip = {setTrip}
+          setStamps = {setStamps}
         />
       </Route>
 

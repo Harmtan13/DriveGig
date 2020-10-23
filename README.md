@@ -20,4 +20,5 @@
   * ~~Start-Shift page is always showing blank after new Trip Creation~~
   * Pre-filled in Odom form on Pickup due to Auto Stamp fill-in
   * Stamp overwrites are happening when pulling from localStorage on refresh on multiple trips
+    * Resolution - Need to flip stamps back upon changing the trip in Trips Form
   * Getting error after finalizing one one trip on multi-trip setup
