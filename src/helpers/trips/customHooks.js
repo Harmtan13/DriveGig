@@ -48,21 +48,19 @@ function useStamps() {
   const updateStamps = (stampInputs) => {
     const updatedStamps = { ...stamps };
 
-    console.log(stampInputs);
-
     stampInputs.forEach((stamp) => {
       if (stamp.stampValue) {
         const { title, stage, placement, stampValue } = stamp;
-        const stampCopy = { ...stamps[title] };
+        const stampCopy = { ...updatedStamps[title] };
         const stampSet = [...stampCopy.stampSet];
         stampSet[placement] = stampValue;
         const newStamp = { ...stampCopy, stage, stampSet };
 
         updatedStamps[title] = newStamp;
-
-        setStamps(updatedStamps);
       }
     });
+
+    setStamps(updatedStamps);
   };
 
   return [stamps, updateStamps];
@@ -111,6 +109,5 @@ function useAddOn() {
 
   return [isAddOn, setIsAddOn];
 }
-
 
 export { useTrip, useTrips, useAddOn };

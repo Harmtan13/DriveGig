@@ -1,9 +1,44 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { createStamp } from '../../../helpers/trips/TripHelpers';
 
-export default function Trips({ setTrip, tripsSort }) {
+export default function Trips({ updateTrip, tripsSort }) {
   const setCurrentTrip = (id) => {
-    setTrip(tripsSort.active[id]);
+    const trip = tripsSort.active[id];
+    const { orderProvider, restaurant, diner, miles, time } = trip;
+
+    const createNewInputs = (stampSet) => {
+      const stampInputs = [];
+
+      const stampReducer = () => {
+        const combinedSet = [...stampSet[0], ...stampSet[1]];
+        return [...new Set(combinedSet)];
+      };
+
+      stampReducer().forEach((stamp, index) => {
+        const determineStage = index === 0 ? 0 : index - 1;
+        const determineTitle = stamp.length <= 6 ? 'miles' : 'time';
+        stampInputs.push(createStamp(determineTitle, stamp, determineStage, index));
+      });
+
+      return stampInputs;
+    };
+
+    const stampInputs = [...new Set([...createNewInputs(miles), ...createNewInputs(time)])];
+    console.log(stampInputs);
+
+    const tripData = {
+      id,
+      restaurant,
+      diner,
+      orderProvider,
+      miles,
+      time,
+      stampInputs,
+    };
+
+    updateTrip(tripData);
+    // console.log(id, orderProvider, diner, miles, time);
   };
 
   return (
