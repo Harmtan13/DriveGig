@@ -4,7 +4,7 @@ import { createStamp } from '../../../helpers/trips/TripHelpers';
 
 export default function Trips({ updateTrip, tripsSort }) {
   const setCurrentTrip = (id) => {
-    const trip = tripsSort.active.filter(trip => trip.id === id)[0];
+    const trip = tripsSort.active.find(trip => trip.id === id);
     const { orderProvider, restaurant, diner, miles, time, completed, pay } = trip;
 
     const createNewInputs = (stampSet) => {
@@ -25,7 +25,6 @@ export default function Trips({ updateTrip, tripsSort }) {
     };
 
     const stampInputs = [...new Set([...createNewInputs(miles), ...createNewInputs(time)])];
-    console.log(stampInputs);
 
     const tripData = {
       id,
