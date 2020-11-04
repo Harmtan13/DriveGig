@@ -11,16 +11,10 @@ export default function StartTrip({ trip, updateTrip, isAddOn, tripsSort, stamps
   const [diner, setDiner] = useState(formValue(trip.diner) || '');
   const [restaurant, setRestaurant] = useState(formValue(trip.restaurant) || '');
 
-  const determineStamp = () => {
-    const rollOverStamp = stamps.miles.stampSet.slice(-1)[0];
-
-    return newTrip ? rollOverStamp : odometerStart;
-  };
-
   const startTrip = () => {
     const timeStamp = createStamp('time', Date.now(), 0, 0);
-    const odomStamp = createStamp('miles', determineStamp(), 0, 0);
-    const stampInputs = [timeStamp, odomStamp];
+    const odomStamp = createStamp('miles', odometerStart, 0, 0);
+    const stampInputs = newTrip ? [] : [timeStamp, odomStamp];
 
     const tripData = {
       diner,
@@ -30,8 +24,6 @@ export default function StartTrip({ trip, updateTrip, isAddOn, tripsSort, stamps
     };
     updateTrip(tripData);
   };
-
-  createStamp('time', Date.now(), 0, 0);
 
   return (
     <div>

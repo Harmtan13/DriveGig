@@ -9,6 +9,7 @@ import EndTrip from './06-EndTrip';
 import {
   setLocalStorage,
   tripSort,
+  createStamp,
 } from '../../../helpers/trips/TripHelpers';
 import { useTrip, useTrips, useAddOn } from '../../../helpers/trips/customHooks';
 import createTrip from '../../../helpers/CreateTrip';
@@ -37,6 +38,15 @@ export default function TripRouter() {
   useEffect(() => {
     if (addOnTrigger && isAddOn) {
       setTrip(createTrip(tripsSort.total.length));
+      setStamps([
+        createStamp('miles', [...stamps.miles.stampSet].pop(), 0, 0),
+        createStamp('miles', '', 0, 1),
+        createStamp('time', [...stamps.time.stampSet].pop(), 0, 0),
+        createStamp('time', '', 0, 1),
+        createStamp('time', '', 0, 2),
+        createStamp('time', '', 0, 3),
+      ]);
+      // updateTrip(tripReset(createTrip(tripsSort.total.length)));
       setIsAddOn(false);
     }
   }, [addOnTrigger]);
