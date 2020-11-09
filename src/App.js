@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import styled from 'styled-components';
 
-import createShift from './helpers/CreateShift';
+import { createShift } from './helpers/CreationHelpers';
 import AppRouter from './AppRouter';
 import Nav from './Nav';
 import './App.css';

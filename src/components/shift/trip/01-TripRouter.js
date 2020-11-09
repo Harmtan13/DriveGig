@@ -11,10 +11,11 @@ import {
   tripSort,
   createStamp,
 } from '../../../helpers/trips/TripHelpers';
-import { useTrip, useTrips, useAddOn } from '../../../helpers/trips/customHooks';
-import createTrip from '../../../helpers/CreateTrip';
+import { useTrip, useTrips, useAddOn, useUpdateTrip } from '../../../helpers/trips/CustomHooks';
+import { createTrip } from '../../../helpers/CreationHelpers';
 
 export default function TripRouter() {
+  const [penis, setedTrip] = useUpdateTrip();
   const [trips, setTrips] = useTrips();
   const [trip, updateTrip, setTrip, stamps, setStamps] = useTrip(trips);
   const [isAddOn, setIsAddOn] = useAddOn();
@@ -27,35 +28,12 @@ export default function TripRouter() {
     tripsSort,
   };
 
-  useEffect(() => {
-    setTrips(trip);
-  }, [trip]);
-
-  useEffect(() => {
-    setLocalStorage({ trip, trips, isAddOn, stamps });
-  }, [trips]);
-
-  useEffect(() => {
-    if (addOnTrigger && isAddOn) {
-      setTrip(createTrip(tripsSort.total.length));
-      setStamps([
-        createStamp('miles', [...stamps.miles.stampSet].pop(), 0, 0),
-        createStamp('miles', '', 0, 1),
-        createStamp('time', [...stamps.time.stampSet].pop(), 0, 0),
-        createStamp('time', '', 0, 1),
-        createStamp('time', '', 0, 2),
-        createStamp('time', '', 0, 3),
-      ]);
-      // updateTrip(tripReset(createTrip(tripsSort.total.length)));
-      setIsAddOn(false);
-    }
-  }, [addOnTrigger]);
-
   return (
     <>
       <Route exact path = "/shift/start-trip">
         <StartTrip
           {...tripState}
+          updatedTrip = {setedTrip}
           isAddOn = {isAddOn}
           stamps = {stamps}
         />

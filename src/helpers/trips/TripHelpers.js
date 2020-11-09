@@ -32,4 +32,18 @@ const tripSort = (trips) => {
   return { active, total, completed };
 };
 
+// const stampSorter = (stampInputs) => {
+//   stampInputs.forEach((stamp) => {
+//     if (stamp.stampValue) {
+//       const { title, stage, placement, stampValue } = stamp;
+//       const stampCopy = { ...updatedStamps[title] };
+//       const stampSet = [...stampCopy.stampSet];
+//       stampSet[placement] = stampValue;
+//       const newStamp = { ...stampCopy, stage, stampSet };
+
+//       updatedStamps[title] = newStamp;
+//     }
+//   });
+// };
+
 export { getLocalStorage, setLocalStorage, createStamp, tripSort };

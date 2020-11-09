@@ -1,3 +1,17 @@
+const createShift = () => {
+  const odometer = [];
+  const timeStamps = [];
+  const trips = [];
+  const completed = false;
+
+  return {
+    odometer,
+    timeStamps,
+    trips,
+    completed,
+  };
+};
+
 const createTrip = (totalTrips) => {
   const id = totalTrips;
   const diner = '';
@@ -14,8 +28,41 @@ const createTrip = (totalTrips) => {
   return { id, orderProvider, diner, restaurant, miles, time, pay, completed };
 };
 
-export default createTrip;
+const createStamp = () => {
+  const miles = {
+    stage: 0,
+    stampSet: [],
+  };
 
+  const time = {
+    stage: 0,
+    stampSet: [],
+  };
+};
+
+export { createShift, createTrip, createStamp };
+
+
+// Shift
+
+// const createShift = () => {
+//   let mileage;
+//   let date;
+//   let totalTime;
+//   let nonActiveTime;
+//   let trips;
+
+//   return {
+//     date,
+//     totalTime,
+//     nonActiveTime,
+//     mileage,
+//     trips
+//   }
+// }
+
+
+// Trip
 
 // let time = () => {
 //   let startTime;

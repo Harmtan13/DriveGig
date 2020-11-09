@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getLocalStorage, tripSort } from './TripHelpers';
-import createTrip from '../CreateTrip';
+import { createTrip } from '../CreationHelpers';
 
 function useTrips() {
   const [trips, setTrips] = useState(getLocalStorage.trips);
@@ -67,40 +67,16 @@ function useStamps() {
 }
 
 function useTrip(trips) {
-  const tripsCount = tripSort(trips);
+  // const tripsCount = tripSort(trips);
   const { trip: currentTrip } = getLocalStorage;
-  const [trip, setTrip] = useState(currentTrip || createTrip(tripsCount.total.length));
-  const [stamps, setStamps] = useStamps();
+  const [trip, setTrip] = useState(currentTrip || createTrip(0));
   const [tripInfo, setTripInfo] = useState({});
 
-  const setUpdatedTrip = () => {
-    const tripCopy = { ...trip, ...tripInfo };
-
-    Object.entries(stamps).forEach((stamp) => {
-      const stampName = stamp[0];
-      const { stage, stampSet } = stamp[1];
-
-      const updateStamp = [...tripCopy[stampName]];
-      updateStamp[stage] = stampSet.slice(stage, stage + 2);
-
-      tripCopy[stampName] = updateStamp;
-      setTrip(tripCopy);
-    });
-  };
-
   const updateTrip = (tripData) => {
-    const { stampInputs, ...tripProps } = tripData;
-
-    setTripInfo(tripProps);
-    setStamps(stampInputs);
-    setUpdatedTrip();
+    console.log(tripData);
   };
 
-  useEffect(() => {
-    setUpdatedTrip();
-  }, [stamps, tripInfo]);
-
-  return [trip, updateTrip, setTrip, stamps];
+  return [trip, updateTrip];
 }
 
 function useAddOn() {
@@ -110,4 +86,18 @@ function useAddOn() {
   return [isAddOn, setIsAddOn];
 }
 
-export { useTrip, useTrips, useAddOn };
+function useUpdateTrip() {
+  const [trip, setTrip] = useTrip();
+  // const [trips, setTrips] = useTrips();
+  // const [stamps, setStamps] = useStamps();
+
+  const updateTrip = (tripData) => {
+    const { stampInputs, ...tripProps } = tripData;
+
+    setTrip(tripData);
+  };
+
+  return [trip, updateTrip];
+}
+
+export { useTrip, useTrips, useAddOn, useUpdateTrip };
