@@ -21,7 +21,6 @@
   * Pre-filled in Odom form on Pickup due to Auto Stamp fill-in
   * ~~Stamp overwrites are happening when pulling from localStorage on refresh on multiple trips~~
     * ~~Resolution - Need to flip stamps back upon changing the trip in Trips Form~~
-    * Change Start-Trip Stamp reset to use UpdateTrip function
-    * Change useEffect that triggers new Stamp to use UpdateTrip Function 
-      * (Resets StampManager & Removes need to pass raw SetTrip Aroun)
   * ~~Getting error after finalizing one one trip on multi-trip setup~~
+  * Fix stamp reset error on Trips.js switching
+  * Start new Trip after trip completion
