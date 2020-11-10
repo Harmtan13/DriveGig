@@ -83,8 +83,8 @@ export default function EndTrip({ trip, updateTrip, tripsSort }) {
       <br />
 
       <center>
-        <Link to = {determineLink()}>
-          <button type = "submit" onClick = {endTrip}>
+        <Link onClick = {endTrip} to = "/shift">
+          <button type = "submit">
             Delivered
           </button>
         </Link>

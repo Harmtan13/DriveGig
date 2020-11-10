@@ -28,7 +28,7 @@ const createTrip = (totalTrips) => {
   return { id, orderProvider, diner, restaurant, miles, time, pay, completed };
 };
 
-const createStamp = () => {
+const createStamps = () => {
   const miles = {
     stage: 0,
     stampSet: [],
@@ -42,7 +42,7 @@ const createStamp = () => {
   return { miles, time };
 };
 
-export { createShift, createTrip, createStamp };
+export { createShift, createTrip, createStamps };
 
 
 // Shift

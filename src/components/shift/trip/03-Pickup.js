@@ -29,6 +29,10 @@ export default function Pickup({ trip, updateTrip }) {
         />
       </label>
 
+      <div>
+        {trip.orderProvider}
+      </div>
+
       <br />
       <br />
       <Link to = "/shift/departure">

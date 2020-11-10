@@ -3,12 +3,10 @@ const getLocalStorage = (() => {
 
   const trips = getLocalItem('trips') || [];
   const trip = getLocalItem('trip');
-  const odometerStamps = getLocalItem('odometerStamps');
-  const timeStamps = getLocalItem('timeStamps');
   const isAddOn = getLocalItem('isAddOn');
-  const stampData = getLocalItem('stamps');
+  const stamps = getLocalItem('stamps');
 
-  return { trips, trip, timeStamps, odometerStamps, isAddOn, stampData };
+  return { trips, trip, isAddOn, stamps };
 })();
 
 const setLocalStorage = (state) => {
@@ -34,7 +32,6 @@ const tripSort = (trips) => {
 
 const stampManager = (stamps, stampInputs) => {
   const updatedStamps = stamps;
-  console.log(updatedStamps);
 
   stampInputs.forEach((stamp) => {
     if (stamp.stampValue) {
@@ -51,4 +48,57 @@ const stampManager = (stamps, stampInputs) => {
   return updatedStamps;
 };
 
-export { getLocalStorage, setLocalStorage, createStamp, stampManager, tripSort };
+const setUpdatedTrip = (trip, tripInfo, stamps) => {
+  const tripCopy = { ...trip, ...tripInfo };
+
+  Object.entries(stamps).forEach((stamp) => {
+    const stampName = stamp[0];
+    const { stage, stampSet } = stamp[1];
+
+    const updateStamp = [...tripCopy[stampName]];
+    updateStamp[stage] = stampSet.slice(stage, stage + 2);
+
+    tripCopy[stampName] = updateStamp;
+  });
+
+  return tripCopy;
+};
+
+const setUpdatedTrips = (trips, trip) => {
+  const determineTripPlacement = () => {
+    const tripMatch = trips.find(eachTrip => eachTrip.id === trip.id);
+
+    return !!tripMatch;
+  };
+
+  const replaceTripsArray = () => {
+    const updatedTrips = [...trips];
+
+    updatedTrips[trip.id] = trip;
+
+    console.log('replaceTripsArray');
+    console.log(updatedTrips);
+
+    return updatedTrips;
+  };
+
+  const updateTripsArray = () => {
+    const updatedTrips = [...trips, trip];
+
+    console.log('updateTripsArray');
+    console.log(updatedTrips);
+    return updatedTrips;
+  };
+
+  return determineTripPlacement() ? replaceTripsArray() : updateTripsArray();
+};
+
+export {
+  getLocalStorage,
+  setLocalStorage,
+  createStamp,
+  stampManager,
+  tripSort,
+  setUpdatedTrip,
+  setUpdatedTrips,
+};

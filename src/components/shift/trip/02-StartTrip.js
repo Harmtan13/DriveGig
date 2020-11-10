@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createStamp } from '../../../helpers/trips/TripHelpers';
 
-export default function StartTrip({ trip, updateTrip, isAddOn, tripsSort, stamps, updatedTrip }) {
+export default function StartTrip({ trip, updateTrip, isAddOn, tripsSort, stamps }) {
   const newTrip = isAddOn || tripsSort.active.length >= 2;
   const formValue = value => (isAddOn ? '' : value);
 
@@ -22,8 +22,7 @@ export default function StartTrip({ trip, updateTrip, isAddOn, tripsSort, stamps
       orderProvider,
       stampInputs,
     };
-    // updateTrip(tripData);
-    updatedTrip(tripData);
+    updateTrip(tripData);
   };
 
   return (
@@ -83,7 +82,7 @@ export default function StartTrip({ trip, updateTrip, isAddOn, tripsSort, stamps
       <br />
       <br />
 
-      <Link to = "/shift/start-trip">
+      <Link to = "/shift/pickup">
         <button type = "submit" onClick = {startTrip}>Head for Pickup</button>
       </Link>
     </div>

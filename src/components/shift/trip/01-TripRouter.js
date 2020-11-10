@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route } from 'react-router-dom';
 
 import StartTrip from './02-StartTrip';
@@ -8,18 +8,48 @@ import Trips from './05-Trips';
 import EndTrip from './06-EndTrip';
 import {
   tripSort,
+  getLocalStorage,
+  setLocalStorage,
   createStamp,
+  stampManager,
+  setUpdatedTrip,
+  setUpdatedTrips,
 } from '../../../helpers/trips/TripHelpers';
-import { useTrip, useTrips, useAddOn, useUpdateTrip } from '../../../helpers/trips/CustomHooks';
-import { createTrip } from '../../../helpers/CreationHelpers';
+import { createTrip, createStamps } from '../../../helpers/CreationHelpers';
 
 export default function TripRouter() {
-  const [penis, setedTrip] = useUpdateTrip();
-  const [trips, setTrips] = useTrips();
-  const [trip, updateTrip, setTrip, stamps, setStamps] = useTrip(trips);
-  const [isAddOn, setIsAddOn] = useAddOn();
+  const {
+    trips: localTrips,
+    trip: localTrip,
+    stamps: localStamps,
+    isAddOn: localAddOn } = getLocalStorage;
+
+  const [trips, setTrips] = useState([]);
+  const [trip, setTrip] = useState(localTrip || createTrip(trips.length));
+  const [stamps, setStamps] = useState(localStamps || createStamps());
+  const [isAddOn, setIsAddOn] = useState(localAddOn || false);
   const addOnTrigger = trips[0]?.time[1] ? trips[0]?.time[1].length === 2 : '';
   const tripsSort = tripSort(trips);
+
+  const updateTrip = (tripData) => {
+    const { stampInputs, ...tripProps } = tripData;
+    const stampsToSend = isAddOn ? createStamps() : stamps;
+
+    const sortedStamps = stampManager(stampsToSend, stampInputs);
+    const updatedTrip = setUpdatedTrip(trip, tripProps, sortedStamps);
+    const updatedTrips = setUpdatedTrips(trips, updatedTrip);
+
+    setLocalStorage({
+      trip: updatedTrip,
+      trips: updatedTrips,
+      isAddOn,
+      stamps: sortedStamps,
+    });
+
+    setStamps(sortedStamps);
+    setTrip(updatedTrip);
+    setTrips(updatedTrips);
+  };
 
   const tripState = {
     trip,
@@ -27,12 +57,25 @@ export default function TripRouter() {
     tripsSort,
   };
 
+  // useEffect(() => {
+  //   if (addOnTrigger && isAddOn) {
+  //     const stampInputs = [
+  //       createStamp('miles', [...stamps.miles.stampSet].pop(), 0, 0),
+  //       createStamp('time', [...stamps.time.stampSet].pop(), 0, 0),
+  //     ];
+  //     const newTrip = createTrip(tripsSort.total.length);
+
+  //     updateTrip({ stampInputs, ...newTrip });
+  //     setIsAddOn(false);
+  //   }
+  // }, [addOnTrigger]);
+
+
   return (
     <>
       <Route exact path = "/shift/start-trip">
         <StartTrip
           {...tripState}
-          updatedTrip = {setedTrip}
           isAddOn = {isAddOn}
           stamps = {stamps}
         />
