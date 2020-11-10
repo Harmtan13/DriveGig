@@ -24,7 +24,7 @@ export default function TripRouter() {
     stamps: localStamps,
     isAddOn: localAddOn } = getLocalStorage;
 
-  const [trips, setTrips] = useState([]);
+  const [trips, setTrips] = useState(localTrips || []);
   const [trip, setTrip] = useState(localTrip || createTrip(trips.length));
   const [stamps, setStamps] = useState(localStamps || createStamps());
   const [isAddOn, setIsAddOn] = useState(localAddOn || false);
@@ -57,18 +57,18 @@ export default function TripRouter() {
     tripsSort,
   };
 
-  // useEffect(() => {
-  //   if (addOnTrigger && isAddOn) {
-  //     const stampInputs = [
-  //       createStamp('miles', [...stamps.miles.stampSet].pop(), 0, 0),
-  //       createStamp('time', [...stamps.time.stampSet].pop(), 0, 0),
-  //     ];
-  //     const newTrip = createTrip(tripsSort.total.length);
+  useEffect(() => {
+    if (addOnTrigger && isAddOn) {
+      const stampInputs = [
+        createStamp('miles', [...stamps.miles.stampSet].pop(), 0, 0),
+        createStamp('time', [...stamps.time.stampSet].pop(), 0, 0),
+      ];
+      const newTrip = createTrip(tripsSort.total.length);
 
-  //     updateTrip({ stampInputs, ...newTrip });
-  //     setIsAddOn(false);
-  //   }
-  // }, [addOnTrigger]);
+      updateTrip({ stampInputs, ...newTrip });
+      setIsAddOn(false);
+    }
+  }, [addOnTrigger]);
 
 
   return (
