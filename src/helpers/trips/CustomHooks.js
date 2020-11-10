@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { getLocalStorage, tripSort } from './TripHelpers';
-import { createTrip } from '../CreationHelpers';
+import { useState } from 'react';
+import { getLocalStorage, setLocalStorage, stampManager } from './TripHelpers';
+import { createTrip, createStamp } from '../CreationHelpers';
 
 function useTrips() {
   const [trips, setTrips] = useState(getLocalStorage.trips);
@@ -22,6 +22,7 @@ function useTrips() {
     const updateTripsArray = () => {
       const updatedTrips = [...trips, trip];
 
+
       setTrips(updatedTrips);
     };
 
@@ -33,34 +34,11 @@ function useTrips() {
 function useStamps() {
   const { stampData } = getLocalStorage;
 
-  const [stamps, setStamps] = useState({
-    miles: {
-      stage: 0,
-      stampSet: stampData?.miles.stampSet || [],
-    },
+  const [stamps, setStamps] = useState(stampData || createStamp());
 
-    time: {
-      stage: 0,
-      stampSet: stampData?.time.stampSet || [],
-    },
-  });
-
-  const updateStamps = (stampInputs) => {
-    const updatedStamps = { ...stamps };
-
-    stampInputs.forEach((stamp) => {
-      if (stamp.stampValue) {
-        const { title, stage, placement, stampValue } = stamp;
-        const stampCopy = { ...updatedStamps[title] };
-        const stampSet = [...stampCopy.stampSet];
-        stampSet[placement] = stampValue;
-        const newStamp = { ...stampCopy, stage, stampSet };
-
-        updatedStamps[title] = newStamp;
-      }
-    });
-
-    setStamps(updatedStamps);
+  const updateStamps = (stampData) => {
+    setLocalStorage({ stampData });
+    setStamps(stampData);
   };
 
   return [stamps, updateStamps];
@@ -87,14 +65,16 @@ function useAddOn() {
 }
 
 function useUpdateTrip() {
+  const [stamps, setStamps] = useStamps();
   const [trip, setTrip] = useTrip();
   // const [trips, setTrips] = useTrips();
-  // const [stamps, setStamps] = useStamps();
 
   const updateTrip = (tripData) => {
     const { stampInputs, ...tripProps } = tripData;
+    const sortedStamps = stampManager(stamps, stampInputs);
 
-    setTrip(tripData);
+    setTrip({ sortedStamps, tripProps });
+    setStamps(sortedStamps);
   };
 
   return [trip, updateTrip];

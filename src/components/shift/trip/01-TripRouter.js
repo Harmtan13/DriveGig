@@ -7,7 +7,6 @@ import Departure from './04-Departure';
 import Trips from './05-Trips';
 import EndTrip from './06-EndTrip';
 import {
-  setLocalStorage,
   tripSort,
   createStamp,
 } from '../../../helpers/trips/TripHelpers';

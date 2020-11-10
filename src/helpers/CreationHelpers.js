@@ -38,6 +38,8 @@ const createStamp = () => {
     stage: 0,
     stampSet: [],
   };
+
+  return { miles, time };
 };
 
 export { createShift, createTrip, createStamp };
@@ -84,3 +86,16 @@ export { createShift, createTrip, createStamp };
 //   return {totalPay, providerPay, tip}
 
 // return {time, mileage, waitTime, orderProvider, offer, pay}
+
+// StampsManager
+// {
+//   miles: {
+//     stage: stampData?.miles.stage || 0,
+//     stampSet: stampData?.miles.stampSet || [],
+//   },
+
+//   time: {
+//     stage: stampData?.time.stage || 0,
+//     stampSet: stampData?.time.stampSet || [],
+//   },
+// }
