@@ -30,10 +30,11 @@ export default function TripRouter() {
   const [isAddOn, setIsAddOn] = useState(localAddOn || false);
   const addOnTrigger = trips[0]?.time[1] ? trips[0]?.time[1].length === 2 : '';
   const tripsSort = tripSort(trips);
+  const isTripCompleted = trip.completed;
 
   const updateTrip = (tripData) => {
     const { stampInputs, ...tripProps } = tripData;
-    const stampsToSend = isAddOn ? createStamps() : stamps;
+    const stampsToSend = isAddOn || isTripCompleted ? createStamps() : stamps;
 
     const sortedStamps = stampManager(stampsToSend, stampInputs);
     const updatedTrip = setUpdatedTrip(trip, tripProps, sortedStamps);
@@ -56,6 +57,16 @@ export default function TripRouter() {
     updateTrip,
     tripsSort,
   };
+
+  console.log(isTripCompleted);
+  console.log(localTrip?.completed);
+
+  // if (tripsSort.active.length === 0) {
+  //   const stampInputs = [];
+  //   const newTrip = createTrip(tripsSort.total.length);
+
+  //   updateTrip({ stampInputs, ...newTrip });
+  // }
 
   useEffect(() => {
     if (addOnTrigger && isAddOn) {
