@@ -73,11 +73,7 @@ const setUpdatedTrips = (trips, trip) => {
 
   const replaceTripsArray = () => {
     const updatedTrips = [...trips];
-
     updatedTrips[trip.id] = trip;
-
-    console.log('replaceTripsArray');
-    console.log(updatedTrips);
 
     return updatedTrips;
   };
@@ -85,8 +81,6 @@ const setUpdatedTrips = (trips, trip) => {
   const updateTripsArray = () => {
     const updatedTrips = [...trips, trip];
 
-    console.log('updateTripsArray');
-    console.log(updatedTrips);
     return updatedTrips;
   };
 
