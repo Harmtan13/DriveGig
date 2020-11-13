@@ -22,5 +22,6 @@
   * ~~Stamp overwrites are happening when pulling from localStorage on refresh on multiple trips~~
     * ~~Resolution - Need to flip stamps back upon changing the trip in Trips Form~~
   * ~~Getting error after finalizing one one trip on multi-trip setup~~
-  * Fix stamp reset error on Trips.js switching
-  * Start new Trip after trip completion
+  * ~~Start new Trip after trip completion~~
+  * ~~Fix Add-On Squence through the standard update Function~~
+  * Stamps don't need to reset. Stamps need to be reworked to retain the last two total stamps so that mileage can be tracked properly when switching between trips. 
