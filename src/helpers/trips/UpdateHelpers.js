@@ -2,10 +2,11 @@ const stampManager = (stamps, stampInputs) => {
   const updatedStamps = stamps;
 
   stampInputs.forEach((stamp) => {
+    const { title, stage, placement, stampValue } = stamp;
+
     if (stamp.stampValue) {
-      const { title, stage, placement, stampValue } = stamp;
       const stampCopy = { ...stamps[title] };
-      const stampSet = [...stampCopy.stampSet.slice(-1)];
+      const stampSet = stampCopy.stage === stage ? [...stampCopy?.stampSet.slice(0, 1)] : [...stampCopy.stampSet.slice(-1)];
       stampSet[placement] = stampValue;
       const newStamp = { ...stampCopy, stage, stampSet };
 
