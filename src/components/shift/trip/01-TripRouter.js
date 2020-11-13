@@ -11,10 +11,8 @@ import {
   getLocalStorage,
   setLocalStorage,
   createStamp,
-  stampManager,
-  setUpdatedTrip,
-  setUpdatedTrips,
 } from '../../../helpers/trips/TripHelpers';
+import { sortedState } from '../../../helpers/trips/UpdateHelpers';
 import { createTrip, createStamps } from '../../../helpers/CreationHelpers';
 
 export default function TripRouter() {
@@ -27,23 +25,66 @@ export default function TripRouter() {
   const [trips, setTrips] = useState(localTrips || []);
   const [trip, setTrip] = useState(localTrip || createTrip(trips.length));
   const [stamps, setStamps] = useState(localStamps || createStamps());
-  const [isAddOn, setIsAddOn] = useState(localAddOn || false);
-  const addOnTrigger = trips[0]?.time[1] ? trips[0]?.time[1].length === 2 : '';
   const tripsSort = tripSort(trips);
-  const isTripCompleted = trip.completed;
+
 
   const updateTrip = (tripData) => {
-    const { stampInputs, ...tripProps } = tripData;
-    const stampsToSend = isAddOn || isTripCompleted ? createStamps() : stamps;
+    const { sequenceTrigger, ...tripProps } = tripData;
+    const sortProps = {
+      ...tripProps,
+      trip,
+      trips,
+      stamps,
+    };
 
-    const sortedStamps = stampManager(stampsToSend, stampInputs);
-    const updatedTrip = setUpdatedTrip(trip, tripProps, sortedStamps);
-    const updatedTrips = setUpdatedTrips(trips, updatedTrip);
+    const standardSequence = () => sortedState(sortProps);
+
+    const addOnSequence = () => {
+      const { updatedTrips } = sortedState(sortProps);
+      const newTrip = createTrip(tripsSort.total.length);
+
+      const stampInputs = [
+        createStamp('miles', [...stamps.miles.stampSet].pop(), 0, 0),
+        createStamp('time', [...stamps.time.stampSet].pop(), 0, 0),
+      ];
+
+      const newTripData = {
+        stampInputs,
+        stamps: createStamps(),
+        trip: newTrip,
+        trips: updatedTrips,
+      };
+
+      return sortedState(newTripData);
+    };
+
+    const newTripSequence = () => {
+      const { updatedTrips } = sortedState(sortProps);
+      const newTrip = createTrip(tripsSort.total.length);
+
+      const stampInputs = [];
+
+      const newTripData = {
+        stampInputs,
+        stamps: createStamps(),
+        trip: newTrip,
+        trips: updatedTrips,
+      };
+
+      return sortedState(newTripData);
+    };
+
+    const triggeredSequence = () => (sequenceTrigger === 'addOn' ? addOnSequence() : newTripSequence());
+
+
+    const determineSequence = sequenceTrigger ? triggeredSequence() : standardSequence();
+
+    const { updatedTrip, updatedTrips, sortedStamps } = determineSequence;
+
 
     setLocalStorage({
       trip: updatedTrip,
       trips: updatedTrips,
-      isAddOn,
       stamps: sortedStamps,
     });
 
@@ -58,36 +99,11 @@ export default function TripRouter() {
     tripsSort,
   };
 
-  console.log(isTripCompleted);
-  console.log(localTrip?.completed);
-
-  // if (tripsSort.active.length === 0) {
-  //   const stampInputs = [];
-  //   const newTrip = createTrip(tripsSort.total.length);
-
-  //   updateTrip({ stampInputs, ...newTrip });
-  // }
-
-  useEffect(() => {
-    if (addOnTrigger && isAddOn) {
-      const stampInputs = [
-        createStamp('miles', [...stamps.miles.stampSet].pop(), 0, 0),
-        createStamp('time', [...stamps.time.stampSet].pop(), 0, 0),
-      ];
-      const newTrip = createTrip(tripsSort.total.length);
-
-      updateTrip({ stampInputs, ...newTrip });
-      setIsAddOn(false);
-    }
-  }, [addOnTrigger]);
-
-
   return (
     <>
       <Route exact path = "/shift/start-trip">
         <StartTrip
           {...tripState}
-          isAddOn = {isAddOn}
           stamps = {stamps}
         />
       </Route>
@@ -99,7 +115,6 @@ export default function TripRouter() {
       <Route path = "/shift/departure">
         <Departure
           {...tripState}
-          setIsAddOn = {setIsAddOn}
         />
       </Route>
 
@@ -112,7 +127,9 @@ export default function TripRouter() {
       </Route>
 
       <Route path = "/shift/delivery">
-        <EndTrip {...tripState} />
+        <EndTrip
+          {...tripState}
+        />
       </Route>
     </>
   );

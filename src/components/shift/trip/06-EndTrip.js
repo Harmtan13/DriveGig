@@ -21,8 +21,10 @@ export default function EndTrip({ trip, updateTrip, tripsSort }) {
       tip,
     };
     const stampInputs = [timeStamp, odomStamp];
+    const sequenceTrigger = !currentTrips ? 'newTrip' : '';
 
     const tripData = {
+      sequenceTrigger,
       completed,
       stampInputs,
       pay,
@@ -83,7 +85,7 @@ export default function EndTrip({ trip, updateTrip, tripsSort }) {
       <br />
 
       <center>
-        <Link onClick = {endTrip} to = "/shift">
+        <Link onClick = {endTrip} to = {determineLink}>
           <button type = "submit">
             Delivered
           </button>

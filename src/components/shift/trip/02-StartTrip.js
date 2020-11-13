@@ -4,12 +4,11 @@ import { createStamp } from '../../../helpers/trips/TripHelpers';
 
 export default function StartTrip({ trip, updateTrip, isAddOn, tripsSort }) {
   const newTrip = isAddOn || tripsSort.active.length >= 2;
-  const formValue = value => (isAddOn ? '' : value);
 
-  const [orderProvider, setOrderProvider] = useState(formValue(trip.orderProvider));
-  const [odometerStart, setOdometerStart] = useState(formValue(trip.miles[0][0]) || '');
-  const [diner, setDiner] = useState(formValue(trip.diner) || '');
-  const [restaurant, setRestaurant] = useState(formValue(trip.restaurant) || '');
+  const [orderProvider, setOrderProvider] = useState(trip.orderProvider);
+  const [odometerStart, setOdometerStart] = useState(trip.miles[0][0] || '');
+  const [diner, setDiner] = useState(trip.diner || '');
+  const [restaurant, setRestaurant] = useState(trip.restaurant || '');
 
   const startTrip = () => {
     const timeStamp = createStamp('time', Date.now(), 0, 0);
