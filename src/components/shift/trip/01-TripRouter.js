@@ -121,7 +121,6 @@ export default function TripRouter() {
         <Trips
           {...tripState}
           setTrip = {setTrip}
-          setStamps = {setStamps}
         />
       </Route>
 
