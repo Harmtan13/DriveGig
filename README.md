@@ -25,4 +25,4 @@
   * ~~Start new Trip after trip completion~~
   * ~~Fix Add-On Squence through the standard update Function~~
   * ~~Stamps don't need to reset. Stamps need to be reworked to retain the last two total stamps so that mileage can be tracked properly when switching between trips.~~
-  * Stamps are being overwritten improperly when you click the back button to make corrections
+  * ~~Stamps are being overwritten improperly when you click the back button to make corrections~~
