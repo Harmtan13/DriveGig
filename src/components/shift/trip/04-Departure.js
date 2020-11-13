@@ -20,6 +20,7 @@ export default function Departure({ updateTrip, tripsSort }) {
     const sequenceTrigger = 'addOn';
 
     const tripData = {
+      sequenceTrigger,
       stampInputs,
     };
 
