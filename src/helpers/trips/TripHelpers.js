@@ -4,10 +4,8 @@ const getLocalStorage = (() => {
   const trips = getItem('trips') || [];
   const trip = getItem('trip');
   const stamps = getItem('stamps');
-  const isAddOn = getItem('isAddOn');
-  const isTripComplete = getItem('isAddOn');
 
-  return { trips, trip, isAddOn, stamps, isTripComplete };
+  return { trips, trip, stamps };
 })();
 
 const setLocalStorage = (state) => {

@@ -19,8 +19,7 @@ export default function TripRouter() {
   const {
     trips: localTrips,
     trip: localTrip,
-    stamps: localStamps,
-    isAddOn: localAddOn } = getLocalStorage;
+    stamps: localStamps } = getLocalStorage;
 
   const [trips, setTrips] = useState(localTrips || []);
   const [trip, setTrip] = useState(localTrip || createTrip(trips.length));
