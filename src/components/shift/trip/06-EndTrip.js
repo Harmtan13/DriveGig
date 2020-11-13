@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { createStamp } from '../../../helpers/trips/TripHelpers';
 
-export default function EndTrip({ trip, updateTrip, tripsSort, setPenis }) {
+export default function EndTrip({ trip, updateTrip, tripsSort }) {
   const [odometer, setOdometer] = useState(trip.miles[1][1] || '');
   const [providerPay, setProviderPay] = useState(trip.pay.provider || '');
   const [tip, setTip] = useState(trip.pay.tip || '');
@@ -30,7 +30,6 @@ export default function EndTrip({ trip, updateTrip, tripsSort, setPenis }) {
       pay,
     };
 
-    setPenis('penis');
     updateTrip(tripData);
   };
 

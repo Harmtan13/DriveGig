@@ -25,7 +25,6 @@ export default function TripRouter(shiftState) {
   const [trips, setTrips] = useState(localTrips || []);
   const [trip, setTrip] = useState(localTrip || createTrip(trips.length));
   const [stamps, setStamps] = useState(localStamps || createStamps());
-  const [penis, setPenis] = useState('');
   const tripsSort = tripSort(trips);
 
   const updateTrip = (tripData) => {
@@ -116,7 +115,6 @@ export default function TripRouter(shiftState) {
       <Route path = "/shift/delivery">
         <EndTrip
           {...tripState}
-          setPenis = {setPenis}
         />
       </Route>
 
