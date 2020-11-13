@@ -4,8 +4,8 @@ const stampManager = (stamps, stampInputs) => {
   stampInputs.forEach((stamp) => {
     if (stamp.stampValue) {
       const { title, stage, placement, stampValue } = stamp;
-      const stampCopy = { ...updatedStamps[title] };
-      const stampSet = [...stampCopy.stampSet];
+      const stampCopy = { ...stamps[title] };
+      const stampSet = [...stampCopy.stampSet.slice(-1)];
       stampSet[placement] = stampValue;
       const newStamp = { ...stampCopy, stage, stampSet };
 
@@ -21,10 +21,10 @@ const setUpdatedTrip = (trip, tripInfo, stamps) => {
 
   Object.entries(stamps).forEach((stamp) => {
     const stampName = stamp[0];
-    const { stage, stampSet } = stamp[1];
+    const stampInfo = stamp[1];
 
     const updateStamp = [...tripCopy[stampName]];
-    updateStamp[stage] = stampSet.slice(stage, stage + 2);
+    updateStamp[stampInfo.stage] = stampInfo.stampSet;
 
     tripCopy[stampName] = updateStamp;
   });

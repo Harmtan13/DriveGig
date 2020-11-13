@@ -5,7 +5,7 @@ import { createStamp } from '../../../helpers/trips/TripHelpers';
 export default function Departure({ updateTrip, tripsSort }) {
   const maxTrips = !(tripsSort.active.length >= 2);
 
-  const timeStamp = createStamp('time', Date.now(), 1, 2);
+  const timeStamp = createStamp('time', Date.now(), 1);
   const stampInputs = [timeStamp];
 
   const updateTripDeparture = () => {

@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createStamp } from '../../../helpers/trips/TripHelpers';
 
-export default function StartTrip({ trip, updateTrip, isAddOn, tripsSort }) {
-  const newTrip = isAddOn || tripsSort.active.length >= 2;
+export default function StartTrip({ trip, updateTrip, tripsSort }) {
+  const newTrip = tripsSort.active.length >= 2;
 
   const [orderProvider, setOrderProvider] = useState(trip.orderProvider);
   const [odometerStart, setOdometerStart] = useState(trip.miles[0][0] || '');
