@@ -7,8 +7,6 @@ import {
 import { addTimeStamp } from '../../helpers/AppHelpers';
 import NewTrip from './trip/00-NewTrip';
 
-import ShiftRouter from './trip/01-TripRouter';
-
 export default function MainShift({ shift, setShift }) {
   // console.log(shift);
 
@@ -41,7 +39,6 @@ export default function MainShift({ shift, setShift }) {
           <NewTrip />
         </div>
       </Route>
-      <ShiftRouter />
 
     </Switch>
   );

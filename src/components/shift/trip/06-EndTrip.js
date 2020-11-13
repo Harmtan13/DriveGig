@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { createStamp } from '../../../helpers/trips/TripHelpers';
 
-export default function EndTrip({ trip, updateTrip, tripsSort }) {
+export default function EndTrip({ trip, updateTrip, tripsSort, setPenis }) {
   const [odometer, setOdometer] = useState(trip.miles[1][1] || '');
   const [providerPay, setProviderPay] = useState(trip.pay.provider || '');
   const [tip, setTip] = useState(trip.pay.tip || '');
-
+  const history = useHistory();
   const currentTrips = tripsSort.active.length > 1;
 
 
@@ -21,7 +21,7 @@ export default function EndTrip({ trip, updateTrip, tripsSort }) {
       tip,
     };
     const stampInputs = [timeStamp, odomStamp];
-    const sequenceTrigger = !currentTrips ? 'newTrip' : '';
+    const sequenceTrigger = !currentTrips ? true : '';
 
     const tripData = {
       sequenceTrigger,
@@ -30,6 +30,7 @@ export default function EndTrip({ trip, updateTrip, tripsSort }) {
       pay,
     };
 
+    setPenis('penis');
     updateTrip(tripData);
   };
 

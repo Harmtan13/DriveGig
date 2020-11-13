@@ -17,7 +17,7 @@ export default function Departure({ updateTrip, tripsSort }) {
   };
 
   const addTrip = () => {
-    const sequenceTrigger = 'addOn';
+    const sequenceTrigger = true;
 
     const tripData = {
       sequenceTrigger,

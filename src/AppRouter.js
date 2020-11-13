@@ -6,7 +6,7 @@ import {
 import Gasform from './components/gas/GasForm';
 import Stats from './components/stats/Stats';
 import StartShift from './components/shift/01-StartShift';
-import MainShift from './components/shift/02-MainShift';
+import TripRouter from './components/shift/trip/01-TripRouter';
 import PauseShift from './components/shift/03-PauseShift';
 import EndShift from './components/shift/04-EndShift';
 
@@ -18,7 +18,7 @@ export default function AppRouter(shiftState) {
       </Route>
 
       <Route path = "/shift">
-        <MainShift {...shiftState} />
+        <TripRouter {...shiftState} />
       </Route>
 
       <Route path = "/shift-paused">

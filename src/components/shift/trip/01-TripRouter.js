@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Route } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Route, Link } from 'react-router-dom';
 
+import MainShift from '../02-MainShift';
 import StartTrip from './02-StartTrip';
 import Pickup from './03-Pickup';
 import Departure from './04-Departure';
@@ -15,7 +16,7 @@ import {
 import { sortedState } from '../../../helpers/trips/UpdateHelpers';
 import { createTrip, createStamps } from '../../../helpers/CreationHelpers';
 
-export default function TripRouter() {
+export default function TripRouter(shiftState) {
   const {
     trips: localTrips,
     trip: localTrip,
@@ -24,8 +25,8 @@ export default function TripRouter() {
   const [trips, setTrips] = useState(localTrips || []);
   const [trip, setTrip] = useState(localTrip || createTrip(trips.length));
   const [stamps, setStamps] = useState(localStamps || createStamps());
+  const [penis, setPenis] = useState('');
   const tripsSort = tripSort(trips);
-
 
   const updateTrip = (tripData) => {
     const { sequenceTrigger, ...tripProps } = tripData;
@@ -57,29 +58,9 @@ export default function TripRouter() {
       return sortedState(newTripData);
     };
 
-    const newTripSequence = () => {
-      const { updatedTrips } = sortedState(sortProps);
-      const newTrip = createTrip(tripsSort.total.length);
-
-      const stampInputs = [];
-
-      const newTripData = {
-        stampInputs,
-        stamps: createStamps(),
-        trip: newTrip,
-        trips: updatedTrips,
-      };
-
-      return sortedState(newTripData);
-    };
-
-    const triggeredSequence = () => (sequenceTrigger === 'addOn' ? addOnSequence() : newTripSequence());
-
-
-    const determineSequence = sequenceTrigger ? triggeredSequence() : standardSequence();
+    const determineSequence = sequenceTrigger ? addOnSequence() : standardSequence();
 
     const { updatedTrip, updatedTrips, sortedStamps } = determineSequence;
-
 
     setLocalStorage({
       trip: updatedTrip,
@@ -100,6 +81,14 @@ export default function TripRouter() {
 
   return (
     <>
+      <Route exact path = "/shift">
+        <Link onClick = {() => { console.log('yellow'); }} to = "/shift/start-trip">
+          <MainShift
+            {...shiftState}
+          />
+        </Link>
+      </Route>
+
       <Route exact path = "/shift/start-trip">
         <StartTrip
           {...tripState}
@@ -127,8 +116,10 @@ export default function TripRouter() {
       <Route path = "/shift/delivery">
         <EndTrip
           {...tripState}
+          setPenis = {setPenis}
         />
       </Route>
+
     </>
   );
 }
