@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createStamp } from '../../../helpers/trips/TripHelpers';
 
-export default function EndTrip({ trip, updateTrip, tripsSort }) {
+export default function EndTrip({ trip, updateTrip, tripsSort, switchTrigger }) {
   const [odometer, setOdometer] = useState(trip.miles[1][1] || '');
   const [providerPay, setProviderPay] = useState(trip.pay.provider || '');
   const [tip, setTip] = useState(trip.pay.tip || '');
-  const currentTrips = tripsSort.active.length >= 1;
-
+  const currentTrips = tripsSort.active.length >= 2;
 
   const determineLink = () => (currentTrips ? '/shift/trips' : '/shift');
+  const triggerToggle = () => (!!currentTrips);
 
   const endTrip = () => {
-    const timeStamp = createStamp('time', Date.now(), 2);
-    const odomStamp = createStamp('miles', odometer, 1);
+    const timeStamp = createStamp('time', Date.now(), 2, 1, switchTrigger);
+    const odomStamp = createStamp('miles', odometer, 1, 1, switchTrigger);
     const completed = true;
     const pay = {
       provider: providerPay,
@@ -27,6 +27,7 @@ export default function EndTrip({ trip, updateTrip, tripsSort }) {
       completed,
       stampInputs,
       pay,
+      switchTriggerToggle: triggerToggle(),
     };
 
     updateTrip(tripData);
@@ -84,7 +85,7 @@ export default function EndTrip({ trip, updateTrip, tripsSort }) {
       <br />
 
       <center>
-        <Link onClick = {endTrip} to = {determineLink}>
+        <Link onClick = {endTrip} to = {determineLink()}>
           <button type = "submit">
             Delivered
           </button>

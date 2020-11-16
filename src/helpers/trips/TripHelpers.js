@@ -4,8 +4,9 @@ const getLocalStorage = (() => {
   const trips = getItem('trips') || [];
   const trip = getItem('trip');
   const stamps = getItem('stamps');
+  const switchTrigger = getItem('switchTrigger');
 
-  return { trips, trip, stamps };
+  return { trips, trip, stamps, switchTrigger };
 })();
 
 const setLocalStorage = (state) => {
@@ -14,11 +15,12 @@ const setLocalStorage = (state) => {
   }
 };
 
-const createStamp = (title, stampValue, stage, placement = 1) => ({
+const createStamp = (title, stampValue, stage, placement = 1, switchTrigger = false) => ({
   title,
   stampValue,
   stage,
   placement,
+  switchTrigger,
 });
 
 const tripSort = (trips) => {

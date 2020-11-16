@@ -13,22 +13,24 @@ import {
   setLocalStorage,
   createStamp,
 } from '../../../helpers/trips/TripHelpers';
-import { sortedState } from '../../../helpers/trips/UpdateHelpers';
+import sortedState from '../../../helpers/trips/UpdateHelpers';
 import { createTrip, createStamps } from '../../../helpers/CreationHelpers';
 
 export default function TripRouter(shiftState) {
   const {
     trips: localTrips,
     trip: localTrip,
-    stamps: localStamps } = getLocalStorage;
+    stamps: localStamps,
+    switchTrigger: localSwitchTrigger } = getLocalStorage;
 
   const [trips, setTrips] = useState(localTrips || []);
   const [trip, setTrip] = useState(localTrip || createTrip(trips.length));
-  const [stamps, setStamps] = useState(localStamps || createStamps());
+  const [stamps, setStamps] = useState(localStamps || createStamps(trips.length));
+  const [switchTrigger, setSwitchTrigger] = useState(localSwitchTrigger || false);
   const tripsSort = tripSort(trips);
 
   const updateTrip = (tripData) => {
-    const { sequenceTrigger, ...tripProps } = tripData;
+    const { sequenceTrigger, switchTriggerToggle, ...tripProps } = tripData;
     const sortProps = {
       ...tripProps,
       trip,
@@ -65,11 +67,13 @@ export default function TripRouter(shiftState) {
       trip: updatedTrip,
       trips: updatedTrips,
       stamps: sortedStamps,
+      switchTrigger: switchTriggerToggle,
     });
 
     setStamps(sortedStamps);
     setTrip(updatedTrip);
     setTrips(updatedTrips);
+    setSwitchTrigger(switchTriggerToggle);
   };
 
   const tripState = {
@@ -115,6 +119,7 @@ export default function TripRouter(shiftState) {
       <Route path = "/shift/delivery">
         <EndTrip
           {...tripState}
+          switchTrigger = {switchTrigger}
         />
       </Route>
 
