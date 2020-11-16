@@ -6,7 +6,7 @@ export default function EndTrip({ trip, updateTrip, tripsSort }) {
   const [odometer, setOdometer] = useState(trip.miles[1][1] || '');
   const [providerPay, setProviderPay] = useState(trip.pay.provider || '');
   const [tip, setTip] = useState(trip.pay.tip || '');
-  const currentTrips = tripsSort.active.length > 1;
+  const currentTrips = tripsSort.active.length >= 1;
 
 
   const determineLink = () => (currentTrips ? '/shift/trips' : '/shift');
