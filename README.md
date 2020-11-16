@@ -27,3 +27,4 @@
   * ~~Stamps don't need to reset. Stamps need to be reworked to retain the last two total stamps so that mileage can be tracked properly when switching between trips.~~
   * ~~Stamps are being overwritten improperly when you click the back button to make corrections~~
   * ~~When Switching trips, the StampManager is loggin stamps wrong, it's pulling the wrong stamp based on only the stage. Need to take into account switching trips.~~
+  * Need to find a way to get a better determineLink function on EndTrip. Unable to go back properly if there's an error.
