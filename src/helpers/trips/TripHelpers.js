@@ -1,7 +1,7 @@
 const getLocalStorage = (() => {
   const getItem = item => JSON.parse(localStorage.getItem(item));
 
-  const trips = getItem('trips') || [];
+  const trips = getItem('trips');
   const trip = getItem('trip');
   const stamps = getItem('stamps');
   const switchTrigger = getItem('switchTrigger');

@@ -67,7 +67,7 @@ export default function TripRouter(shiftState) {
       trip: updatedTrip,
       trips: updatedTrips,
       stamps: sortedStamps,
-      switchTrigger: switchTriggerToggle,
+      switchTrigger: switchTriggerToggle || false,
     });
 
     setStamps(sortedStamps);
