@@ -85,13 +85,11 @@ export default function TripRouter(shiftState) {
   return (
     <>
       <Route exact path = "/shift">
-        <Link to = "/shift/start-trip">
-          <MainShift
-            {...shiftState}
-            {...tripState}
-            trips = {trips}
-          />
-        </Link>
+        <MainShift
+          {...shiftState}
+          {...tripState}
+          trips = {trips}
+        />
       </Route>
 
       <Route exact path = "/shift/start-trip">
