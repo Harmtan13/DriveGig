@@ -85,9 +85,11 @@ export default function TripRouter(shiftState) {
   return (
     <>
       <Route exact path = "/shift">
-        <Link onClick = {() => { console.log('yellow'); }} to = "/shift/start-trip">
+        <Link to = "/shift/start-trip">
           <MainShift
             {...shiftState}
+            {...tripState}
+            trips = {trips}
           />
         </Link>
       </Route>

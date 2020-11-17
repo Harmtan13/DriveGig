@@ -20,10 +20,10 @@ export default function EndTrip({ trip, updateTrip, tripsSort, switchTrigger }) 
       tip,
     };
     const stampInputs = [timeStamp, odomStamp];
-    const sequenceTrigger = !currentTrips ? true : '';
+    const sequenceTrigger = !currentTrips;
 
     const tripData = {
-      sequenceTrigger,
+      // sequenceTrigger,
       completed,
       stampInputs,
       pay,

@@ -31,13 +31,13 @@ export default function Departure({ updateTrip, tripsSort }) {
 
   return (
     <div>
-      <Link to = {headOutLink}>
-        <button onClick = {updateTripDeparture}>Head Out</button>
+      <Link onClick = {updateTripDeparture} to = {headOutLink}>
+        <button>Head Out</button>
       </Link>
 
       {maxTrips && (
-        <Link to = "/shift/start-trip">
-          <button onClick = {addTrip}>Add-on Trip</button>
+        <Link onClick = {addTrip} to = "/shift/start-trip">
+          <button>Add-on Trip</button>
         </Link>
       )}
     </div>
