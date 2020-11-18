@@ -13,7 +13,6 @@ export default function NewTrip({ updateTrip, trip }) {
     };
 
     updateTrip(tripData);
-    console.log('newTrip');
   };
 
 

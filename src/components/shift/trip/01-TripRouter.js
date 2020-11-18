@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 import MainShift from '../02-MainShift';
 import StartTrip from './02-StartTrip';
@@ -118,6 +118,7 @@ export default function TripRouter(shiftState) {
 
       <Route path = "/shift/delivery">
         <EndTrip
+          {...shiftState}
           {...tripState}
           switchTrigger = {switchTrigger}
         />

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { addTimeStamp } from '../../helpers/AppHelpers';
+import { addTimeStamp } from '../../helpers/ShiftHelpers';
 import NewTrip from './trip/00-NewTrip';
 
-export default function MainShift({ shift, setShift, trips, updateTrip, trip }) {
+export default function MainShift({ shift, setShift, updateTrip, trip }) {
   // console.log(shift);
 
   const pauseShift = () => {
@@ -20,10 +20,8 @@ export default function MainShift({ shift, setShift, trips, updateTrip, trip }) 
         </button>
       </Link>
 
-      <Link to = "/end-shift">
-        <button
-          onClick = {() => console.log('Shift Paused')}
-        >
+      <Link onClick = {() => console.log('Shift Paused')} to = "/end-shift">
+        <button>
           End Shift
         </button>
       </Link>
