@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -14,11 +14,20 @@ import './App.css';
 
 export default function App() {
   const [shift, setShift] = useState(JSON.parse(localStorage.getItem('shift')) || createShift());
+  const [shifts, setShifts] = useState(JSON.parse(localStorage.getItem('shifts')) || []);
 
   const shiftState = {
     shift,
     setShift,
   };
+
+  useEffect(() => {
+    if (shift.completed) {
+      localStorage.clear();
+      localStorage.setItem('shifts', JSON.stringify([...shifts, shift]));
+      setShifts([...shifts, shift]);
+    }
+  }, [shift]);
 
   return (
     <Router>
