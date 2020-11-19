@@ -5,12 +5,20 @@ export default function EndShift({ shift, setShift }) {
   const [odometerEnd, setOdometerEnd] = useState('');
 
   const endShift = () => {
-    const odometer = [...shift.odometer, odometerEnd];
-    const timeStamps = [...shift.timeStamps, Date.now()];
+    const odometer = [...shift.miles, odometerEnd];
+    const timeStamps = [...shift.time, Date.now()];
+    const completed = true;
 
-    const updatedShift = { ...shift, odometer, timeStamps };
+    const updatedShift = {
+      ...shift,
+      miles: odometer,
+      time: timeStamps,
+      completed,
+    };
 
     console.log(updatedShift);
+    setShift(updatedShift);
+    localStorage.setItem('shift', JSON.stringify(updatedShift));
   };
 
   return (

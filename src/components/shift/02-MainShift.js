@@ -20,7 +20,7 @@ export default function MainShift({ shift, setShift, updateTrip, trip }) {
         </button>
       </Link>
 
-      <Link onClick = {() => console.log('Shift Paused')} to = "/end-shift">
+      <Link to = "/end-shift">
         <button>
           End Shift
         </button>
