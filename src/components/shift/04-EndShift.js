@@ -30,7 +30,7 @@ export default function EndShift({ shift, setShift }) {
       <br />
 
       <center>
-        <Link to = "/end-shift">
+        <Link to = "/">
           <button
             onClick = {endShift}
           >

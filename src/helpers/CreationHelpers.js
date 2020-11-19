@@ -1,12 +1,12 @@
 const createShift = () => {
-  const odometer = [];
-  const timeStamps = [];
+  const miles = [];
+  const time = [];
   const trips = [];
   const completed = false;
 
   return {
-    odometer,
-    timeStamps,
+    miles,
+    time,
     trips,
     completed,
   };

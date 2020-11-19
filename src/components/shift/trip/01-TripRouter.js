@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route } from 'react-router-dom';
 
 import MainShift from '../02-MainShift';
@@ -15,6 +15,7 @@ import {
 } from '../../../helpers/trips/TripHelpers';
 import sortedState from '../../../helpers/trips/UpdateHelpers';
 import { createTrip, createStamps } from '../../../helpers/CreationHelpers';
+import { mergeShiftAndTripStamps } from '../../../helpers/ShiftHelpers';
 
 export default function TripRouter(shiftState) {
   const {
@@ -76,6 +77,17 @@ export default function TripRouter(shiftState) {
     setSwitchTrigger(switchTriggerToggle);
   };
 
+  useEffect(() => {
+    if (trip.completed) {
+      const shiftData = {
+        ...shiftState,
+        trip,
+      };
+
+      mergeShiftAndTripStamps(shiftData);
+    }
+  }, [trips]);
+
   const tripState = {
     trip,
     updateTrip,
@@ -118,7 +130,6 @@ export default function TripRouter(shiftState) {
 
       <Route path = "/shift/delivery">
         <EndTrip
-          {...shiftState}
           {...tripState}
           switchTrigger = {switchTrigger}
         />
