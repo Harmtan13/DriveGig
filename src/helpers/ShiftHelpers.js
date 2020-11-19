@@ -25,7 +25,7 @@ function addTimeStamp(setShift, shift, placement = 0) {
   localStorage.setItem('shift', JSON.stringify(updatedShift));
 }
 
-function mergeShiftAndTripStamps({ shift, setShift, trip }) {
+function mergeShiftAndTripStamps({ shift, trip }) {
   const shiftCopy = { ...shift };
   const stampTitles = ['time', 'miles'];
 
@@ -44,18 +44,20 @@ function mergeShiftAndTripStamps({ shift, setShift, trip }) {
     const sortedStamps = mergedStamps.sort();
     const filteredStamps = sortedStamps.filter((a, b) => sortedStamps[b + 1] !== a && sortedStamps[b - 1] !== a);
 
-    console.log(shift[title]);
-    console.log(trip[title]);
-
-    console.log(mergedStamps);
-    console.log(sortedStamps);
-    console.log(filteredStamps);
-
     shiftCopy[title] = filteredStamps;
   });
+
+  return shiftCopy;
+}
+
+function addTripToShift({ shift, setShift, trip }) {
+  const shiftCopy = mergeShiftAndTripStamps({ shift, trip });
+  console.log(shiftCopy);
+  shiftCopy.trips = [...shiftCopy.trips, trip];
+  console.log(shiftCopy);
 
   setShift(shiftCopy);
   localStorage.setItem('shift', JSON.stringify(shiftCopy));
 }
 
-export { addTimeStamp, mergeShiftAndTripStamps };
+export { addTimeStamp, addTripToShift };
