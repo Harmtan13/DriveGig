@@ -41,7 +41,7 @@ function mergeShiftAndTripStamps({ shift, trip }) {
 
   stampTitles.forEach((title) => {
     const mergedStamps = [...shift[title], ...consolidateTripStamps(trip[title])];
-    const sortedStamps = mergedStamps.sort();
+    const sortedStamps = mergedStamps.sort((a, b) => a - b);
     const filteredStamps = sortedStamps.filter((a, b) => sortedStamps[b + 1] !== a && sortedStamps[b - 1] !== a);
 
     shiftCopy[title] = filteredStamps;
@@ -52,9 +52,7 @@ function mergeShiftAndTripStamps({ shift, trip }) {
 
 function addTripToShift({ shift, setShift, trip }) {
   const shiftCopy = mergeShiftAndTripStamps({ shift, trip });
-  console.log(shiftCopy);
   shiftCopy.trips = [...shiftCopy.trips, trip];
-  console.log(shiftCopy);
 
   setShift(shiftCopy);
   localStorage.setItem('shift', JSON.stringify(shiftCopy));
