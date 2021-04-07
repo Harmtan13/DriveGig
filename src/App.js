@@ -8,7 +8,8 @@ import {
 import styled from 'styled-components';
 
 import { createShift } from './helpers/CreationHelpers';
-import Signup from './components/auth/Signup';
+import { signUp } from './Firebase';
+import AuthRouter from './components/auth/AuthRouter';
 import AppRouter from './AppRouter';
 import Nav from './Nav';
 import './App.css';
@@ -41,7 +42,7 @@ export default function App() {
         <Switch>
           <Route exact path = "/">
             <ButtonWrapper className = "wrapper">
-              <Signup />
+              <AuthRouter signUp = {signUp} />
             </ButtonWrapper>
           </Route>
 

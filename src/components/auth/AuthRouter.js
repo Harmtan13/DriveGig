@@ -1,7 +1,10 @@
 import React from 'react';
+import Signup from './Signup';
 
-export default function AuthFunctions() {
+export default function AuthFunctions({ signUp }) {
   return (
-    <div />
+    <>
+      <Signup signUp = {signUp} />
+    </>
   );
 }

@@ -12,5 +12,19 @@ firebase.initializeApp({
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
 });
 
-export const auth = firebase.auth();
-export const db = firebase.firestore();
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+const signUp = async (signUpInfo) => {
+  const { email, password, firstName, lastName, clients } = signUpInfo;
+
+  const newUser = await auth.createUserWithEmailAndPassword(email, password);
+
+  db.collection('users').doc(newUser.user.uid).set({
+    firstName,
+    lastName,
+    clientList: clients,
+  });
+};
+
+export { signUp };

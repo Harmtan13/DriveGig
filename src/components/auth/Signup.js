@@ -1,143 +1,202 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
-export default function Signup() {
-  const [userFirstName, setUserFirstName] = useState('');
-  const [userLastName, setUserLastName] = useState('');
-  const [userEmail, setUserEmail] = useState('');
+export default function Signup({ signUp }) {
+  const [firstName, setfirstName] = useState('');
+  const [lastName, setlastName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConf, setPasswordConf] = useState('');
-  const [drivingClients, setDrivingClients] = useState([]);
-
-  console.log(drivingClients);
+  const [clients, setClients] = useState([]);
+  const [error, setError] = useState('');
+  const history = useHistory();
 
   const handleCheckbox = (e) => {
     if (e.target.checked) {
-      setDrivingClients([...drivingClients, e.target.value]);
+      setClients([...clients, e.target.value]);
     } else {
-      setDrivingClients(drivingClients.filter(client => client !== e.target.value));
+      setClients(clients.filter(client => client !== e.target.value));
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (password !== passwordConf) {
+      return setError('Passwords do not match');
+    }
+
+    try {
+      setError('');
+      await signUp({ firstName, lastName, email, password, clients });
+
+      console.log('Connected Baby!');
+    } catch {
+      console.log("Shucks, it didn't work");
     }
   };
 
   return (
-    <>
-
+    <div>
       <h1>Create DriveGig account</h1>
 
-      <label htmlFor = "firstName">
-        <input
-          type = "text"
-          name = "firstName"
-          placeholder = "First Name"
-          onChange = {e => setUserFirstName(e.target.value)}
-          value = {userFirstName}
-        />
-      </label>
+      <br />
+      <br />
 
-      <label htmlFor = "lastName">
-        <input
-          type = "text"
-          name = "lastName"
-          placeholder = "Last Name"
-          onChange = {e => setUserLastName(e.target.value)}
-          value = {userLastName}
-        />
-      </label>
 
-      <label htmlFor = "email">
-        <input
-          type = "text"
-          name = "email"
-          placeholder = "Email"
-          onChange = {e => setUserEmail(e.target.value)}
-          value = {userEmail}
-        />
-      </label>
+      <form onSubmit = {handleSubmit}>
+        <label htmlFor = "firstName">
+          <input
+            type = "text"
+            name = "firstName"
+            placeholder = "First Name"
+            onChange = {e => setfirstName(e.target.value)}
+            value = {firstName}
+          />
+        </label>
 
-      <label htmlFor = "password">
-        <input
-          type = "password"
-          name = "password"
-          placeholder = "Enter Password"
-          onChange = {e => setPassword(e.target.value)}
-          value = {password}
-        />
-      </label>
+        <br />
+        <br />
 
-      <label htmlFor = "passwordConf">
-        <input
-          type = "password"
-          name = "passwordConf"
-          placeholder = "Confirm Password"
-          onChange = {e => setPasswordConf(e.target.value)}
-          value = {passwordConf}
-        />
-      </label>
+        <label htmlFor = "lastName">
+          <input
+            type = "text"
+            name = "lastName"
+            placeholder = "Last Name"
+            onChange = {e => setlastName(e.target.value)}
+            value = {lastName}
+          />
+        </label>
 
-      <label htmlFor = "drivingClients">
-        <input
-          type = "checkbox"
-          name = "DrivingClient"
-          value = "Uber Eats"
-          onChange = {handleCheckbox}
-        />
-        {' '}
-        Uber Eats
-      </label>
+        <br />
+        <br />
 
-      <label htmlFor = "drivingClients">
-        <input
-          type = "checkbox"
-          name = "DrivingClient"
-          value = "UberX"
-          onChange = {handleCheckbox}
-        />
-        {' '}
-        Uber Rideshare
-      </label>
+        <label htmlFor = "email">
+          <input
+            type = "text"
+            name = "email"
+            placeholder = "Email"
+            onChange = {e => setEmail(e.target.value)}
+            value = {email}
+          />
+        </label>
 
-      <label htmlFor = "drivingClients">
-        <input
-          type = "checkbox"
-          name = "DrivingClient"
-          value = "Doordash"
-          onChange = {handleCheckbox}
-        />
-        {' '}
-        Doordash
-      </label>
+        <br />
+        <br />
 
-      <label htmlFor = "drivingClients">
-        <input
-          type = "checkbox"
-          name = "DrivingClient"
-          value = "Grubhub"
-          onChange = {handleCheckbox}
-        />
-        {' '}
-        Grubhub
-      </label>
+        <label htmlFor = "password">
+          <input
+            type = "password"
+            name = "password"
+            placeholder = "Enter Password"
+            onChange = {e => setPassword(e.target.value)}
+            value = {password}
+          />
+        </label>
 
-      <label htmlFor = "drivingClients">
-        <input
-          type = "checkbox"
-          name = "DrivingClient"
-          value = "Postmates"
-          onChange = {handleCheckbox}
-        />
-        {' '}
-        Postmates
-      </label>
+        <br />
+        <br />
 
-      <label htmlFor = "drivingClients">
-        <input
-          type = "checkbox"
-          name = "DrivingClient"
-          value = "Lyft"
-          onChange = {handleCheckbox}
-        />
-        {' '}
-        Lyft
-      </label>
-    </>
+        <label htmlFor = "passwordConf">
+          <input
+            type = "password"
+            name = "passwordConf"
+            placeholder = "Confirm Password"
+            onChange = {e => setPasswordConf(e.target.value)}
+            value = {passwordConf}
+          />
+        </label>
+
+        <br />
+        <br />
+
+        <label htmlFor = "drivingClients">
+          <input
+            type = "checkbox"
+            name = "DrivingClient"
+            value = "Uber Eats"
+            onChange = {handleCheckbox}
+          />
+          {' '}
+          Uber Eats
+        </label>
+
+        <br />
+        <br />
+
+        <label htmlFor = "drivingClients">
+          <input
+            type = "checkbox"
+            name = "DrivingClient"
+            value = "UberX"
+            onChange = {handleCheckbox}
+          />
+          {' '}
+          Uber Rideshare
+        </label>
+
+        <br />
+        <br />
+
+        <label htmlFor = "drivingClients">
+          <input
+            type = "checkbox"
+            name = "DrivingClient"
+            value = "Doordash"
+            onChange = {handleCheckbox}
+          />
+          {' '}
+          Doordash
+        </label>
+
+        <br />
+        <br />
+
+        <label htmlFor = "drivingClients">
+          <input
+            type = "checkbox"
+            name = "DrivingClient"
+            value = "Grubhub"
+            onChange = {handleCheckbox}
+          />
+          {' '}
+          Grubhub
+        </label>
+
+        <br />
+        <br />
+
+        <label htmlFor = "drivingClients">
+          <input
+            type = "checkbox"
+            name = "DrivingClient"
+            value = "Postmates"
+            onChange = {handleCheckbox}
+          />
+          {' '}
+          Postmates
+        </label>
+
+        <br />
+        <br />
+
+        <label htmlFor = "drivingClients">
+          <input
+            type = "checkbox"
+            name = "DrivingClient"
+            value = "Lyft"
+            onChange = {handleCheckbox}
+          />
+          {' '}
+          Lyft
+        </label>
+
+        <br />
+        <br />
+
+        <button type = "submit">Sign Up</button>
+
+      </form>
+    </div>
   );
 }
