@@ -8,19 +8,21 @@ import {
 import styled from 'styled-components';
 
 import { createShift } from './helpers/CreationHelpers';
-import { signUp } from './Firebase';
 import AuthRouter from './components/auth/AuthRouter';
 import AppRouter from './AppRouter';
 import Nav from './Nav';
 import './App.css';
 
 export default function App() {
+  const [currentUser, setCurrentUser] = useState({});
   const [shift, setShift] = useState(JSON.parse(localStorage.getItem('shift')) || createShift());
   const [shifts, setShifts] = useState(JSON.parse(localStorage.getItem('shifts')) || []);
 
   const shiftState = {
     shift,
     setShift,
+    currentUser,
+    setCurrentUser,
   };
 
   const eraseLocalStorage = () => {
@@ -42,7 +44,7 @@ export default function App() {
         <Switch>
           <Route exact path = "/">
             <ButtonWrapper className = "wrapper">
-              <AuthRouter signUp = {signUp} />
+              <AuthRouter {...shiftState} />
             </ButtonWrapper>
           </Route>
 

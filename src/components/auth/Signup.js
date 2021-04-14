@@ -23,12 +23,20 @@ export default function Signup({ signUp }) {
     e.preventDefault();
 
     if (password !== passwordConf) {
-      return setError('Passwords do not match');
+      return console.log('Passwords do not match');
     }
+
+    const signUpInfo = {
+      firstName,
+      lastName,
+      email,
+      password,
+      clients,
+    };
 
     try {
       setError('');
-      await signUp({ firstName, lastName, email, password, clients });
+      await signUp(signUpInfo);
 
       console.log('Connected Baby!');
     } catch {
