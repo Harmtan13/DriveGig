@@ -14,7 +14,8 @@ import Nav from './Nav';
 import './App.css';
 
 export default function App() {
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState();
+  const [isLoading, setIsLoading] = useState(true);
   const [shift, setShift] = useState(JSON.parse(localStorage.getItem('shift')) || createShift());
   const [shifts, setShifts] = useState(JSON.parse(localStorage.getItem('shifts')) || []);
 
@@ -23,6 +24,8 @@ export default function App() {
     setShift,
     currentUser,
     setCurrentUser,
+    isLoading,
+    setIsLoading,
   };
 
   const eraseLocalStorage = () => {
@@ -42,7 +45,7 @@ export default function App() {
       <Nav />
       <div className = "container">
         <Switch>
-          <Route exact path = "/">
+          <Route path = "/">
             <ButtonWrapper className = "wrapper">
               <AuthRouter {...shiftState} />
             </ButtonWrapper>

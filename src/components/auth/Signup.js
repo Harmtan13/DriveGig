@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
+
+
+import EmailAndPassword from './formComponents/EmailAndPassword';
 
 export default function Signup({ signUp }) {
   const [firstName, setfirstName] = useState('');
@@ -10,6 +13,13 @@ export default function Signup({ signUp }) {
   const [clients, setClients] = useState([]);
   const [error, setError] = useState('');
   const history = useHistory();
+
+  const emailAndPasswordState = {
+    email,
+    setEmail,
+    password,
+    setPassword,
+  };
 
   const handleCheckbox = (e) => {
     if (e.target.checked) {
@@ -39,6 +49,7 @@ export default function Signup({ signUp }) {
       await signUp(signUpInfo);
 
       console.log('Connected Baby!');
+      history.push('/');
     } catch {
       console.log("Shucks, it didn't work");
     }
@@ -79,28 +90,7 @@ export default function Signup({ signUp }) {
         <br />
         <br />
 
-        <label htmlFor = "email">
-          <input
-            type = "text"
-            name = "email"
-            placeholder = "Email"
-            onChange = {e => setEmail(e.target.value)}
-            value = {email}
-          />
-        </label>
-
-        <br />
-        <br />
-
-        <label htmlFor = "password">
-          <input
-            type = "password"
-            name = "password"
-            placeholder = "Enter Password"
-            onChange = {e => setPassword(e.target.value)}
-            value = {password}
-          />
-        </label>
+        <EmailAndPassword {...emailAndPasswordState} />
 
         <br />
         <br />
@@ -203,6 +193,15 @@ export default function Signup({ signUp }) {
         <br />
 
         <button type = "submit">Sign Up</button>
+
+        <br />
+        <br />
+
+        <div>
+          Already have an account?
+          {' '}
+          <Link to = "/login">Log In</Link>
+        </div>
 
       </form>
     </div>

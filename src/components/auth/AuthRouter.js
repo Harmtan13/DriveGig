@@ -1,11 +1,18 @@
 import React, { useEffect } from 'react';
+import { Route } from 'react-router-dom';
 import { auth, db } from '../../Firebase';
+import PrivateRoute from '../routes/PrivateRoute';
+import HomeSummary from './HomeSummary';
 import Signup from './Signup';
+import Login from './Login';
 
-export default function AuthFunctions({ setCurrentUser, currentUser }) {
+
+export default function AuthFunctions({ setCurrentUser, currentUser, setIsLoading, isLoading }) {
+  console.log(currentUser);
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
+      setIsLoading(false);
     });
 
     return unsubscribe;
@@ -23,22 +30,40 @@ export default function AuthFunctions({ setCurrentUser, currentUser }) {
     });
   };
 
-  const login = () => auth.signInWithEmailAndPassword();
+  const login = (email, password) => auth.signInWithEmailAndPassword(email, password);
 
   const logout = () => auth.signOut();
 
-  const resetPassword = () => auth.sendPasswordResetEmail();
+  const resetPassword = email => auth.sendPasswordResetEmail();
 
   const updateProfile = () => auth.updateEmail();
 
   const updatePassword = () => auth.updatePassword();
 
+  const userState = {
+    currentUser,
+    logout,
+  };
+
 
   return (
     <>
-      <Signup signUp = {signUp} />
+      {
+      !isLoading
+      && (
+      <div>
+        <PrivateRoute exact path = "/" component = {HomeSummary} userState = {userState} />
 
-      {currentUser.uid}
+        <Route path = "/signup">
+          <Signup signUp = {signUp} />
+        </Route>
+
+        <Route path = "/login">
+          <Login login = {login} />
+        </Route>
+      </div>
+      )
+    }
     </>
   );
 }
