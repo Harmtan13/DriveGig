@@ -15,7 +15,6 @@ import './App.css';
 
 export default function App() {
   const [currentUser, setCurrentUser] = useState();
-  const [isLoading, setIsLoading] = useState(true);
   const [shift, setShift] = useState(JSON.parse(localStorage.getItem('shift')) || createShift());
   const [shifts, setShifts] = useState(JSON.parse(localStorage.getItem('shifts')) || []);
 
@@ -24,8 +23,6 @@ export default function App() {
     setShift,
     currentUser,
     setCurrentUser,
-    isLoading,
-    setIsLoading,
   };
 
   const eraseLocalStorage = () => {
@@ -46,9 +43,7 @@ export default function App() {
       <div className = "container">
         <Switch>
           <Route path = "/">
-            <ButtonWrapper className = "wrapper">
-              <AuthRouter {...shiftState} />
-            </ButtonWrapper>
+            <AuthRouter {...shiftState} />
           </Route>
 
           <AppRouter {...shiftState} />
@@ -58,9 +53,6 @@ export default function App() {
   );
 }
 
-const ButtonWrapper = styled.div`
-display: grid;
-`;
 
 const Button = styled.button`
 background: ${props => props.background || 'purple'};

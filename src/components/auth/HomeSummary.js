@@ -14,7 +14,12 @@ export default function HomeSummary({ currentUser, logout }) {
   return (
     <>
       <h1>HomeSummary baby!</h1>
-      <p>{JSON.stringify(currentUser)}</p>
+      {/* <p>{JSON.stringify(currentUser)}</p> */}
+
+      <p>{currentUser.firstName}</p>
+      <p>{currentUser.lastName}</p>
+      <p>{currentUser.email}</p>
+      {/* <p>{currentUser.clientList.join(' ')}</p> */}
 
       <div>
         Need to create an Account?

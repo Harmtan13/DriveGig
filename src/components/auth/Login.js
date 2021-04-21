@@ -3,7 +3,7 @@ import { useHistory, Link } from 'react-router-dom';
 
 import EmailAndPassword from './formComponents/EmailAndPassword';
 
-export default function Login({ login }) {
+export default function Login({ login, setIsLoading }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const history = useHistory();
@@ -19,6 +19,7 @@ export default function Login({ login }) {
     e.preventDefault();
 
     try {
+      setIsLoading(true);
       await login(email, password);
       history.push('/');
     } catch (error) {

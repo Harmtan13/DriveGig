@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import { auth, db } from '../../Firebase';
 import PrivateRoute from '../routes/PrivateRoute';
@@ -7,11 +7,16 @@ import Signup from './Signup';
 import Login from './Login';
 
 
-export default function AuthFunctions({ setCurrentUser, currentUser, setIsLoading, isLoading }) {
-  console.log(currentUser);
+export default function AuthFunctions({ setCurrentUser, currentUser }) {
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setCurrentUser(user);
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        const userDetails = await db.collection('users').doc(user.uid).get();
+        setCurrentUser({ ...user, ...userDetails.data() });
+        setIsLoading(false);
+      }
       setIsLoading(false);
     });
 
@@ -30,7 +35,7 @@ export default function AuthFunctions({ setCurrentUser, currentUser, setIsLoadin
     });
   };
 
-  const login = (email, password) => auth.signInWithEmailAndPassword(email, password);
+  const login = async (email, password) => auth.signInWithEmailAndPassword(email, password);
 
   const logout = () => auth.signOut();
 
@@ -45,7 +50,6 @@ export default function AuthFunctions({ setCurrentUser, currentUser, setIsLoadin
     logout,
   };
 
-
   return (
     <>
       {
@@ -55,11 +59,11 @@ export default function AuthFunctions({ setCurrentUser, currentUser, setIsLoadin
         <PrivateRoute exact path = "/" component = {HomeSummary} userState = {userState} />
 
         <Route path = "/signup">
-          <Signup signUp = {signUp} />
+          <Signup signUp = {signUp} setIsLoading = {setIsLoading} />
         </Route>
 
         <Route path = "/login">
-          <Login login = {login} />
+          <Login login = {login} setIsLoading = {setIsLoading} />
         </Route>
       </div>
       )

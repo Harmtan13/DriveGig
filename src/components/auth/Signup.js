@@ -4,7 +4,7 @@ import { useHistory, Link } from 'react-router-dom';
 
 import EmailAndPassword from './formComponents/EmailAndPassword';
 
-export default function Signup({ signUp }) {
+export default function Signup({ signUp, setIsLoading }) {
   const [firstName, setfirstName] = useState('');
   const [lastName, setlastName] = useState('');
   const [email, setEmail] = useState('');
@@ -45,6 +45,7 @@ export default function Signup({ signUp }) {
     };
 
     try {
+      setIsLoading(true);
       setError('');
       await signUp(signUpInfo);
 
