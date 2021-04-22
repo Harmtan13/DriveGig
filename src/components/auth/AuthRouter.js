@@ -5,6 +5,7 @@ import PrivateRoute from '../routes/PrivateRoute';
 import HomeSummary from './HomeSummary';
 import Signup from './Signup';
 import Login from './Login';
+import ForgotPassword from './ForgotPassword';
 
 
 export default function AuthFunctions({ setCurrentUser, currentUser }) {
@@ -39,7 +40,7 @@ export default function AuthFunctions({ setCurrentUser, currentUser }) {
 
   const logout = () => auth.signOut();
 
-  const resetPassword = email => auth.sendPasswordResetEmail();
+  const resetPassword = email => auth.sendPasswordResetEmail(email);
 
   const updateProfile = () => auth.updateEmail();
 
@@ -64,6 +65,10 @@ export default function AuthFunctions({ setCurrentUser, currentUser }) {
 
         <Route path = "/login">
           <Login login = {login} setIsLoading = {setIsLoading} />
+        </Route>
+
+        <Route path = "/forgot-password">
+          <ForgotPassword resetPassword = {resetPassword} setIsLoading = {setIsLoading} />
         </Route>
       </div>
       )

@@ -19,7 +19,7 @@ export default function HomeSummary({ currentUser, logout }) {
       <p>{currentUser.firstName}</p>
       <p>{currentUser.lastName}</p>
       <p>{currentUser.email}</p>
-      {/* <p>{currentUser.clientList.join(' ')}</p> */}
+      <p>{currentUser.clientList.join(' ')}</p>
 
       <div>
         Need to create an Account?

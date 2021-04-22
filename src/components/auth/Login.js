@@ -46,6 +46,11 @@ export default function Login({ login, setIsLoading }) {
       <br />
 
       <div>
+        <Link to = "forgot-password">Forgot Password?</Link>
+
+      </div>
+
+      <div>
         Need to create an Account?
         {' '}
         <Link to = "/signup">Sign Up</Link>
