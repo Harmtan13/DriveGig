@@ -25,10 +25,6 @@ export default function App() {
     setCurrentUser,
   };
 
-  const eraseLocalStorage = () => {
-    localStorage.clear();
-  };
-
   useEffect(() => {
     if (shift.completed) {
       localStorage.clear();
@@ -39,16 +35,17 @@ export default function App() {
 
   return (
     <Router>
-      <Nav />
+      {/* <Link to = "/"><h1>DriveGig</h1></Link> */}
+
       <div className = "container">
         <Switch>
           <Route path = "/">
             <AuthRouter {...shiftState} />
+            <AppRouter {...shiftState} />
           </Route>
-
-          <AppRouter {...shiftState} />
         </Switch>
       </div>
+      <Nav />
     </Router>
   );
 }
@@ -62,29 +59,3 @@ font-size: 20px;
 margin: 20px;
 padding: 30px;
 `;
-
-{ /* <h1>Welcome to Drive-Gig</h1>
-
-<div>
-  <button onClick = {eraseLocalStorage} className = "erase">
-    Erase Everything
-  </button>
-</div>
-
-<Link to = "/start-shift">
-  <Button>
-    Start Shift
-  </Button>
-</Link>
-
-<Link to = "/gas">
-  <Button background = "yellow" color = "black">
-    Gas Fillup
-  </Button>
-</Link>
-
-<Link to = "/statistics">
-  <Button>
-    Statistics
-  </Button>
-</Link> */ }
