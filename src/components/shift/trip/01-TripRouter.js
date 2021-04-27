@@ -17,7 +17,7 @@ import sortedState from '../../../helpers/trips/UpdateHelpers';
 import { createTrip, createStamps } from '../../../helpers/CreationHelpers';
 import { addTripToShift } from '../../../helpers/ShiftHelpers';
 
-export default function TripRouter(shiftState) {
+export default function TripRouter({ currentUser, ...shiftState }) {
   const {
     trips: localTrips,
     trip: localTrip,
@@ -107,6 +107,7 @@ export default function TripRouter(shiftState) {
       <Route exact path = "/shift/start-trip">
         <StartTrip
           {...tripState}
+          currentUser = {currentUser}
           stamps = {stamps}
         />
       </Route>

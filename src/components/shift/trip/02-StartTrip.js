@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createStamp } from '../../../helpers/trips/TripHelpers';
 
-export default function StartTrip({ trip, updateTrip, tripsSort }) {
+export default function StartTrip({ trip, updateTrip, tripsSort, currentUser }) {
   const newTrip = tripsSort.active.length >= 2;
+  const clientList = currentUser ? currentUser.clientList : {};
 
   const [orderProvider, setOrderProvider] = useState(trip.orderProvider);
   const [odometerStart, setOdometerStart] = useState(trip.miles[0][0] || '');
@@ -72,10 +73,14 @@ export default function StartTrip({ trip, updateTrip, tripsSort }) {
         onChange = {e => setOrderProvider(e.target.value)}
       >
         <option value = "">Select Delivery Provider</option>
-        <option value = "doordash">DoorDash</option>
-        <option value = "grubhub">GrubHub</option>
-        <option value = "postmates">PostMates</option>
-        <option value = "ubereats">Uber Eats</option>
+        {clientList.map(client => (
+          <option
+            key = {client.split(' ').join('')}
+            value = {client.split(' ').join('')}
+          >
+            {client}
+          </option>
+        ))}
       </select>
 
       <br />
