@@ -107,13 +107,14 @@ export default function TripRouter({ currentUser, ...shiftState }) {
       <Route exact path = "/shift/start-trip">
         <StartTrip
           {...tripState}
-          currentUser = {currentUser}
-          stamps = {stamps}
         />
       </Route>
 
       <Route path = "/shift/pickup">
-        <Pickup {...tripState} />
+        <Pickup
+          {...tripState}
+          currentUser = {currentUser}
+        />
       </Route>
 
       <Route path = "/shift/departure">
