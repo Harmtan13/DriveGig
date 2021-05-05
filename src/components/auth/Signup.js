@@ -127,20 +127,6 @@ export default function Signup({ signUp, setIsLoading }) {
           <input
             type = "checkbox"
             name = "DrivingClient"
-            value = "UberX"
-            onChange = {handleCheckbox}
-          />
-          {' '}
-          Uber Rideshare
-        </label>
-
-        <br />
-        <br />
-
-        <label htmlFor = "drivingClients">
-          <input
-            type = "checkbox"
-            name = "DrivingClient"
             value = "Doordash"
             onChange = {handleCheckbox}
           />
@@ -174,20 +160,6 @@ export default function Signup({ signUp, setIsLoading }) {
           />
           {' '}
           Postmates
-        </label>
-
-        <br />
-        <br />
-
-        <label htmlFor = "drivingClients">
-          <input
-            type = "checkbox"
-            name = "DrivingClient"
-            value = "Lyft"
-            onChange = {handleCheckbox}
-          />
-          {' '}
-          Lyft
         </label>
 
         <br />
