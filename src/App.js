@@ -3,8 +3,8 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
+  Link,
 } from 'react-router-dom';
-import styled from 'styled-components';
 import { auth, db } from './Firebase';
 
 import Gasform from './components/gas/GasForm';
@@ -44,18 +44,20 @@ export default function App() {
 
   return (
     <Router>
-      {/* <Link to = "/"><h1>DriveGig</h1></Link> */}
 
       <div className = "container">
+        <header>
+          <h1><Link to = "/">DriveGig</Link></h1>
+        </header>
         <Switch>
           {
             !isLoading
             && (
             <Route path = "/">
-              {/* <AuthRouter {...appState} {...authState} />
-              <ShiftRouter currentUser = {currentUser} /> */}
+              <AuthRouter {...appState} {...authState} />
+              <ShiftRouter currentUser = {currentUser} />
 
-              <Route path = "/gas">
+              <Route path = "/input-expenses">
                 <Gasform />
               </Route>
 
@@ -65,10 +67,9 @@ export default function App() {
             </Route>
             )
           }
-
         </Switch>
+        <Nav />
       </div>
-      <Nav />
     </Router>
   );
 }

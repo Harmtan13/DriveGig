@@ -4,15 +4,12 @@
   box-sizing: border-box;
 }
 
-.wrapper {
-  justify-content: center;
-  justify-items: center;
-}
-
 header {
+  position: fixed;
+  top: 0;
   height: 50px;
   width: 100%;
-  padding: 10px;
+  margin: 10px;
 }
 
 header h1 {
@@ -22,12 +19,72 @@ header h1 {
 .container {
   display: grid;
   width: 100%;
-  height: calc(100vh - 50px);
+  height: calc(100vh);
   place-items: center;
 }
 
-.erase {
+nav {
   position: fixed;
-  bottom: 0;
-  right: 0;
+  bottom: 15px;
+  right: 15px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+nav .menu-icon,
+nav li {
+  margin: 5px 0;
+}
+
+nav ul {
+  display: flex;
+  transition: 1s;
+  flex-direction: column-reverse;
+}
+
+nav li {
+ display: flex;
+ justify-content: flex-end;
+ align-items: center;
+}
+
+nav li *,
+nav > div {
+  margin: 0 2.5px;
+}
+
+nav .menu-icon,
+nav li .logo {
+  display: grid;
+  place-items: center;
+  width: 55px;
+  height: 55px;
+  background-color: navy;
+  color: white;
+  border-radius: 50%;
+  align-self: end;
+}
+
+nav div {
+  margin-right: 2px;
+  z-index: 10;
+}
+
+nav li .logo {
+  width: 50px;
+  height: 50px;
+}
+
+nav li.closed {
+  position: fixed;
+  bottom: 18px;
+  right: 12px;
+}
+
+nav li .closed {
+  position: fixed;
+  font-size: 1px;
+  margin: 20px;
+  padding: 10px;
 }
