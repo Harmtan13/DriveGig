@@ -23,7 +23,7 @@ export default function Nav() {
   return (
     <nav>
       <ul>
-        <Link to = "/input-expenses">
+        <Link onClick = {() => setIsClosed(true)} to = "/input-expenses">
           <li className = {menuState()}>
             <span className = {`label ${menuState()}`}>
               Add Expenses
@@ -35,7 +35,7 @@ export default function Nav() {
           </li>
         </Link>
 
-        <Link to = "/statistics">
+        <Link onClick = {() => setIsClosed(true)} to = "/statistics">
           <li className = {menuState()}>
             <span className = {`label ${menuState()}`}>
               Statistics
