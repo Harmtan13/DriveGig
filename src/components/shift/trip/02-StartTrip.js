@@ -23,7 +23,6 @@ export default function StartTrip({ trip, updateTrip, tripsSort }) {
   return (
     <div>
 
-
       {!newTrip && (
         <label htmlFor = "odometer">
           <input
