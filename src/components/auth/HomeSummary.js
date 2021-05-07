@@ -13,6 +13,8 @@ export default function HomeSummary({ currentUser, logout }) {
     <>
       <h1>HomeSummary baby!</h1>
       <Link to = "/start-shift">Start Shift</Link>
+
+      <p onClick = {handleLogout}>Logout</p>
     </>
   );
 }
