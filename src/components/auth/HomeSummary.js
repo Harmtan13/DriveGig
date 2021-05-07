@@ -12,7 +12,7 @@ export default function HomeSummary({ currentUser, logout }) {
   return (
     <>
       <h1>HomeSummary baby!</h1>
-      <Link to = "/start-shift">Start Shift</Link>
+      <Link to = "/active-shift/start">Start Shift</Link>
 
       <p onClick = {handleLogout}>Logout</p>
     </>

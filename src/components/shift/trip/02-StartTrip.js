@@ -38,7 +38,7 @@ export default function StartTrip({ trip, updateTrip, tripsSort }) {
       {!newTrip && (<br />)}
       {!newTrip && (<br />)}
 
-      <Link to = "/shift/pickup">
+      <Link to = "/active-shift/pickup">
         <button type = "submit" onClick = {startTrip}>Head for Pickup</button>
       </Link>
     </div>

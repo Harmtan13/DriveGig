@@ -29,7 +29,7 @@ export default function StartShift({ shift, setShift }) {
         />
       </label>
 
-      <Link to = "/shift">
+      <Link to = "/active-shift">
         <button
           type = "submit"
           onClick = {startShift}

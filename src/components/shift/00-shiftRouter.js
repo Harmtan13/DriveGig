@@ -28,22 +28,22 @@ export default function ShiftRouter({ currentUser }) {
 
   return (
     <>
-      <Route path = "/start-shift">
+      <Route path = "/active-shift/start">
         <StartShift {...shiftState} />
       </Route>
 
-      <Route path = "/shift">
+      <Route path = "/active-shift">
         <TripRouter
           {...shiftState}
           currentUser = {currentUser}
         />
       </Route>
 
-      <Route path = "/shift-paused">
+      <Route path = "/active-shift/pause">
         <PauseShift {...shiftState} />
       </Route>
 
-      <Route path = "/end-shift">
+      <Route path = "/active-shift/end">
         <EndShift {...shiftState} />
       </Route>
     </>

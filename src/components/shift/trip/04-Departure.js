@@ -27,7 +27,7 @@ export default function Departure({ updateTrip, tripsSort }) {
     updateTrip(tripData);
   };
 
-  const headOutLink = () => (maxTrips ? '/shift/delivery' : '/shift/trips');
+  const headOutLink = () => (maxTrips ? '/active-shift/delivery' : '/active-shift/trips');
 
   return (
     <div>
@@ -36,7 +36,7 @@ export default function Departure({ updateTrip, tripsSort }) {
       </Link>
 
       {maxTrips && (
-        <Link onClick = {addTrip} to = "/shift/start-trip">
+        <Link onClick = {addTrip} to = "/active-shift/start-trip">
           <button>Add-on Trip</button>
         </Link>
       )}

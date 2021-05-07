@@ -81,7 +81,7 @@ export default function Pickup({ trip, updateTrip, currentUser }) {
 
       <br />
       <br />
-      <Link to = "/shift/departure">
+      <Link to = "/active-shift/departure">
         <button type = "submit" onClick = {updateTripPickup}>
           Arrived For Pickup
         </button>

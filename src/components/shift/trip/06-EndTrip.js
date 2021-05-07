@@ -8,7 +8,7 @@ export default function EndTrip({ trip, updateTrip, tripsSort, switchTrigger }) 
   const [tip, setTip] = useState(trip.pay.tip || '');
   const currentTrips = tripsSort.active.length >= 2;
 
-  const determineLink = () => (currentTrips ? '/shift/trips' : '/shift');
+  const determineLink = () => (currentTrips ? '/active-shift/trips' : '/active-shift');
   const triggerToggle = () => (!!currentTrips);
 
   const endTrip = () => {

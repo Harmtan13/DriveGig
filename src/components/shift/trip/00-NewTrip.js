@@ -18,7 +18,7 @@ export default function NewTrip({ updateTrip, trip }) {
 
   return (
     <>
-      <Link onClick = {newTrip} to = "/shift/start-trip">
+      <Link onClick = {newTrip} to = "/active-shift/start-trip">
         <button>
           Start Trip
         </button>

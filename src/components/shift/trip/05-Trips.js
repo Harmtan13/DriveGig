@@ -16,7 +16,7 @@ export default function Trips({ setTrip, tripsSort }) {
       <h1>Trips</h1>
       {tripsSort.active.map(trip => (
         <div key = {trip.id}>
-          <Link to = "/shift/delivery" onClick = {() => (setCurrentTrip(trip.id))}>
+          <Link to = "/active-shift/delivery" onClick = {() => (setCurrentTrip(trip.id))}>
             <h3>{trip.id}</h3>
           </Link>
         </div>

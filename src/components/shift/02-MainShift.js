@@ -12,7 +12,7 @@ export default function MainShift({ shift, setShift, updateTrip, trip }) {
 
   return (
     <div>
-      <Link to = "/shift-paused">
+      <Link to = "/active-shift/pause">
         <button
           onClick = {pauseShift}
         >
@@ -20,7 +20,7 @@ export default function MainShift({ shift, setShift, updateTrip, trip }) {
         </button>
       </Link>
 
-      <Link to = "/end-shift">
+      <Link to = "/active-shift/end">
         <button>
           End Shift
         </button>

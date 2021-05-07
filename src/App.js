@@ -56,6 +56,9 @@ export default function App() {
               <>
                 <Route path = "/">
                   <AuthRouter {...appState} {...authState} />
+                </Route>
+
+                <Route path = "/active-shift">
                   <ShiftRouter currentUser = {currentUser} />
                 </Route>
 
