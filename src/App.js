@@ -53,18 +53,20 @@ export default function App() {
           {
             !isLoading
             && (
-            <Route path = "/">
-              <AuthRouter {...appState} {...authState} />
-              <ShiftRouter currentUser = {currentUser} />
+              <>
+                <Route path = "/">
+                  <AuthRouter {...appState} {...authState} />
+                  <ShiftRouter currentUser = {currentUser} />
+                </Route>
 
-              <Route path = "/input-expenses">
-                <Gasform />
-              </Route>
+                <Route path = "/input-expenses">
+                  <Gasform />
+                </Route>
 
-              <Route path = "/statistics">
-                <Stats />
-              </Route>
-            </Route>
+                <Route path = "/statistics">
+                  <Stats />
+                </Route>
+              </>
             )
           }
         </Switch>
