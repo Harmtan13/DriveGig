@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createStamp } from '../../../helpers/trips/TripHelpers';
 
-export default function StartTrip({ trip, updateTrip, tripsSort }) {
+export default function StartTrip({ trip, updateTrip, tripsSort, setStage }) {
   const newTrip = tripsSort.active.length >= 2;
 
 
@@ -17,6 +17,7 @@ export default function StartTrip({ trip, updateTrip, tripsSort }) {
     const tripData = {
       stampInputs,
     };
+    setStage('/active-shift/pickup');
     updateTrip(tripData);
   };
 

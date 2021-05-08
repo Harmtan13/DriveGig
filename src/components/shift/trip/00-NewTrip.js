@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function NewTrip({ updateTrip, trip }) {
+export default function NewTrip({ updateTrip, trip, setStage }) {
   const stampInputs = [];
 
   const newTrip = () => {
@@ -12,6 +12,7 @@ export default function NewTrip({ updateTrip, trip }) {
       stampInputs,
     };
 
+    setStage('/active-shift/start-trip');
     updateTrip(tripData);
   };
 

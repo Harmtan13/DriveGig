@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-export default function EndShift({ shift, setShift }) {
+export default function EndShift({ shift, setShift, setStage }) {
   const [odometerEnd, setOdometerEnd] = useState('');
 
   const endShift = () => {
@@ -16,7 +16,7 @@ export default function EndShift({ shift, setShift }) {
       completed,
     };
 
-    console.log(updatedShift);
+    setStage('');
     setShift(updatedShift);
     localStorage.setItem('shift', JSON.stringify(updatedShift));
   };

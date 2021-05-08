@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { addTimeStamp } from '../../helpers/ShiftHelpers';
 import NewTrip from './trip/00-NewTrip';
 
-export default function MainShift({ shift, setShift, updateTrip, trip }) {
+export default function MainShift({ shift, setShift, updateTrip, trip, setStage }) {
   // console.log(shift);
 
   const pauseShift = () => {
@@ -29,6 +29,7 @@ export default function MainShift({ shift, setShift, updateTrip, trip }) {
       <NewTrip
         updateTrip = {updateTrip}
         trip = {trip}
+        setStage = {setStage}
       />
     </div>
   );

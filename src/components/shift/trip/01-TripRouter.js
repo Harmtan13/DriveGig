@@ -17,7 +17,7 @@ import sortedState from '../../../helpers/trips/UpdateHelpers';
 import { createTrip, createStamps } from '../../../helpers/CreationHelpers';
 import { addTripToShift } from '../../../helpers/ShiftHelpers';
 
-export default function TripRouter({ currentUser, ...shiftState }) {
+export default function TripRouter({ currentUser, setStage, ...shiftState }) {
   const {
     trips: localTrips,
     trip: localTrip,
@@ -92,6 +92,7 @@ export default function TripRouter({ currentUser, ...shiftState }) {
     trip,
     updateTrip,
     tripsSort,
+    setStage,
   };
 
   return (

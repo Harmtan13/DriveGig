@@ -2,17 +2,20 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { createStamp } from '../../../helpers/trips/TripHelpers';
 
-export default function Departure({ updateTrip, tripsSort }) {
+export default function Departure({ updateTrip, tripsSort, setStage }) {
   const maxTrips = !(tripsSort.active.length >= 2);
 
   const timeStamp = createStamp('time', Date.now(), 1);
   const stampInputs = [timeStamp];
+
+  const headOutLink = () => (maxTrips ? '/active-shift/delivery' : '/active-shift/trips');
 
   const updateTripDeparture = () => {
     const tripData = {
       stampInputs,
     };
 
+    setStage(headOutLink());
     updateTrip(tripData);
   };
 
@@ -24,10 +27,9 @@ export default function Departure({ updateTrip, tripsSort }) {
       stampInputs,
     };
 
+    setStage('/active-shift/start-trip');
     updateTrip(tripData);
   };
-
-  const headOutLink = () => (maxTrips ? '/active-shift/delivery' : '/active-shift/trips');
 
   return (
     <div>

@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { addTimeStamp } from '../../helpers/ShiftHelpers';
 
-export default function PauseShift({ shift, setShift }) {
+export default function PauseShift({ shift, setShift, setStage }) {
+  setStage('/shift');
   const resumeShift = () => {
     addTimeStamp(setShift, shift, 1);
   };

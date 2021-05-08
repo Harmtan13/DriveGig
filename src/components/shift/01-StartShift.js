@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-export default function StartShift({ shift, setShift }) {
+export default function StartShift({ shift, setShift, setStage }) {
   const [odometerStart, setOdometerStart] = useState(shift.miles[0] || '');
 
   const startShift = () => {
@@ -9,6 +9,8 @@ export default function StartShift({ shift, setShift }) {
     const timeStamps = [Date.now()];
     const updatedShift = { ...shift, miles: odometer, time: timeStamps };
 
+
+    setStage('/active-shift');
     setShift(updatedShift);
     localStorage.setItem('shift', JSON.stringify(updatedShift));
   };

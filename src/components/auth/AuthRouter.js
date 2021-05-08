@@ -7,7 +7,7 @@ import Login from './Login';
 import ForgotPassword from './ForgotPassword';
 
 
-export default function AuthFunctions({ setIsLoading, auth, db, setCurrentUser, currentUser }) {
+export default function AuthFunctions({ setIsLoading, auth, db, setCurrentUser, currentUser, stage }) {
   const signUp = async (signUpInfo) => {
     const { email, password, firstName, lastName, clients } = signUpInfo;
 
@@ -33,12 +33,18 @@ export default function AuthFunctions({ setIsLoading, auth, db, setCurrentUser, 
   const userState = {
     currentUser,
     logout,
+    stage,
   };
 
   return (
     <>
       <div>
-        <PrivateRoute exact path = "/" component = {HomeSummary} userState = {userState} />
+        <PrivateRoute
+          exact
+          path = "/"
+          component = {HomeSummary}
+          userState = {userState}
+        />
 
         <Route path = "/signup">
           <Signup signUp = {signUp} setIsLoading = {setIsLoading} />

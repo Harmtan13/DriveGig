@@ -9,13 +9,15 @@ import TripRouter from './trip/01-TripRouter';
 import PauseShift from './03-PauseShift';
 import EndShift from './04-EndShift';
 
-export default function ShiftRouter({ currentUser }) {
+export default function ShiftRouter({ currentUser, stage, setStage }) {
   const [shift, setShift] = useState(JSON.parse(localStorage.getItem('shift')) || createShift());
   const [shifts, setShifts] = useState(JSON.parse(localStorage.getItem('shifts')) || []);
 
   const shiftState = {
     shift,
     setShift,
+    stage,
+    setStage,
   };
 
   useEffect(() => {

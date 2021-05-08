@@ -20,7 +20,6 @@ const stampManager = (stamps, stampInputs) => {
     }
   });
 
-
   return updatedStamps;
 };
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
-  BrowserRouter as Router,
   Route,
+  Redirect,
   Switch,
   Link,
 } from 'react-router-dom';
@@ -17,6 +17,7 @@ import './App.css';
 export default function App() {
   const [currentUser, setCurrentUser] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [stage, setStage] = useState(localStorage.getItem('stage') || '');
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
@@ -27,9 +28,12 @@ export default function App() {
       }
       setIsLoading(false);
     });
-
     return unsubscribe;
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem('stage', stage);
+  }, [stage]);
 
   const authState = {
     auth,
@@ -40,41 +44,44 @@ export default function App() {
   const appState = {
     currentUser,
     setCurrentUser,
+    setStage,
+    stage,
   };
 
   return (
-    <Router>
+    <div className = "container">
+      <header>
+        <h1><Link to = "/">DriveGig</Link></h1>
+      </header>
+      <Switch>
+        {
+          !isLoading
+          && (
+            <>
+              <Route path = "/">
+                <AuthRouter {...appState} {...authState} />
+              </Route>
 
-      <div className = "container">
-        <header>
-          <h1><Link to = "/">DriveGig</Link></h1>
-        </header>
-        <Switch>
-          {
-            !isLoading
-            && (
-              <>
-                <Route path = "/">
-                  <AuthRouter {...appState} {...authState} />
-                </Route>
+              <Route path = "/resume-shift">
+                {stage ? <Redirect to = {stage} /> : <Redirect to = "/active-shift/start" />}
+              </Route>
 
-                <Route path = "/active-shift">
-                  <ShiftRouter currentUser = {currentUser} />
-                </Route>
+              <Route path = "/active-shift">
+                <ShiftRouter {...appState} />
+              </Route>
 
-                <Route path = "/input-expenses">
-                  <Gasform />
-                </Route>
+              <Route path = "/input-expenses">
+                <Gasform />
+              </Route>
 
-                <Route path = "/statistics">
-                  <Stats />
-                </Route>
-              </>
-            )
-          }
-        </Switch>
-        <Nav />
-      </div>
-    </Router>
+              <Route path = "/statistics">
+                <Stats />
+              </Route>
+            </>
+          )
+        }
+      </Switch>
+      <Nav />
+    </div>
   );
 }

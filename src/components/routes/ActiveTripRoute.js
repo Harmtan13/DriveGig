@@ -6,17 +6,17 @@ export default function ActiveTripRoute({
   component: Component,
   path,
   stage,
-  ...compState
+  currentUser,
 }) {
   // const compState = {
   //   ...shiftState,
   //   ...tripState,
   // };
-  console.log(compState);
+  // console.log(compState);
   return (
     <>
       <Route {...path}>
-        {stage && stage !== path ? <Redirect to = {stage} /> : <Component {...compState} /> }
+        {stage && stage !== path ? <Redirect exact to = "/statistics" /> : <Component currentUser = {currentUser} /> }
       </Route>
     </>
   );
