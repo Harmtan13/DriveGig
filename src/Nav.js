@@ -35,6 +35,18 @@ export default function Nav() {
           </li>
         </Link>
 
+        <Link onClick = {() => setIsClosed(true)} to = "/resume-shift">
+          <li className = {menuState()}>
+            <span className = {`label ${menuState()}`}>
+              Resume Shift
+            </span>
+
+            <span className = "logo">
+              <FaDollarSign size = "50%" />
+            </span>
+          </li>
+        </Link>
+
         <Link onClick = {() => setIsClosed(true)} to = "/statistics">
           <li className = {menuState()}>
             <span className = {`label ${menuState()}`}>

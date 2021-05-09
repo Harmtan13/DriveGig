@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { setLocalStorage } from '../../../helpers/trips/TripHelpers';
+import { setSavedState } from '../../../helpers/trips/TripHelpers';
 
 
 export default function Trips({ setTrip, tripsSort, setStage }) {
@@ -8,7 +8,7 @@ export default function Trips({ setTrip, tripsSort, setStage }) {
     const trip = tripsSort.active.find(trip => trip.id === id);
 
     setStage('/active-shift/delivery');
-    setLocalStorage({ trip });
+    setSavedState({ trip });
     setTrip(trip);
   };
 

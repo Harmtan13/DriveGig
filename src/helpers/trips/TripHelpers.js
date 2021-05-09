@@ -1,15 +1,6 @@
-const getLocalStorage = (() => {
-  const getItem = item => JSON.parse(localStorage.getItem(item));
+const getSavedState = item => JSON.parse(localStorage.getItem(item));
 
-  const trips = getItem('trips');
-  const trip = getItem('trip');
-  const stamps = getItem('stamps');
-  const switchTrigger = getItem('switchTrigger');
-
-  return { trips, trip, stamps, switchTrigger };
-})();
-
-const setLocalStorage = (state) => {
+const setSavedState = (state) => {
   for (const [key, value] of Object.entries(state)) {
     localStorage.setItem(key, JSON.stringify(value));
   }
@@ -33,8 +24,8 @@ const tripSort = (trips) => {
 
 
 export {
-  getLocalStorage,
-  setLocalStorage,
+  getSavedState,
+  setSavedState,
   createStamp,
   tripSort,
 };
