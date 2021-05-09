@@ -19,21 +19,20 @@ import { addTripToShift } from '../../../helpers/ShiftHelpers';
 
 export default function TripRouter({ currentUser, setStage, ...shiftState }) {
   const [trips, setTrips] = useState(
-    getSavedState('trips') || [],
+    getSavedState('trips') || []
   );
 
   const [trip, setTrip] = useState(
-    getSavedState('trip') || createTrip(trips.length),
+    getSavedState('trip') || createTrip(trips.length)
   );
 
   const [stamps, setStamps] = useState(
-    getSavedState('stamps') || createStamps(trips.length),
+    getSavedState('stamps') || createStamps(trips.length)
   );
 
   const [switchTrigger, setSwitchTrigger] = useState(
-    getSavedState('switchTrigger') || false,
+    getSavedState('switchTrigger') || false
   );
-
   const tripsSort = tripSort(trips);
 
   const updateTrip = (tripData) => {
