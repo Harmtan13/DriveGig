@@ -10,8 +10,13 @@ import PauseShift from './03-PauseShift';
 import EndShift from './04-EndShift';
 
 export default function ShiftRouter({ currentUser, stage, setStage }) {
-  const [shift, setShift] = useState(JSON.parse(localStorage.getItem('shift')) || createShift());
-  const [shifts, setShifts] = useState(JSON.parse(localStorage.getItem('shifts')) || []);
+  const [shift, setShift] = useState(
+    JSON.parse(localStorage.getItem('shift')) || createShift()
+  );
+  
+  const [shifts, setShifts] = useState(
+    JSON.parse(localStorage.getItem('shifts')) || []
+  );
 
   const shiftState = {
     shift,
@@ -25,6 +30,7 @@ export default function ShiftRouter({ currentUser, stage, setStage }) {
       localStorage.clear();
       localStorage.setItem('shifts', JSON.stringify([...shifts, shift]));
       setShifts([...shifts, shift]);
+      console.log('completed');
     }
   }, [shift]);
 
