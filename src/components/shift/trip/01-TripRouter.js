@@ -51,8 +51,19 @@ export default function TripRouter({ currentUser, setStage, ...shiftState }) {
       const newTrip = createTrip(tripsSort.total.length);
 
       const stampInputs = [
-        createStamp('miles', [...stamps.miles.stampSet].pop(), 0, 0),
-        createStamp('time', [...stamps.time.stampSet].pop(), 0, 0),
+        createStamp({
+          title: 'miles', 
+          stampValue: stamps.miles.stampSet.end, 
+          stage: 'pickup', 
+          placement: 'start'
+      }),
+
+        createStamp({
+          title: 'time',
+          stampValue: stamps.time.stampSet.end, 
+          stage: 'pickup', 
+          placement: 'start'
+      }),
       ];
 
       const newTripData = {

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { createStamp } from '../../../helpers/trips/TripHelpers';
 
 export default function EndTrip({ trip, updateTrip, tripsSort, switchTrigger, setStage }) {
-  const [odometer, setOdometer] = useState(trip.miles[1][1] || '');
+  const [odometer, setOdometer] = useState(trip.miles.delivery.end || '');
   const [providerPay, setProviderPay] = useState(trip.pay.provider || '');
   const [tip, setTip] = useState(trip.pay.tip || '');
   const currentTrips = tripsSort.active.length >= 2;
@@ -12,8 +12,20 @@ export default function EndTrip({ trip, updateTrip, tripsSort, switchTrigger, se
   const triggerToggle = () => (!!currentTrips);
 
   const endTrip = () => {
-    const timeStamp = createStamp('time', Date.now(), 2, 1, switchTrigger);
-    const odomStamp = createStamp('miles', odometer, 1, 1, switchTrigger);
+    const timeStamp = createStamp({
+      title: 'time', 
+      stampValue: Date.now(), 
+      stage: 'delivery', 
+      switchTrigger
+  });
+
+    const odomStamp = createStamp({
+      title: 'miles', 
+      stampValue: odometer, 
+      stage: 1, 
+      switchTrigger
+  });
+
     const completed = true;
     const pay = {
       provider: providerPay,

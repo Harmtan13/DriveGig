@@ -5,7 +5,10 @@ import { createStamp } from '../../../helpers/trips/TripHelpers';
 export default function Departure({ updateTrip, tripsSort, setStage }) {
   const maxTrips = !(tripsSort.active.length >= 2);
 
-  const timeStamp = createStamp('time', Date.now(), 1);
+  const timeStamp = createStamp({
+    title: 'time', 
+    stampValue: Date.now(), 
+    stage: 'waitTime'});
   const stampInputs = [timeStamp];
 
   const headOutLink = () => (maxTrips ? '/active-shift/delivery' : '/active-shift/trips');

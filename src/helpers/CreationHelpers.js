@@ -17,8 +17,15 @@ const createTrip = (totalTrips) => {
   const diner = '';
   const restaurant = '';
   const orderProvider = '';
-  const miles = [[], []];
-  const time = [[]];
+  const miles = {
+    pickup: {},
+    delivery: {}
+  };
+  const time = {
+    pickup: {},
+    waitTime: {},
+    delivery: {}
+  };
   const pay = {
     provider: '',
     tip: '',
@@ -30,13 +37,17 @@ const createTrip = (totalTrips) => {
 
 const createStamps = () => {
   const miles = {
-    stage: 0,
-    stampSet: [],
+    stage: 'pickup',
+    stampSet: {
+      start: 0
+    }
   };
 
   const time = {
-    stage: 0,
-    stampSet: [],
+    stage: 'pickup',
+    stampSet: {
+      start: 0
+    }
   };
 
   return { miles, time };

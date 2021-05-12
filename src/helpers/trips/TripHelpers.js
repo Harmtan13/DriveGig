@@ -6,13 +6,15 @@ const setSavedState = (state) => {
   }
 };
 
-const createStamp = (title, stampValue, stage, placement = 1, switchTrigger = false) => ({
+const createStamp = ({title, stampValue, stage, placement = 'end', switchTrigger = false}) => {
+ return {
   title,
   stampValue,
   stage,
   placement,
-  switchTrigger,
-});
+  switchTrigger
+ }
+}
 
 const tripSort = (trips) => {
   const active = trips.filter(trip => trip.completed === false);

@@ -5,13 +5,23 @@ import { createStamp } from '../../../helpers/trips/TripHelpers';
 export default function StartTrip({ trip, updateTrip, tripsSort, setStage }) {
   const newTrip = tripsSort.active.length >= 2;
 
-
-  const [odometerStart, setOdometerStart] = useState(trip.miles[0][0] || '');
-
+  const [odometerStart, setOdometerStart] = useState(trip.miles.pickup.start || '');
 
   const startTrip = () => {
-    const timeStamp = createStamp('time', Date.now(), 0, 0);
-    const odomStamp = createStamp('miles', odometerStart, 0, 0);
+    const timeStamp = createStamp({
+      title:'time', 
+      stampValue: Date.now(), 
+      stage: 'pickup', 
+      placement: 'start'
+    });
+
+    const odomStamp = createStamp({
+      title:'miles', 
+      stampValue: odometerStart, 
+      stage: 'pickup', 
+      placement: 'start'
+    });
+
     const stampInputs = newTrip ? [] : [timeStamp, odomStamp];
 
     const tripData = {

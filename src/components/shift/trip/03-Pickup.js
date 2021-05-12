@@ -3,15 +3,25 @@ import { Link } from 'react-router-dom';
 import { createStamp } from '../../../helpers/trips/TripHelpers';
 
 export default function Pickup({ trip, updateTrip, currentUser, setStage }) {
-  const [odometerStart, setOdometerStart] = useState(trip.miles[0][1] || '');
+  const [odometerStart, setOdometerStart] = useState(trip.miles.pickup.end || '');
   const [diner, setDiner] = useState(trip.diner || '');
   const [orderProvider, setOrderProvider] = useState(trip.orderProvider);
   const [restaurant, setRestaurant] = useState(trip.restaurant || '');
   const clientList = currentUser ? currentUser.clientList : {};
 
   const updateTripPickup = () => {
-    const timeStamp = createStamp('time', Date.now(), 0);
-    const odomStamp = createStamp('miles', odometerStart, 0);
+    const timeStamp = createStamp({
+      title: 'time', 
+      stampValue: Date.now(), 
+      stage: 'pickup'
+    });
+
+    const odomStamp = createStamp({
+      title: 'miles', 
+      stampValue: odometerStart, 
+      stage: 'pickup'
+    });
+
     const stampInputs = [timeStamp, odomStamp];
 
     const tripData = {
