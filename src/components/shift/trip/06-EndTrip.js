@@ -22,7 +22,7 @@ export default function EndTrip({ trip, updateTrip, tripsSort, switchTrigger, se
     const odomStamp = createStamp({
       title: 'miles', 
       stampValue: odometer, 
-      stage: 1, 
+      stage: 'delivery', 
       switchTrigger
   });
 
