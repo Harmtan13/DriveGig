@@ -93,16 +93,16 @@ export default function TripRouter({ currentUser, setStage, ...shiftState }) {
     setSwitchTrigger(switchTriggerToggle);
   };
 
-  useEffect(() => {
-    if (trip.completed) {
-      const shiftData = {
-        ...shiftState,
-        trip,
-      };
+  // useEffect(() => {
+  //   if (trip.completed) {
+  //     const shiftData = {
+  //       ...shiftState,
+  //       trip,
+  //     };
 
-      addTripToShift(shiftData);
-    }
-  }, [trips]);
+  //     addTripToShift(shiftData);
+  //   }
+  // }, [trips]);
 
   const tripState = {
     trip,
