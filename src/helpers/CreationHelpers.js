@@ -1,10 +1,12 @@
-const createShift = () => {
-  const miles = [];
-  const time = [];
+const createShift = (totalShifts) => {
+  const id = totalShifts
+  const miles = {};
+  const time = {};
   const trips = [];
   const completed = false;
 
   return {
+    id,
     miles,
     time,
     trips,

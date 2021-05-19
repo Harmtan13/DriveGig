@@ -11,20 +11,15 @@ const stampManager = (stamps, stampInputs) => {
       const takeFirstStamp = () => ({start: stampCopy.stampSet.start});
       const takeLastStamp = () => ({start: stampCopy.stampSet.end});
 
-      console.log(takeFirstStamp());
-
       const stampSet = determineSliceBehavior() ? takeFirstStamp() : takeLastStamp();
 
       stampSet[placement] = stampValue;
-      console.log(stampSet);
 
-      const newStamp = { 
+      const newStamp = {
         ...stampCopy,
         stampSet,
         stage
       };
-
-      console.log(newStamp);
 
       updatedStamps[title] = newStamp;
     }

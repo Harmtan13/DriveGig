@@ -17,7 +17,7 @@ import sortedState from '../../../helpers/trips/UpdateHelpers';
 import { createTrip, createStamps } from '../../../helpers/CreationHelpers';
 import { addTripToShift } from '../../../helpers/ShiftHelpers';
 
-export default function TripRouter({ currentUser, setStage, ...shiftState }) {
+export default function TripRouter({ currentUser, setStage, updateShift, ...shiftState }) {
   const [trips, setTrips] = useState(
     getSavedState('trips') || []
   );
@@ -27,16 +27,18 @@ export default function TripRouter({ currentUser, setStage, ...shiftState }) {
   );
 
   const [stamps, setStamps] = useState(
-    getSavedState('stamps') || createStamps(trips.length)
+    getSavedState('tripStamps') || createStamps()
   );
 
   const [switchTrigger, setSwitchTrigger] = useState(
     getSavedState('switchTrigger') || false
   );
+  
   const tripsSort = tripSort(trips);
 
   const updateTrip = (tripData) => {
     const { sequenceTrigger, switchTriggerToggle, ...tripProps } = tripData;
+
     const sortProps = {
       ...tripProps,
       trip,
@@ -63,7 +65,7 @@ export default function TripRouter({ currentUser, setStage, ...shiftState }) {
           stampValue: stamps.time.stampSet.end, 
           stage: 'pickup', 
           placement: 'start'
-      }),
+        }),
       ];
 
       const newTripData = {
@@ -83,7 +85,7 @@ export default function TripRouter({ currentUser, setStage, ...shiftState }) {
     setSavedState({
       trip: updatedTrip,
       trips: updatedTrips,
-      stamps: sortedStamps,
+      tripStamps: sortedStamps,
       switchTrigger: switchTriggerToggle || false,
     });
 
@@ -124,6 +126,7 @@ export default function TripRouter({ currentUser, setStage, ...shiftState }) {
       <Route exact path = "/active-shift/start-trip">
         <StartTrip
           {...tripState}
+          updateShift = {updateShift}
         />
       </Route>
 
@@ -150,6 +153,7 @@ export default function TripRouter({ currentUser, setStage, ...shiftState }) {
       <Route path = "/active-shift/delivery">
         <EndTrip
           {...tripState}
+          updateShift = {updateShift}
           switchTrigger = {switchTrigger}
         />
       </Route>
