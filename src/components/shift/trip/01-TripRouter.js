@@ -33,6 +33,9 @@ export default function TripRouter({ currentUser, setStage, updateShift, ...shif
   const [switchTrigger, setSwitchTrigger] = useState(
     getSavedState('switchTrigger') || false
   );
+
+  const [shiftStageId, setShiftStageId] = useState(null);
+  console.log('ShiftStageID: ',shiftStageId);
   
   const tripsSort = tripSort(trips);
 
@@ -127,6 +130,8 @@ export default function TripRouter({ currentUser, setStage, updateShift, ...shif
         <StartTrip
           {...tripState}
           updateShift = {updateShift}
+          setShiftStageId = {setShiftStageId}
+          shiftStageId = {shiftStageId}
         />
       </Route>
 
@@ -155,6 +160,8 @@ export default function TripRouter({ currentUser, setStage, updateShift, ...shif
           {...tripState}
           updateShift = {updateShift}
           switchTrigger = {switchTrigger}
+          setShiftStageId = {setShiftStageId}
+          shiftStageId = {shiftStageId}
         />
       </Route>
 

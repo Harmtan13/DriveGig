@@ -39,8 +39,6 @@ export default function ShiftRouter({ currentUser, stage, setStage }) {
 
     const { updatedTrip, updatedTrips, sortedStamps} = sortedState(sortProps);
 
-    console.log(updatedTrips);
-
     setSavedState({
       shifts: updatedTrips,
       shift: updatedTrip,

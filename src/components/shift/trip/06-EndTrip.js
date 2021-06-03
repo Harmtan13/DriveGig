@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createStamp } from '../../../helpers/trips/TripHelpers';
 
-export default function EndTrip({ trip, updateTrip, tripsSort, switchTrigger, setStage, updateShift }) {
+export default function EndTrip({ trip, updateTrip, tripsSort, switchTrigger, setStage, updateShift, setShiftStageId, shiftStageId }) {
   const [odometer, setOdometer] = useState(trip.miles.delivery.end || '');
   const [providerPay, setProviderPay] = useState(trip.pay.provider || '');
   const [tip, setTip] = useState(trip.pay.tip || '');
@@ -42,7 +42,9 @@ export default function EndTrip({ trip, updateTrip, tripsSort, switchTrigger, se
 
     const exportShiftData = () => {
       const placement = 'start';
-      const stage = `Trip${trip.id}`;
+      const stageId = shiftStageId == null ? trip.id.toString() : shiftStageId.concat(`-${trip.id}`);
+      setShiftStageId(stageId);
+      const stage = !shiftStageId ? `Trip-${stageId}` : `Trips-${stageId}`;
 
       const stampInputs = [
         {...timeStamp, placement, stage},
@@ -62,6 +64,8 @@ export default function EndTrip({ trip, updateTrip, tripsSort, switchTrigger, se
     if (!currentTrips) {
       updateShift(exportShiftData());
     };
+
+    console.log(exportShiftData());
 
   };
 
@@ -117,7 +121,7 @@ export default function EndTrip({ trip, updateTrip, tripsSort, switchTrigger, se
       <br />
 
       <center>
-        <Link onClick = {endTrip} to = {determineLink()}>
+        <Link onClick = {endTrip} to = {determineLink}>
           <button type = "submit">
             Delivered
           </button>

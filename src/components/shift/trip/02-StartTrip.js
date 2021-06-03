@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createStamp } from '../../../helpers/trips/TripHelpers';
 
-export default function StartTrip({ trip, updateTrip, tripsSort, setStage, updateShift }) {
+export default function StartTrip({ trip, updateTrip, tripsSort, setStage, updateShift, shiftStageId, setShiftStageId }) {
   const newTrip = tripsSort.active.length >= 2;
-  const shiftStage = trip.id > 0 ? `nonActive${trip.id}` : 'startShift';
+  const determineShiftStage = trip.id > 0 ? `nonActive-${shiftStageId}` : 'startShift';
 
   const [odometerStart, setOdometerStart] = useState(trip.miles.pickup.start || '');
 
@@ -32,7 +32,7 @@ export default function StartTrip({ trip, updateTrip, tripsSort, setStage, updat
 
     const exportShiftData = () => {
       const placement = 'end';
-      const stage = shiftStage;
+      const stage = determineShiftStage;
 
       const stampInputs = [
         {...timeStamp, placement, stage},
@@ -46,12 +46,10 @@ export default function StartTrip({ trip, updateTrip, tripsSort, setStage, updat
       return shiftData;
     }
 
-    console.log('TripData: ', tripData);
-    console.log('ShiftData: ', exportShiftData());
-
     setStage('/active-shift/pickup');
 
     if (!newTrip) {
+      if (trip.id > 0) setShiftStageId(null);
       updateShift(exportShiftData());
     };
 
