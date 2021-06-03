@@ -17,7 +17,15 @@ import sortedState from '../../../helpers/trips/UpdateHelpers';
 import { createTrip, createStamps } from '../../../helpers/CreationHelpers';
 import { addTripToShift } from '../../../helpers/ShiftHelpers';
 
-export default function TripRouter({ currentUser, setStage, updateShift, ...shiftState }) {
+export default function TripRouter(
+  { currentUser, 
+    setStage, 
+    updateShift, 
+    shiftStageId, 
+    setShiftStageId, 
+    ...shiftState 
+  }) {
+
   const [trips, setTrips] = useState(
     getSavedState('trips') || []
   );
@@ -33,9 +41,6 @@ export default function TripRouter({ currentUser, setStage, updateShift, ...shif
   const [switchTrigger, setSwitchTrigger] = useState(
     getSavedState('switchTrigger') || false
   );
-
-  const [shiftStageId, setShiftStageId] = useState(null);
-  console.log('ShiftStageID: ',shiftStageId);
   
   const tripsSort = tripSort(trips);
 

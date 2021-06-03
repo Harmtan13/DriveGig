@@ -3,19 +3,11 @@ import { Link } from 'react-router-dom';
 import { addTimeStamp } from '../../helpers/ShiftHelpers';
 import NewTrip from './trip/00-NewTrip';
 
-export default function MainShift({ shift, setShift, updateTrip, trip, setStage }) {
-  // console.log(shift);
-
-  const pauseShift = () => {
-    addTimeStamp(setShift, shift);
-  };
-
+export default function MainShift({ updateTrip, trip, setStage }) {
   return (
     <div>
       <Link to = "/active-shift/pause">
-        <button
-          onClick = {pauseShift}
-        >
+        <button>
           Pause Shift
         </button>
       </Link>

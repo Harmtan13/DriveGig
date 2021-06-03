@@ -29,6 +29,8 @@ export default function ShiftRouter({ currentUser, stage, setStage }) {
     getSavedState('shiftStamps') || createStamps()
   );
 
+  const [shiftStageId, setShiftStageId] = useState(null);
+
   const updateShift = (shiftData) => {
     const sortProps = {
       ...shiftData,
@@ -62,6 +64,8 @@ export default function ShiftRouter({ currentUser, stage, setStage }) {
   const shiftState = {
     shift,
     updateShift,
+    shiftStageId,
+    setShiftStageId,
     stage,
     setStage,
   };

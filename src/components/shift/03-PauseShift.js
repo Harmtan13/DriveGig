@@ -1,11 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { addTimeStamp } from '../../helpers/ShiftHelpers';
+import { createStamp } from './../../helpers/trips/TripHelpers';
 
-export default function PauseShift({ shift, setShift, setStage }) {
+export default function PauseShift({ updateShift, setStage, shiftStageId }) {
   setStage('/active-shift');
+
+  console.log(shiftStageId)
+
   const resumeShift = () => {
-    addTimeStamp(setShift, shift, 1);
+    const timeStamp = createStamp({
+      title: 'time',
+      stampValue: Date.now(),
+      stage: `break-${shiftStageId}`,
+      placement: 'end'
+    })
+
+    const stampInputs = [timeStamp];
+
+    const shiftData = {
+      stampInputs
+    }
+
+    updateShift(shiftData)
   };
 
   return (
