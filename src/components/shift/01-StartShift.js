@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createStamp } from './../../helpers/trips/TripHelpers';
 
-export default function StartShift({ shift, setShift, setStage, updateShift }) {
+export default function StartShift({ shift, setStage, updateShift }) {
   const [odometerStart, setOdometerStart] = useState(shift.miles?.clockIn?.start || '');
 
   const startShift = () => {

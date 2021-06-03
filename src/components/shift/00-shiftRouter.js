@@ -61,7 +61,7 @@ export default function ShiftRouter({ currentUser, stage, setStage }) {
 
   const shiftState = {
     shift,
-    setShift,
+    updateShift,
     stage,
     setStage,
   };

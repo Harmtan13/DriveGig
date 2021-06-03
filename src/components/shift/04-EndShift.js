@@ -1,24 +1,35 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { createStamp } from './../../helpers/trips/TripHelpers';
 
-export default function EndShift({ shift, setShift, setStage }) {
+export default function EndShift({ shift, updateShift, setStage }) {
   const [odometerEnd, setOdometerEnd] = useState('');
 
   const endShift = () => {
-    const odometer = [...shift.miles, odometerEnd];
-    const timeStamps = [...shift.time, Date.now()];
+    const timeStamp = createStamp({
+      title: 'time',
+      stampValue: Date.now(),
+      stage: 'endShift',
+      placement: 'end'
+    })
+
+    const odomStamp = createStamp({
+      title: 'miles',
+      stampValue: odometerEnd,
+      stage: 'endShift',
+      placement: 'end'
+    })
+
+    const stampInputs = [timeStamp, odomStamp];
     const completed = true;
 
-    const updatedShift = {
-      ...shift,
-      miles: odometer,
-      time: timeStamps,
+    const shiftData = {
       completed,
-    };
+      stampInputs
+    }
 
     setStage('');
-    setShift(updatedShift);
-    localStorage.setItem('shift', JSON.stringify(updatedShift));
+    updateShift(shiftData);
   };
 
   return (
