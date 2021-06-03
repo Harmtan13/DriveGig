@@ -41,7 +41,7 @@ export default function EndTrip({ trip, updateTrip, tripsSort, switchTrigger, se
     };
 
     const exportShiftData = () => {
-      const placement = 'start';
+      const placement = 'end';
       const stageId = shiftStageId == null ? trip.id.toString() : shiftStageId.concat(`-${trip.id}`);
       setShiftStageId(stageId);
       const stage = !shiftStageId ? `Trip-${stageId}` : `Trips-${stageId}`;
