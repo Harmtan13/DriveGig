@@ -10,19 +10,17 @@ import PauseShift from './03-PauseShift';
 import EndShift from './04-EndShift';
 import sortedState from '../../helpers/trips/UpdateHelpers';
 import {
-  tripSort,
   getSavedState,
   setSavedState,
-  createStamp,
 } from '../../helpers/trips/TripHelpers';
 
 export default function ShiftRouter({ currentUser, stage, setStage }) {
   const [shifts, setShifts] = useState(
-    JSON.parse(localStorage.getItem('shifts')) || []
+    getSavedState('shifts') || []
   );
 
   const [shift, setShift] = useState(
-    JSON.parse(localStorage.getItem('shift')) || createShift(shifts.length)
+    getSavedState('shift') || createShift(shifts.length)
   );
 
   const [stamps, setStamps] = useState(
@@ -44,7 +42,8 @@ export default function ShiftRouter({ currentUser, stage, setStage }) {
     setSavedState({
       shifts: updatedTrips,
       shift: updatedTrip,
-      shiftStamps: sortedStamps
+      shiftStamps: sortedStamps,
+      shiftStageId
     })
 
     setShifts(updatedTrips);
