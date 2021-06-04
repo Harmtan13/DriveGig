@@ -24,7 +24,6 @@ const tripSort = (trips) => {
   return { active, total, completed };
 };
 
-
 export {
   getSavedState,
   setSavedState,
