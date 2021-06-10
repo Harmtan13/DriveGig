@@ -64,9 +64,6 @@ export default function EndTrip({ trip, updateTrip, tripsSort, switchTrigger, se
     if (!currentTrips) {
       updateShift(exportShiftData());
     };
-
-    console.log(exportShiftData());
-
   };
 
   return (

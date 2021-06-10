@@ -57,9 +57,7 @@ export default function ShiftRouter({ currentUser, stage, setStage }) {
   useEffect(() => {
     if (shift.completed) {
       localStorage.clear();
-      localStorage.setItem('shifts', JSON.stringify([...shifts, shift]));
-      setShifts([...shifts, shift]);
-      console.log('completed');
+      localStorage.setItem('shifts', JSON.stringify(shifts));
     }
   }, [shift]);
 
