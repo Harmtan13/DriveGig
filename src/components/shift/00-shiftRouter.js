@@ -4,10 +4,13 @@ import {
 } from 'react-router-dom';
 
 import { createShift, createStamps } from '../../helpers/CreationHelpers';
+import PrivateRoute from '../routes/PrivateRoute';
+import HomeSummary from './../../components/auth/HomeSummary';
 import StartShift from './01-StartShift';
 import TripRouter from './trip/01-TripRouter';
 import PauseShift from './03-PauseShift';
 import EndShift from './04-EndShift';
+
 import sortedState from '../../helpers/trips/UpdateHelpers';
 import {
   getSavedState,
@@ -70,15 +73,26 @@ export default function ShiftRouter({ currentUser, stage, setStage }) {
     setStage,
   };
 
+  const userState = {
+    currentUser
+  }
+
   return (
     <>
-      <Route path = "/active-shift/start">
+      <PrivateRoute
+        exact
+        path = "/"
+        component = {HomeSummary}
+        userState = {userState}
+      />
+
+      <Route path = "/start-shift">
         <StartShift {...shiftState} 
         updateShift = {updateShift}
         />
       </Route>
 
-      <Route path = "/active-shift">
+      <Route path = "/shift">
         <TripRouter
           {...shiftState}
           currentUser = {currentUser}
@@ -86,11 +100,11 @@ export default function ShiftRouter({ currentUser, stage, setStage }) {
         />
       </Route>
 
-      <Route path = "/active-shift/pause">
+      <Route path = "/pause-shift">
         <PauseShift {...shiftState} />
       </Route>
 
-      <Route path = "/active-shift/end">
+      <Route path = "/end-shift">
         <EndShift {...shiftState} />
       </Route>
     </>

@@ -12,14 +12,14 @@ export default function NewTrip({ updateTrip, trip, setStage }) {
       stampInputs,
     };
 
-    setStage('/active-shift/start-trip');
+    setStage('/shift/start-trip');
     updateTrip(tripData);
   };
 
 
   return (
     <>
-      <Link onClick = {newTrip} to = "/active-shift/start-trip">
+      <Link onClick = {newTrip} to = "/shift/start-trip">
         <button>
           Start Trip
         </button>

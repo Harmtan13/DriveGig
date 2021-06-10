@@ -4,10 +4,11 @@ import { setSavedState } from '../../../helpers/trips/TripHelpers';
 
 
 export default function Trips({ setTrip, tripsSort, setStage }) {
+  const nextPage = '/shift/delivery'
   const setCurrentTrip = (id) => {
     const trip = tripsSort.active.find(trip => trip.id === id);
 
-    setStage('/active-shift/delivery');
+    setStage(nextPage);
     setSavedState({ trip });
     setTrip(trip);
   };
@@ -17,7 +18,7 @@ export default function Trips({ setTrip, tripsSort, setStage }) {
       <h1>Trips</h1>
       {tripsSort.active.map(trip => (
         <div key = {trip.id}>
-          <Link to = "/active-shift/delivery" onClick = {() => (setCurrentTrip(trip.id))}>
+          <Link to = {nextPage} onClick = {() => (setCurrentTrip(trip.id))}>
             <h3>{trip.id}</h3>
           </Link>
         </div>

@@ -26,7 +26,7 @@ export default function PauseShift({ updateShift, setStage, shiftStageId }) {
 
   return (
     <div>
-      <Link to = "/active-shift">
+      <Link to = "/shift">
         <button
           onClick = {resumeShift}
         >

@@ -59,15 +59,15 @@ export default function App() {
           && (
             <>
               <Route path = "/">
+                <ShiftRouter {...appState} />
+              </Route>
+              
+              <Route path = "/account">
                 <AuthRouter {...appState} {...authState} />
               </Route>
 
               <Route path = "/resume-shift">
                 {stage ? <Redirect to = {stage} /> : <Redirect to = "/active-shift/start" />}
-              </Route>
-
-              <Route path = "/active-shift">
-                <ShiftRouter {...appState} />
               </Route>
 
               <Route path = "/input-expenses">

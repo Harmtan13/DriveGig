@@ -4,6 +4,7 @@ import { createStamp } from '../../../helpers/trips/TripHelpers';
 
 export default function Departure({ updateTrip, tripsSort, setStage }) {
   const maxTrips = !(tripsSort.active.length >= 2);
+  const nextPage = '/shift/start-trip';
 
   const timeStamp = createStamp({
     title: 'time', 
@@ -11,7 +12,7 @@ export default function Departure({ updateTrip, tripsSort, setStage }) {
     stage: 'waitTime'});
   const stampInputs = [timeStamp];
 
-  const headOutLink = () => (maxTrips ? '/active-shift/delivery' : '/active-shift/trips');
+  const headOutLink = () => (maxTrips ? '/shift/delivery' : '/shift/trips');
 
   const updateTripDeparture = () => {
     const tripData = {
@@ -30,7 +31,7 @@ export default function Departure({ updateTrip, tripsSort, setStage }) {
       stampInputs,
     };
 
-    setStage('/active-shift/start-trip');
+    setStage(nextPage);
     updateTrip(tripData);
   };
 
@@ -41,7 +42,7 @@ export default function Departure({ updateTrip, tripsSort, setStage }) {
       </Link>
 
       {maxTrips && (
-        <Link onClick = {addTrip} to = "/active-shift/start-trip">
+        <Link onClick = {addTrip} to = {nextPage}>
           <button>Add-on Trip</button>
         </Link>
       )}

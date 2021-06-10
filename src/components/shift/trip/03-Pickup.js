@@ -8,6 +8,7 @@ export default function Pickup({ trip, updateTrip, currentUser, setStage }) {
   const [orderProvider, setOrderProvider] = useState(trip.orderProvider);
   const [restaurant, setRestaurant] = useState(trip.restaurant || '');
   const clientList = currentUser ? currentUser.clientList : {};
+  const nextPage = '/shift/departure';
 
   const updateTripPickup = () => {
     const timeStamp = createStamp({
@@ -31,7 +32,7 @@ export default function Pickup({ trip, updateTrip, currentUser, setStage }) {
       stampInputs,
     };
 
-    setStage('/active-shift/departure');
+    setStage(nextPage);
     updateTrip(tripData);
   };
 
@@ -92,7 +93,7 @@ export default function Pickup({ trip, updateTrip, currentUser, setStage }) {
 
       <br />
       <br />
-      <Link to = "/active-shift/departure">
+      <Link to = {nextPage}>
         <button type = "submit" onClick = {updateTripPickup}>
           Arrived For Pickup
         </button>

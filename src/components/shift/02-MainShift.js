@@ -6,13 +6,13 @@ import NewTrip from './trip/00-NewTrip';
 export default function MainShift({ updateTrip, trip, setStage }) {
   return (
     <div>
-      <Link to = "/active-shift/pause">
+      <Link to = "/pause-shift">
         <button>
           Pause Shift
         </button>
       </Link>
 
-      <Link to = "/active-shift/end">
+      <Link to = "/end-shift">
         <button>
           End Shift
         </button>

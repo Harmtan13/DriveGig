@@ -5,6 +5,8 @@ import { createStamp } from './../../helpers/trips/TripHelpers';
 export default function StartShift({ shift, setStage, updateShift }) {
   const [odometerStart, setOdometerStart] = useState(shift.miles?.startShift?.start || '');
 
+  const nextPage = '/shift'
+
   const startShift = () => {
     const timeStamp = createStamp({
       title: 'time',
@@ -31,7 +33,7 @@ export default function StartShift({ shift, setStage, updateShift }) {
     // const updatedShift = { ...shift, miles: odometer, time: timeStamps };
 
 
-    setStage('/active-shift');
+    setStage(nextPage);
     // setShift(updatedShift);
     // localStorage.setItem('shift', JSON.stringify(updatedShift));
   };
@@ -50,7 +52,7 @@ export default function StartShift({ shift, setStage, updateShift }) {
         />
       </label>
 
-      <Link to = "/active-shift">
+      <Link to = {nextPage}>
         <button
           type = "submit"
           onClick = {startShift}

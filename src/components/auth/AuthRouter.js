@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Route } from 'react-router-dom';
-import PrivateRoute from '../routes/PrivateRoute';
-import HomeSummary from './HomeSummary';
 import Signup from './Signup';
 import Login from './Login';
 import ForgotPassword from './ForgotPassword';
@@ -39,12 +37,6 @@ export default function AuthFunctions({ setIsLoading, auth, db, setCurrentUser, 
   return (
     <>
       <div>
-        <PrivateRoute
-          exact
-          path = "/"
-          component = {HomeSummary}
-          userState = {userState}
-        />
 
         <Route path = "/signup">
           <Signup signUp = {signUp} setIsLoading = {setIsLoading} />

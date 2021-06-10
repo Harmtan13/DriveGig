@@ -123,7 +123,7 @@ export default function TripRouter(
 
   return (
     <>
-      <Route exact path = "/active-shift">
+      <Route exact path = "/shift">
         <MainShift
           {...shiftState}
           {...tripState}
@@ -131,7 +131,7 @@ export default function TripRouter(
         />
       </Route>
 
-      <Route exact path = "/active-shift/start-trip">
+      <Route exact path = "/shift/start-trip">
         <StartTrip
           {...tripState}
           updateShift = {updateShift}
@@ -140,27 +140,27 @@ export default function TripRouter(
         />
       </Route>
 
-      <Route path = "/active-shift/pickup">
+      <Route path = "/shift/pickup">
         <Pickup
           {...tripState}
           currentUser = {currentUser}
         />
       </Route>
 
-      <Route path = "/active-shift/departure">
+      <Route path = "/shift/departure">
         <Departure
           {...tripState}
         />
       </Route>
 
-      <Route path = "/active-shift/trips">
+      <Route path = "/shift/trips">
         <Trips
           {...tripState}
           setTrip = {setTrip}
         />
       </Route>
 
-      <Route path = "/active-shift/delivery">
+      <Route path = "/shift/delivery">
         <EndTrip
           {...tripState}
           updateShift = {updateShift}

@@ -9,7 +9,7 @@ export default function HomeSummary({ currentUser, logout, stage }) {
     history.push('login');
   };
 
-  const determineLink = () => (stage ? '/resume-shift' : '/active-shift/start');
+  const determineLink = () => (stage ? '/resume-shift' : '/start-shift');
   const determineText = () => (stage ? 'Resume Shift' : 'Start Shift');
 
   return (

@@ -5,6 +5,7 @@ import { createStamp } from '../../../helpers/trips/TripHelpers';
 export default function StartTrip({ trip, updateTrip, tripsSort, setStage, updateShift, shiftStageId, setShiftStageId }) {
   const newTrip = tripsSort.active.length >= 2;
   const determineShiftStage = trip.id > 0 ? `nonActive-${shiftStageId}` : 'startShift';
+  const nextPage = '/shift/pickup'
 
   const [odometerStart, setOdometerStart] = useState(trip.miles.pickup.start || '');
 
@@ -46,7 +47,7 @@ export default function StartTrip({ trip, updateTrip, tripsSort, setStage, updat
       return shiftData;
     }
 
-    setStage('/active-shift/pickup');
+    setStage(nextPage);
 
     if (!newTrip) {
       if (trip.id > 0) setShiftStageId(null);
@@ -74,7 +75,7 @@ export default function StartTrip({ trip, updateTrip, tripsSort, setStage, updat
       {!newTrip && (<br />)}
       {!newTrip && (<br />)}
 
-      <Link to = "/active-shift/pickup">
+      <Link to = {nextPage}>
         <button type = "submit" onClick = {startTrip}>Head for Pickup</button>
       </Link>
     </div>
