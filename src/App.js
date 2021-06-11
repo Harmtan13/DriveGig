@@ -36,7 +36,7 @@ export default function App() {
   }, [stage]);
 
   const addShiftsToUser = (shifts) => {
-    !isLoading && db.collection('users').doc(currentUser.uid).set({
+    !isLoading && db.collection('users').doc(currentUser.uid).update({
       shifts
     })
   }
@@ -53,7 +53,7 @@ export default function App() {
     stage,
   };
 
-  console.log(currentUser?.shifts ? currentUser.shifts : 'poop');
+  console.log(!!currentUser);
 
   return (
     <div className = "container">
