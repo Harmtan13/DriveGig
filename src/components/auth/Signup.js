@@ -173,7 +173,7 @@ export default function Signup({ signUp, setIsLoading }) {
         <div>
           Already have an account?
           {' '}
-          <Link to = "/login">Log In</Link>
+          <Link to = "/account/login">Log In</Link>
         </div>
 
       </form>
