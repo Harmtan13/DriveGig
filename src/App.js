@@ -53,8 +53,6 @@ export default function App() {
     stage,
   };
 
-  console.log(!!currentUser);
-
   return (
     <div className = "container">
       <header>
