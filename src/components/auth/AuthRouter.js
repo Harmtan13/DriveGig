@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import Signup from './Signup';
 import Login from './Login';
+import Profile from './Profile';
 import ForgotPassword from './ForgotPassword';
 
 
@@ -38,15 +39,19 @@ export default function AuthFunctions({ setIsLoading, auth, db, setCurrentUser, 
     <>
       <div>
 
-        <Route path = "/signup">
+        <Route path = "/account/signup">
           <Signup signUp = {signUp} setIsLoading = {setIsLoading} />
         </Route>
 
-        <Route path = "/login">
+        <Route path = "/account/login">
           <Login login = {login} setIsLoading = {setIsLoading} />
         </Route>
 
-        <Route path = "/forgot-password">
+        <Route>
+          <Profile logout = {logout} />
+        </Route>
+
+        <Route path = "/account/forgot-password">
           <ForgotPassword resetPassword = {resetPassword} setIsLoading = {setIsLoading} />
         </Route>
       </div>
