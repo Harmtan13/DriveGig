@@ -17,7 +17,7 @@ import {
   setSavedState,
 } from '../../helpers/trips/TripHelpers';
 
-export default function ShiftRouter({ currentUser, stage, setStage }) {
+export default function ShiftRouter({ currentUser, stage, setStage, addShiftsToUser }) {
   const [shifts, setShifts] = useState(
     getSavedState('shifts') || []
   );
@@ -56,8 +56,8 @@ export default function ShiftRouter({ currentUser, stage, setStage }) {
 
   useEffect(() => {
     if (shift.completed) {
+      addShiftsToUser(shifts);
       localStorage.clear();
-      localStorage.setItem('shifts', JSON.stringify(shifts));
     }
   }, [shift]);
 

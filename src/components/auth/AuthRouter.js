@@ -6,7 +6,7 @@ import Profile from './Profile';
 import ForgotPassword from './ForgotPassword';
 
 
-export default function AuthFunctions({ setIsLoading, auth, db, setCurrentUser, currentUser, stage }) {
+export default function AuthFunctions({ setIsLoading, auth, db, currentUser, stage }) {
   const signUp = async (signUpInfo) => {
     const { email, password, firstName, lastName, clients } = signUpInfo;
 

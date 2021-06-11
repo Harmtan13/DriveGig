@@ -35,6 +35,12 @@ export default function App() {
     localStorage.setItem('stage', stage);
   }, [stage]);
 
+  const addShiftsToUser = (shifts) => {
+    !isLoading && db.collection('users').doc(currentUser.uid).set({
+      shifts
+    })
+  }
+
   const authState = {
     auth,
     db,
@@ -43,10 +49,11 @@ export default function App() {
 
   const appState = {
     currentUser,
-    setCurrentUser,
     setStage,
     stage,
   };
+
+  console.log(currentUser?.shifts ? currentUser.shifts : 'poop');
 
   return (
     <div className = "container">
@@ -59,7 +66,10 @@ export default function App() {
           && (
             <>
               <Route path = "/">
-                <ShiftRouter {...appState} />
+                <ShiftRouter 
+                  {...appState}
+                  addShiftsToUser = {addShiftsToUser}  
+                />
               </Route>
               
               <Route path = "/account">
