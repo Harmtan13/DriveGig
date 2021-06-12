@@ -9,6 +9,7 @@ export default function HomeSummary({ currentUser, stage }) {
   return (
     <>
       <h1>HomeSummary baby!</h1>
+      <p>{currentUser.email}</p>
       <Link to = {determineLink()}>{determineText()}</Link>
     </>
   );
