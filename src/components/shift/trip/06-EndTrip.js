@@ -4,8 +4,8 @@ import { createStamp } from '../../../helpers/trips/TripHelpers';
 
 export default function EndTrip({ trip, updateTrip, tripsSort, switchTrigger, setStage, updateShift, setShiftStageId, shiftStageId }) {
   const [odometer, setOdometer] = useState(trip.miles.delivery.end || '');
-  const [providerPay, setProviderPay] = useState(trip.pay.provider || '');
-  const [tip, setTip] = useState(trip.pay.tip || '');
+  const [providerPay, setProviderPay] = useState(trip.pay.provider || '0');
+  const [tip, setTip] = useState(trip.pay.tip || '0');
   const currentTrips = tripsSort.active.length >= 2;
 
   const determineLink = () => (currentTrips ? '/shift/trips' : '/shift');
@@ -113,6 +113,11 @@ export default function EndTrip({ trip, updateTrip, tripsSort, switchTrigger, se
           onChange = {e => setTip(e.target.value)}
         />
       </label>
+
+      <br />
+      <br />
+
+      <p>{`$${(Number(providerPay) * 100 + Number(tip) * 100) / 100}` || '$0.00'} </p>
 
       <br />
       <br />
