@@ -19,7 +19,11 @@ export default function Trips({ setTrip, tripsSort, setStage }) {
       {tripsSort.active.map(trip => (
         <div key = {trip.id}>
           <Link to = {nextPage} onClick = {() => (setCurrentTrip(trip.id))}>
-            <h3>{trip.id}</h3>
+            <h3>{trip.diner}</h3>
+            <p>{trip.orderProvider}</p>
+            <p>{trip.restaurant}</p>
+            <br/>
+            <br/>
           </Link>
         </div>
       ))}
