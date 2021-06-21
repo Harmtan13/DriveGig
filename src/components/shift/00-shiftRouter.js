@@ -18,12 +18,12 @@ import {
 } from '../../helpers/trips/TripHelpers';
 
 export default function ShiftRouter({ currentUser, stage, setStage, addShiftsToUser }) {
-  const [shifts, setShifts] = useState(
-    currentUser?.shifts || []
-  );
+  // const [shifts, setShifts] = useState(
+  //   currentUser?.shifts || []
+  // );
 
   const [shift, setShift] = useState(
-    getSavedState('shift') || createShift(shifts.length)
+    getSavedState('shift') || createShift(1)
   );
 
   const [stamps, setStamps] = useState(
@@ -36,27 +36,25 @@ export default function ShiftRouter({ currentUser, stage, setStage, addShiftsToU
     const sortProps = {
       ...shiftData,
       trip: shift,
-      trips: shifts,
+      trips: [],
       stamps
     }
 
     const { updatedTrip, updatedTrips, sortedStamps} = sortedState(sortProps);
 
     setSavedState({
-      shifts: updatedTrips,
       shift: updatedTrip,
       shiftStamps: sortedStamps,
       shiftStageId
     })
 
-    setShifts(updatedTrips);
     setShift(updatedTrip);
     setStamps(sortedStamps);
   };
 
   useEffect(() => {
     if (shift.completed) {
-      addShiftsToUser(shifts);
+      addShiftsToUser(shift);
       localStorage.clear();
     }
   }, [shift]);

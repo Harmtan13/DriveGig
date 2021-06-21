@@ -35,10 +35,21 @@ export default function App() {
     localStorage.setItem('stage', stage);
   }, [stage]);
 
-  const addShiftsToUser = (shifts) => {
-    !isLoading && db.collection('users').doc(currentUser.uid).update({
-      shifts
-    })
+  const addShiftsToUser = (shiftData) => {
+    const {trips, miles, time, ...completedShift } = shiftData;
+    // const trip = shift.collection('trips').doc('trip').set({...trips})
+
+    const saveShift = async () => {
+      const shift = db.collection('users').doc(currentUser.uid).collection('shifts').doc('shift');
+
+      await shift.set({completedShift}, {merge: true});
+
+      shift.collection('trips').doc('trip').set({...trips}) && 
+      shift.collection('stamps').doc('distance').set({miles}) &&
+      shift.collection('stamps').doc('time').set({time});
+    } 
+
+    !isLoading && saveShift();
   }
 
   const authState = {
