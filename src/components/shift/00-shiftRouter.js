@@ -18,12 +18,8 @@ import {
 } from '../../helpers/trips/TripHelpers';
 
 export default function ShiftRouter({ currentUser, stage, setStage, addShiftsToUser }) {
-  // const [shifts, setShifts] = useState(
-  //   currentUser?.shifts || []
-  // );
-
   const [shift, setShift] = useState(
-    getSavedState('shift') || createShift(1)
+    getSavedState('shift') || createShift(currentUser.totalShifts)
   );
 
   const [stamps, setStamps] = useState(

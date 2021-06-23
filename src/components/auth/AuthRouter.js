@@ -16,6 +16,7 @@ export default function AuthFunctions({ setIsLoading, auth, db, currentUser, sta
       firstName,
       lastName,
       clientList: clients,
+      totalShifts: 0,
     });
   };
 

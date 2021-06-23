@@ -37,16 +37,29 @@ export default function App() {
 
   const addShiftsToUser = (shiftData) => {
     const {trips, miles, time, ...completedShift } = shiftData;
-    // const trip = shift.collection('trips').doc('trip').set({...trips})
+    const user = db.collection('users').doc(currentUser.uid);
+    const shiftCount = currentUser.totalShifts + 1;
+    console.log(shiftCount);
+    user.update({
+      totalShifts: shiftCount
+    })
 
     const saveShift = async () => {
-      const shift = db.collection('users').doc(currentUser.uid).collection('shifts').doc('shift');
+      const shift = user.collection('shifts').doc(`shift-${completedShift.id}`);
 
-      await shift.set({completedShift}, {merge: true});
+      await shift.set({...completedShift}, {merge: true});
 
-      shift.collection('trips').doc('trip').set({...trips}) && 
-      shift.collection('stamps').doc('distance').set({miles}) &&
-      shift.collection('stamps').doc('time').set({time});
+      trips.forEach((tripData) => {
+        const {time, miles, ...extractedTrip} = tripData;
+
+        const trip = shift.collection('trips').doc(`trip-${extractedTrip.id}`);
+        trip.set({...extractedTrip})
+        trip.collection('stamps').doc('distance').set({...miles});
+        trip.collection('stamps').doc('time').set({...time});
+      })
+
+      shift.collection('stamps').doc('distance').set({...miles});
+      shift.collection('stamps').doc('time').set({...time});
     } 
 
     !isLoading && saveShift();
