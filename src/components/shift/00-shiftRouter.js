@@ -19,7 +19,7 @@ import {
 
 export default function ShiftRouter({ currentUser, stage, setStage, addShiftsToUser }) {
   const [shift, setShift] = useState(
-    getSavedState('shift') || createShift(currentUser.totalShifts)
+    getSavedState('shift') || createShift(currentUser?.totalShifts)
   );
 
   const [stamps, setStamps] = useState(
