@@ -2,33 +2,51 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createStamp } from '../../../helpers/trips/TripHelpers';
 
-export default function StartTrip({ trip, updateTrip, tripsSort, setStage, updateShift, shiftStageId, setShiftStageId }) {
-  const newTrip = tripsSort.active.length >= 2;
+export default function StartTrip({ 
+  trip, 
+  updateTrip, 
+  tripsSort, 
+  setStage, 
+  updateShift, 
+  shiftStageId, 
+  setShiftStageId 
+}) {
+
+  const stampDate = Date.now();
+const newTrip = tripsSort.active.length >= 2;
   const determineShiftStage = trip.id > 0 ? `nonActive-${shiftStageId}` : 'startShift';
   const nextPage = '/shift/pickup'
 
-  const [odometerStart, setOdometerStart] = useState(trip.miles.pickup.start || '');
+  const [odometer, setOdometer] = useState(trip.startDistance || '');
+
+  const timeStamp = createStamp({
+    title:'time', 
+    stampValue: stampDate, 
+    stage: 'pickup', 
+    placement: 'start'
+  });
+
+  const odomStamp = createStamp({
+    title:'miles', 
+    stampValue: odometer, 
+    stage: 'pickup', 
+    placement: 'start'
+  });
 
   const startTrip = () => {
     
-    const timeStamp = createStamp({
-      title:'time', 
-      stampValue: Date.now(), 
-      stage: 'pickup', 
-      placement: 'start'
-    });
-
-    const odomStamp = createStamp({
-      title:'miles', 
-      stampValue: odometerStart, 
-      stage: 'pickup', 
-      placement: 'start'
-    });
+    const date = new Date(stampDate).setUTCHours(0,0,0,0);
+    const start = {
+      time: stampDate,
+      distance: odometer
+    }
 
     const stampInputs = newTrip ? [] : [timeStamp, odomStamp];
 
     const tripData = {
       stampInputs,
+      date,
+      start
     };
 
     const exportShiftData = () => {
@@ -66,8 +84,8 @@ export default function StartTrip({ trip, updateTrip, tripsSort, setStage, updat
             type = "number"
             name = "odometer"
             placeholder = "Current Odometer"
-            onChange = {e => setOdometerStart(e.target.value)}
-            value = {odometerStart}
+            onChange = {e => setOdometer(e.target.value)}
+            value = {odometer}
           />
         </label>
       )}

@@ -2,7 +2,17 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createStamp } from '../../../helpers/trips/TripHelpers';
 
-export default function EndTrip({ trip, updateTrip, tripsSort, switchTrigger, setStage, updateShift, setShiftStageId, shiftStageId }) {
+export default function EndTrip({ 
+  trip, 
+  updateTrip, 
+  tripsSort, 
+  switchTrigger, 
+  setStage, 
+  updateShift, 
+  setShiftStageId, 
+  shiftStageId 
+}) {
+  const stampDate = Date.now();
   const [odometer, setOdometer] = useState(trip.miles.delivery.end || '');
   const [providerPay, setProviderPay] = useState(trip.pay.provider || '');
   const [tip, setTip] = useState(trip.pay.tip || '');
@@ -13,54 +23,61 @@ export default function EndTrip({ trip, updateTrip, tripsSort, switchTrigger, se
   const determineLink = () => (currentTrips ? '/shift/trips' : '/shift');
   const triggerToggle = () => (!!currentTrips);
 
-  const endTrip = () => {
-    const timeStamp = createStamp({
-      title: 'time', 
-      stampValue: Date.now(), 
-      stage: 'delivery', 
-      switchTrigger
-  });
+  const timeStamp = createStamp({
+    title: 'time', 
+    stampValue: Date.now(), 
+    stage: 'delivery', 
+    switchTrigger
+});
 
-    const odomStamp = createStamp({
-      title: 'miles', 
-      stampValue: odometer, 
-      stage: 'delivery', 
-      switchTrigger
-  });
+  const odomStamp = createStamp({
+    title: 'miles', 
+    stampValue: odometer, 
+    stage: 'delivery', 
+    switchTrigger
+});
 
-    const completed = true;
-    const pay = {
-      provider: providerPay,
-      tip,
-      total
-    };
-    const stampInputs = [timeStamp, odomStamp];
+  const completed = true;
 
-    const tripData = {
-      completed,
-      stampInputs,
-      pay,
-      switchTriggerToggle: triggerToggle(),
-    };
+  const pay = {
+    provider: providerPay,
+    tip,
+    total
+  };
 
-    const exportShiftData = () => {
-      const placement = 'end';
-      const stageId = shiftStageId == null ? trip.id.toString() : shiftStageId.concat(`-${trip.id}`);
-      setShiftStageId(stageId);
-      const stage = !shiftStageId ? `Trip-${stageId}` : `Trips-${stageId}`;
+  const end = {
+    time: stampDate,
+    distance: odometer
+  }
 
-      const stampInputs = [
-        {...timeStamp, placement, stage},
-        {...odomStamp, placement, stage}
-      ];
+  const stampInputs = [timeStamp, odomStamp];
 
-      const shiftData = {
-        stampInputs
-      }
+  const tripData = {
+    completed,
+    stampInputs,
+    pay,
+    switchTriggerToggle: triggerToggle(),
+  };
 
-      return shiftData;
+  const exportShiftData = () => {
+    const placement = 'end';
+    const stageId = shiftStageId == null ? trip.id.toString() : shiftStageId.concat(`-${trip.id}`);
+    setShiftStageId(stageId);
+    const stage = !shiftStageId ? `Trip-${stageId}` : `Trips-${stageId}`;
+
+    const stampInputs = [
+      {...timeStamp, placement, stage},
+      {...odomStamp, placement, stage}
+    ];
+
+    const shiftData = {
+      stampInputs
     }
 
+    return shiftData;
+  }
+
+  const endTrip = () => {
     setStage(determineLink());
     updateTrip(tripData);
 

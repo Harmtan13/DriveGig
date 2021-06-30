@@ -3,35 +3,43 @@ import { Link } from 'react-router-dom';
 import { createStamp } from '../../../helpers/trips/TripHelpers';
 
 export default function Pickup({ trip, updateTrip, currentUser, setStage }) {
-  const [odometerStart, setOdometerStart] = useState(trip.miles.pickup.end || '');
+
+  const stampDate = Date.now();
+  const [odometer, setOdometer] = useState(trip.miles.pickup.end || '');
   const [diner, setDiner] = useState(trip.diner || '');
   const [orderProvider, setOrderProvider] = useState(trip.orderProvider);
   const [restaurant, setRestaurant] = useState(trip.restaurant || '');
   const clientList = currentUser ? currentUser.clientList : {};
   const nextPage = '/shift/departure';
 
+  const timeStamp = createStamp({
+    title: 'time', 
+    stampValue: stampDate, 
+    stage: 'pickup'
+  });
+
+  const odomStamp = createStamp({
+    title: 'miles', 
+    stampValue: odometer, 
+    stage: 'pickup'
+  });
+
+  const end = {
+    time: stampDate,
+    distance: odometer
+  }
+
+  const stampInputs = [timeStamp, odomStamp];
+
+  const tripData = {
+    diner,
+    restaurant,
+    orderProvider,
+    stampInputs,
+    end
+  };
+
   const updateTripPickup = () => {
-    const timeStamp = createStamp({
-      title: 'time', 
-      stampValue: Date.now(), 
-      stage: 'pickup'
-    });
-
-    const odomStamp = createStamp({
-      title: 'miles', 
-      stampValue: odometerStart, 
-      stage: 'pickup'
-    });
-
-    const stampInputs = [timeStamp, odomStamp];
-
-    const tripData = {
-      diner,
-      restaurant,
-      orderProvider,
-      stampInputs,
-    };
-
     setStage(nextPage);
     updateTrip(tripData);
   };
@@ -68,8 +76,8 @@ export default function Pickup({ trip, updateTrip, currentUser, setStage }) {
           type = "number"
           name = "odometer"
           placeholder = "Current Odometer"
-          onChange = {e => setOdometerStart(e.target.value)}
-          value = {odometerStart}
+          onChange = {e => setOdometer(e.target.value)}
+          value = {odometer}
         />
       </label>
 
