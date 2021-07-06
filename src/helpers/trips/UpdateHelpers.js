@@ -14,8 +14,14 @@ const stampManager = (stamps, stampInputs) => {
       stampCopy.start[title] = stampSet;
       stampCopy.stage = stage;
       stampCopy[placement][title] = stampValue;
+
+      if (stampCopy.end[title]) {
+        stampCopy.total[title] = stampCopy.end[title] - stampCopy.start[title];
+      }
     }
   });
+
+  console.log(stampCopy);
 
   return stampCopy;
 };
