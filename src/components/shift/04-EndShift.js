@@ -14,7 +14,7 @@ export default function EndShift({ shift, updateShift, setStage }) {
     })
 
     const odomStamp = createStamp({
-      title: 'miles',
+      title: 'distance',
       stampValue: odometerEnd,
       stage: 'endShift',
       placement: 'end'

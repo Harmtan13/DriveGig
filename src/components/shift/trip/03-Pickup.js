@@ -5,7 +5,7 @@ import { createStamp } from '../../../helpers/trips/TripHelpers';
 export default function Pickup({ trip, updateTrip, currentUser, setStage }) {
 
   const stampDate = Date.now();
-  const [odometer, setOdometer] = useState(trip.miles.pickup.end || '');
+  const [odometer, setOdometer] = useState(trip?.stageInfo?.pickup?.end || '');
   const [diner, setDiner] = useState(trip.diner || '');
   const [orderProvider, setOrderProvider] = useState(trip.orderProvider);
   const [restaurant, setRestaurant] = useState(trip.restaurant || '');
@@ -19,7 +19,7 @@ export default function Pickup({ trip, updateTrip, currentUser, setStage }) {
   });
 
   const odomStamp = createStamp({
-    title: 'miles', 
+    title: 'distance', 
     stampValue: odometer, 
     stage: 'pickup'
   });

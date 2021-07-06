@@ -15,8 +15,8 @@ export default function StartTrip({
   const stampDate = Date.now();
 const newTrip = tripsSort.active.length >= 2;
   const determineShiftStage = trip.id > 0 ? `nonActive-${shiftStageId}` : 'startShift';
-  const nextPage = '/shift/start-trip'
-  // const nextPage = '/shift/pickup'
+  // const nextPage = '/shift/start-trip'
+  const nextPage = '/shift/pickup'
 
   const [odometer, setOdometer] = useState(trip.startDistance || '');
 

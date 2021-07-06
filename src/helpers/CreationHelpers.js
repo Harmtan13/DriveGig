@@ -1,7 +1,7 @@
 const createShift = (totalShifts) => {
   const id = totalShifts
   const stageInfo = {
-
+    
   };
   const trips = [];
   const completed = false;

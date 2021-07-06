@@ -13,7 +13,7 @@ export default function EndTrip({
   shiftStageId 
 }) {
   const stampDate = Date.now();
-  const [odometer, setOdometer] = useState(trip.miles.delivery.end || '');
+  const [odometer, setOdometer] = useState(trip?.stageInfo?.delivery?.end || '');
   const [providerPay, setProviderPay] = useState(trip.pay.provider || '');
   const [tip, setTip] = useState(trip.pay.tip || '');
   const total = (Number(providerPay || 0) * 100 + Number(tip || 0) * 100) / 100
@@ -31,7 +31,7 @@ export default function EndTrip({
 });
 
   const odomStamp = createStamp({
-    title: 'miles', 
+    title: 'distance', 
     stampValue: odometer, 
     stage: 'delivery', 
     switchTrigger
