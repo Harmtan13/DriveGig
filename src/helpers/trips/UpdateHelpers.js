@@ -14,27 +14,17 @@ const stampManager = (stamps, stampInputs) => {
       stampCopy.start[title] = stampSet;
       stampCopy.stage = stage;
       stampCopy[placement][title] = stampValue;
-
-      console.log(stampCopy);
     }
   });
 
   return stampCopy;
 };
 
-const setUpdatedTrip = (trip, tripInfo, stamps) => {
+const setUpdatedTrip = (trip, tripInfo, stampManager) => {
   const tripCopy = { ...trip, ...tripInfo };
+  const {stage, ...stamps} = stampManager
 
-  Object.entries(stamps).forEach((stamp) => {
-    const stampName = stamp[0];
-    const stampInfo = stamp[1];
-
-    const updateStamp = {...tripCopy[stampName]};
-
-    updateStamp[stampInfo.stage] = stampInfo.stampSet;
-
-    tripCopy[stampName] = updateStamp;
-  });
+  tripCopy.stageInfo[stage] = stamps;
 
   return tripCopy;
 };
