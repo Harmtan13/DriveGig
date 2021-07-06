@@ -1,6 +1,7 @@
 const createShift = (totalShifts) => {
   const id = totalShifts
   const miles = {};
+  const stageInfo = {};
   const time = {};
   const trips = [];
   const completed = false;
@@ -10,6 +11,7 @@ const createShift = (totalShifts) => {
     miles,
     time,
     trips,
+    stageInfo,
     completed,
   };
 };
@@ -19,6 +21,13 @@ const createTrip = (totalTrips) => {
   const diner = '';
   const restaurant = '';
   const orderProvider = '';
+  const stageInfo = {
+    pickup: {
+      start: {},
+      end: {},
+      total: {}
+    }
+  }
   const miles = {
     pickup: {},
     delivery: {}
@@ -34,25 +43,28 @@ const createTrip = (totalTrips) => {
   };
   const completed = false;
 
-  return { id, orderProvider, diner, restaurant, miles, time, pay, completed };
+  return { id, orderProvider, diner, restaurant, stageInfo, miles, time, pay, completed };
 };
 
 const createStamps = () => {
-  const miles = {
-    stage: 'pickup',
-    stampSet: {
-      start: 0
-    }
-  };
+  const stage = 'pickup';
 
-  const time = {
-    stage: 'pickup',
-    stampSet: {
-      start: 0
-    }
-  };
+  const start = {
+    time: 0,
+    distance: 0
+  }
 
-  return { miles, time };
+  const end = {
+    time: 0,
+    distance: 0
+  }
+
+  const total = {
+    time: 0,
+    distance: 0
+  }
+
+  return {stage, start, end, total };
 };
 
 export { createShift, createTrip, createStamps };

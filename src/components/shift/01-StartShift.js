@@ -5,6 +5,7 @@ import { createStamp } from './../../helpers/trips/TripHelpers';
 export default function StartShift({ shift, setStage, updateShift }) {
   const [odometerStart, setOdometerStart] = useState(shift.miles?.startShift?.start || '');
 
+  // const nextPage = '/start-shift'
   const nextPage = '/shift'
 
   const startShift = () => {
@@ -16,7 +17,7 @@ export default function StartShift({ shift, setStage, updateShift }) {
     })
 
     const odomStamp = createStamp({
-      title: 'miles',
+      title: 'distance',
       stampValue: odometerStart,
       stage: 'startShift',
       placement: 'start'

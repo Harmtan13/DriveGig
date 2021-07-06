@@ -1,31 +1,25 @@
 const stampManager = (stamps, stampInputs) => {
-  const updatedStamps = stamps;
+  const stampCopy = stamps;
 
   stampInputs.forEach((stamp) => {
     const { title, stampValue, stage, placement, switchTrigger } = stamp;
 
     if (stampValue) {
-      const stampCopy = { ...updatedStamps[title] };
-
       const determineSliceBehavior = () => stampCopy.stage === stage && !switchTrigger;
-      const takeFirstStamp = () => ({start: stampCopy.stampSet.start});
-      const takeLastStamp = () => ({start: stampCopy.stampSet.end});
+      const takeFirstStamp = () => (stampCopy?.start[title]);
+      const takeLastStamp = () => (stampCopy?.end[title]);
 
       const stampSet = determineSliceBehavior() ? takeFirstStamp() : takeLastStamp();
 
-      stampSet[placement] = stampValue;
+      stampCopy.start[title] = stampSet;
+      stampCopy.stage = stage;
+      stampCopy[placement][title] = stampValue;
 
-      const newStamp = {
-        ...stampCopy,
-        stampSet,
-        stage
-      };
-
-      updatedStamps[title] = newStamp;
+      console.log(stampCopy);
     }
   });
 
-  return updatedStamps;
+  return stampCopy;
 };
 
 const setUpdatedTrip = (trip, tripInfo, stamps) => {
