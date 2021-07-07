@@ -22,13 +22,20 @@ const stampManager = (stamps, stampInputs) => {
   });
 
   console.log(stampCopy);
-
   return stampCopy;
 };
 
 const setUpdatedTrip = (trip, tripInfo, stampManager) => {
   const tripCopy = { ...trip, ...tripInfo };
-  const {stage, ...stamps} = stampManager
+  const {stage, ...extractedStamps} = stampManager
+
+  const stamps =  JSON.parse(JSON.stringify(extractedStamps));
+
+  if (stage === 'waitTime') {
+    delete stamps.start.distance
+    delete stamps.end.distance
+    delete stamps.total.distance
+  }
 
   tripCopy.stageInfo[stage] = stamps;
 
@@ -62,6 +69,7 @@ export default function sortedState(tripData) {
   const { stamps, trip, trips, stampInputs, ...tripProps } = tripData;
 
   const sortedStamps = stampManager(stamps, stampInputs, trip.id);
+  console.log(sortedStamps);
   const updatedTrip = setUpdatedTrip(trip, tripProps, sortedStamps);
   const updatedTrips = setUpdatedTrips(trips, updatedTrip);
 
