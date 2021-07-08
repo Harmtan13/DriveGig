@@ -1,5 +1,5 @@
 const round = (number) => {
-  return Number(Math.round(number+'e'+2)+'e-'+2);
+  return Number(Math.round(`${number}e2`)+`e-2`);
 }
 
 const currencyAddition = (amount1, amount2) => {
