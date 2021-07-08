@@ -4,7 +4,7 @@ import { createStamp } from '../../../helpers/trips/TripHelpers';
 
 export default function Departure({trip, updateTrip, tripsSort, setStage }) {
   const maxTrips = !(tripsSort.active.length >= 2);
-  const nextPage = '/shift/start-trip';
+  const nextPage = '/shift/pickup';
   const stampDate = Date.now();
 
   const timeStamp = createStamp({
@@ -17,13 +17,13 @@ export default function Departure({trip, updateTrip, tripsSort, setStage }) {
 
   const headOutLink = () => (maxTrips ? '/shift/delivery' : '/shift/trips');
 
-  const end = {
-    time: stampDate,
+  const total = {
+    time: stampDate - trip.start.time,
   }
 
   const tripData = {
     stampInputs,
-    end
+    total
   }
 
   const updateTripDeparture = () => {
@@ -34,13 +34,13 @@ export default function Departure({trip, updateTrip, tripsSort, setStage }) {
   const addTrip = () => {
     const sequenceTrigger = true;
 
-    const tripData = {
+    const AddonData = {
       ...tripData,
       sequenceTrigger,
     };
 
     setStage(nextPage);
-    updateTrip(tripData);
+    updateTrip(AddonData);
   };
 
   return (

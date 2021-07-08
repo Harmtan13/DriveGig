@@ -62,15 +62,15 @@ export default function TripRouter(
 
       const stampInputs = [
         createStamp({
-          title: 'miles', 
-          stampValue: stamps.miles.stampSet.end, 
+          title: 'distance', 
+          stampValue: stamps.end.distance, 
           stage: 'pickup', 
           placement: 'start'
       }),
 
         createStamp({
           title: 'time',
-          stampValue: stamps.time.stampSet.end, 
+          stampValue: stamps.end.time, 
           stage: 'pickup', 
           placement: 'start'
         }),

@@ -24,9 +24,9 @@ export default function Pickup({ trip, updateTrip, currentUser, setStage }) {
     stage: 'pickup'
   });
 
-  const end = {
-    time: stampDate,
-    distance: odometer
+  const total = {
+    time: stampDate - trip.start.time,
+    distance: odometer - trip.start.distance
   }
 
   const stampInputs = [timeStamp, odomStamp];
@@ -36,7 +36,7 @@ export default function Pickup({ trip, updateTrip, currentUser, setStage }) {
     restaurant,
     orderProvider,
     stampInputs,
-    end
+    total
   };
 
   const updateTripPickup = () => {

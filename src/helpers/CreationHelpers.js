@@ -1,15 +1,11 @@
 const createShift = (totalShifts) => {
   const id = totalShifts
-  const stageInfo = {
-    
-  };
   const trips = [];
   const completed = false;
 
   return {
     id,
     trips,
-    stageInfo,
     completed,
   };
 };
@@ -19,20 +15,13 @@ const createTrip = (totalTrips) => {
   const diner = '';
   const restaurant = '';
   const orderProvider = '';
-  const stageInfo = {
-    pickup: {
-      start: {},
-      end: {},
-      total: {}
-    }
-  }
   const pay = {
     provider: '',
     tip: '',
   };
   const completed = false;
 
-  return { id, orderProvider, diner, restaurant, stageInfo, pay, completed };
+  return { id, orderProvider, diner, restaurant, pay, completed };
 };
 
 const createStamps = () => {

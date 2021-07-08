@@ -35,7 +35,6 @@ const newTrip = tripsSort.active.length >= 2;
   });
 
   const startTrip = () => {
-    
     const date = new Date(stampDate).setUTCHours(0,0,0,0);
     const start = {
       time: stampDate,

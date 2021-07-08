@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createStamp } from '../../../helpers/trips/TripHelpers';
+import { round, runRate, currencyAddition } from './../../../helpers/AppHelpers';
 
 export default function EndTrip({ 
   trip, 
@@ -15,8 +16,10 @@ export default function EndTrip({
   const stampDate = Date.now();
   const [odometer, setOdometer] = useState(trip?.stageInfo?.delivery?.end || '');
   const [providerPay, setProviderPay] = useState(trip.pay.provider || '');
-  const [tip, setTip] = useState(trip.pay.tip || '');
-  const total = (Number(providerPay || 0) * 100 + Number(tip || 0) * 100) / 100
+  const [tipPay, setTip] = useState(trip.pay.tip || '');
+  const pay = currencyAddition(tipPay, providerPay);
+  const time = stampDate - trip.start.time 
+  const distance = odometer - trip.start.distance
 
   const currentTrips = tripsSort.active.length >= 2;
 
@@ -28,35 +31,41 @@ export default function EndTrip({
     stampValue: Date.now(), 
     stage: 'delivery', 
     switchTrigger
-});
+  });
 
   const odomStamp = createStamp({
     title: 'distance', 
     stampValue: odometer, 
     stage: 'delivery', 
     switchTrigger
-});
+  });
+
+  const stampInputs = [timeStamp, odomStamp];
 
   const completed = true;
-
-  const pay = {
-    provider: providerPay,
-    tip,
-    total
-  };
 
   const end = {
     time: stampDate,
     distance: odometer
   }
 
-  const stampInputs = [timeStamp, odomStamp];
+  const total = {
+    time,
+    distance,
+    providerPay: providerPay,
+    tipPay,
+    pay,
+    perDistancePay: round(pay / distance),
+    payRunRate: runRate(time, pay),
+  }
 
   const tripData = {
     completed,
     stampInputs,
     pay,
     switchTriggerToggle: triggerToggle(),
+    end,
+    total
   };
 
   const exportShiftData = () => {
@@ -129,7 +138,7 @@ export default function EndTrip({
           type = "number"
           name = "tip"
           placeholder = "000000"
-          value = {tip}
+          value = {tipPay}
           onChange = {e => setTip(e.target.value)}
         />
       </label>
@@ -137,7 +146,7 @@ export default function EndTrip({
       <br />
       <br />
 
-      <p>{`$${total}` || '$0.00'} </p>
+      <p>{`$${pay}` || '$0.00'} </p>
 
       <br />
       <br />
