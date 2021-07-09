@@ -4,11 +4,12 @@ import { createStamp } from './../../helpers/trips/TripHelpers';
 
 export default function EndShift({ shift, updateShift, setStage }) {
   const [odometerEnd, setOdometerEnd] = useState('');
+  const stampDate = Date.now();
 
   const endShift = () => {
     const timeStamp = createStamp({
       title: 'time',
-      stampValue: Date.now(),
+      stampValue: stampDate,
       stage: 'endShift',
       placement: 'end'
     })
@@ -21,10 +22,21 @@ export default function EndShift({ shift, updateShift, setStage }) {
     })
 
     const stampInputs = [timeStamp, odomStamp];
+
     const completed = true;
+
+    const end = {
+      time: stampDate,
+      distance: odometerEnd
+    }
+
+    const total = {
+      
+    }
 
     const shiftData = {
       completed,
+      end,
       stampInputs
     }
 

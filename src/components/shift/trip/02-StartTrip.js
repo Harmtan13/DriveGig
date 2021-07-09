@@ -20,6 +20,8 @@ const newTrip = tripsSort.active.length >= 2;
 
   const [odometer, setOdometer] = useState(trip.startDistance || '');
 
+  console.log(shiftStageId);
+
   const timeStamp = createStamp({
     title:'time', 
     stampValue: stampDate, 

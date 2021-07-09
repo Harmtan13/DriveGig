@@ -6,12 +6,13 @@ export default function StartShift({ shift, setStage, updateShift }) {
   const [odometerStart, setOdometerStart] = useState(shift.miles?.startShift?.start || '');
 
   // const nextPage = '/start-shift'
-  const nextPage = '/shift'
+  const nextPage = '/shift';
+  const stampDate = Date.now();
 
   const startShift = () => {
     const timeStamp = createStamp({
       title: 'time',
-      stampValue: Date.now(),
+      stampValue: stampDate,
       stage: 'startShift',
       placement: 'start'
     })
@@ -25,18 +26,19 @@ export default function StartShift({ shift, setStage, updateShift }) {
 
     const stampInputs = [timeStamp, odomStamp];
 
+    const start = {
+      time: stampDate,
+      distance: odometerStart
+    }
+
     const shiftData = {
       stampInputs,
+      start
     }
 
     updateShift(shiftData);
 
-    // const updatedShift = { ...shift, miles: odometer, time: timeStamps };
-
-
     setStage(nextPage);
-    // setShift(updatedShift);
-    // localStorage.setItem('shift', JSON.stringify(updatedShift));
   };
 
   return (

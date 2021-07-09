@@ -21,6 +21,8 @@ export default function EndTrip({
   const time = stampDate - trip.start.time 
   const distance = odometer - trip.start.distance
 
+  console.log(shiftStageId);
+
   const currentTrips = tripsSort.active.length >= 2;
 
   const determineLink = () => (currentTrips ? '/shift/trips' : '/shift');
@@ -71,6 +73,7 @@ export default function EndTrip({
   const exportShiftData = () => {
     const placement = 'end';
     const stageId = shiftStageId == null ? trip.id.toString() : shiftStageId.concat(`-${trip.id}`);
+    console.log(stageId);
     setShiftStageId(stageId);
     const stage = !shiftStageId ? `Trip-${stageId}` : `Trips-${stageId}`;
 
