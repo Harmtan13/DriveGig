@@ -28,11 +28,10 @@ export default function ShiftRouter({ currentUser, stage, setStage, addShiftsToU
 
   const [shiftStageId, setShiftStageId] = useState(getSavedState('shiftStageId'));
 
-  console.log(shiftStageId);
-
   const updateShift = (shiftData) => {
+    const {stageId, ...data} = shiftData;
     const sortProps = {
-      ...shiftData,
+      ...data,
       trip: shift,
       trips: [],
       stamps
@@ -40,14 +39,15 @@ export default function ShiftRouter({ currentUser, stage, setStage, addShiftsToU
 
     const { updatedTrip, updatedTrips, sortedStamps} = sortedState(sortProps);
 
+    setShift(updatedTrip);
+    setStamps(sortedStamps);
+    if (stageId || stageId === null) setShiftStageId(stageId);
+
     setSavedState({
       shift: updatedTrip,
       shiftStamps: sortedStamps,
-      shiftStageId
+      shiftStageId: stageId || stageId === null ? stageId : shiftStageId
     })
-
-    setShift(updatedTrip);
-    setStamps(sortedStamps);
   };
 
   useEffect(() => {

@@ -64,7 +64,7 @@ const newTrip = tripsSort.active.length >= 2;
         stampInputs
       }
 
-      return shiftData;
+      return trip.id > 0 ? {...shiftData, shiftId: null} : shiftData
     }
 
     setStage(nextPage);

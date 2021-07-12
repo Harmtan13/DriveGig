@@ -73,8 +73,8 @@ export default function EndTrip({
   const exportShiftData = () => {
     const placement = 'end';
     const stageId = shiftStageId == null ? trip.id.toString() : shiftStageId.concat(`-${trip.id}`);
-    console.log(stageId);
-    setShiftStageId(stageId);
+    // console.log(stageId);
+    // setShiftStageId(stageId);
     const stage = !shiftStageId ? `Trip-${stageId}` : `Trips-${stageId}`;
 
     const stampInputs = [
@@ -83,7 +83,8 @@ export default function EndTrip({
     ];
 
     const shiftData = {
-      stampInputs
+      stampInputs,
+      stageId
     }
 
     return shiftData;
