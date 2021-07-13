@@ -21,9 +21,14 @@ export default function EndTrip({
   const time = stampDate - trip.start.time 
   const distance = odometer - trip.start.distance
 
-  console.log(shiftStageId);
-
   const currentTrips = tripsSort.active.length >= 2;
+  const stageId = 
+    shiftStageId ==  null ? 
+      trip.id.toString() : 
+      shiftStageId.concat(`-${trip.id}`)
+        .split('-')
+        .sort()
+        .join('-');
 
   const determineLink = () => (currentTrips ? '/shift/trips' : '/shift');
   const triggerToggle = () => (!!currentTrips);
@@ -72,7 +77,6 @@ export default function EndTrip({
 
   const exportShiftData = () => {
     const placement = 'end';
-    const stageId = shiftStageId == null ? trip.id.toString() : shiftStageId.concat(`-${trip.id}`);
     const stage = !shiftStageId ? `Trip-${stageId}` : `Trips-${stageId}`;
 
     const stampInputs = [
@@ -90,9 +94,11 @@ export default function EndTrip({
 
   const endTrip = () => {
     setStage(determineLink());
+    setShiftStageId(stageId)
     updateTrip(tripData);
 
     if (!currentTrips) {
+      console.log('I ran');
       updateShift(exportShiftData());
     };
   };
