@@ -13,14 +13,12 @@ export default function StartTrip({
 }) {
 
   const stampDate = Date.now();
-const newTrip = tripsSort.active.length >= 2;
+  const newTrip = tripsSort.active.length >= 2;
   const determineShiftStage = trip.id > 0 ? `nonActive-${shiftStageId}` : 'startShift';
   // const nextPage = '/shift/start-trip'
   const nextPage = '/shift/pickup'
 
   const [odometer, setOdometer] = useState(trip.startDistance || '');
-
-  console.log(shiftStageId);
 
   const timeStamp = createStamp({
     title:'time', 
@@ -65,13 +63,12 @@ const newTrip = tripsSort.active.length >= 2;
         stampInputs
       }
 
-      return trip.id > 0 ? {...shiftData, shiftId: null} : shiftData
+      return trip.id > 0 ? {...shiftData, stageId: null} : shiftData
     }
 
     setStage(nextPage);
 
     if (!newTrip) {
-      if (trip.id > 0) setShiftStageId(null);
       updateShift(exportShiftData());
     };
 

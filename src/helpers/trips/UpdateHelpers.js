@@ -22,7 +22,6 @@ const stampManager = (stamps, stampInputs) => {
     }
   });
 
-  console.log(stampCopy);
   return stampCopy;
 };
 
