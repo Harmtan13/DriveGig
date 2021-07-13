@@ -60,19 +60,26 @@ export default function TripRouter(
       const { updatedTrips } = sortedState(sortProps);
       const newTrip = createTrip(tripsSort.total.length);
 
+      const start = {
+        time: stamps.end.time,
+        distance: stamps.end.distance
+      }
+
       const stampInputs = [
         createStamp({
           title: 'distance', 
-          stampValue: stamps.end.distance, 
+          stampValue: start.distance, 
           stage: 'pickup', 
-          placement: 'start'
+          placement: 'start',
+          switchTrigger: true
       }),
 
         createStamp({
           title: 'time',
-          stampValue: stamps.end.time, 
+          stampValue: start.time, 
           stage: 'pickup', 
-          placement: 'start'
+          placement: 'start',
+          switchTrigger: true
         }),
       ];
 
@@ -81,10 +88,13 @@ export default function TripRouter(
         stamps: createStamps(),
         trip: newTrip,
         trips: updatedTrips,
+        start
       };
 
       return sortedState(newTripData);
     };
+
+    addOnSequence();
 
     const determineSequence = sequenceTrigger ? addOnSequence() : standardSequence();
 

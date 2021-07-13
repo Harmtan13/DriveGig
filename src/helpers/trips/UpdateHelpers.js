@@ -4,6 +4,7 @@ const stampManager = (stamps, stampInputs) => {
   stampInputs.forEach((stamp) => {
     const { title, stampValue, stage, placement, switchTrigger } = stamp;
 
+
     if (stampValue) {
       const determineSliceBehavior = () => stampCopy.stage === stage && !switchTrigger;
       const takeFirstStamp = () => (stampCopy?.start[title]);
@@ -21,6 +22,7 @@ const stampManager = (stamps, stampInputs) => {
     }
   });
 
+  console.log(stampCopy);
   return stampCopy;
 };
 

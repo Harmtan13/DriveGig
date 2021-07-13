@@ -11,24 +11,32 @@ export default function Departure({trip, updateTrip, tripsSort, setStage }) {
     title: 'time', 
     stampValue: stampDate, 
     stage: 'waitTime'});
+
+  console.log(stampDate);
+  
   const stampInputs = [timeStamp];
 
   const endTime = stampDate;
 
   const headOutLink = () => (maxTrips ? '/shift/delivery' : '/shift/trips');
 
-  const total = {
-    time: stampDate - trip.start.time,
-  }
-
   const tripData = {
     stampInputs,
-    total
   }
 
   const updateTripDeparture = () => {
     setStage(headOutLink());
-    updateTrip(tripData);
+
+    const total = {
+      time: stampDate - trip.start.time,
+    }
+
+    const updateData = {
+      ...tripData,
+      total
+    }
+
+    updateTrip(updateData);
   };
 
   const addTrip = () => {
