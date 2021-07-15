@@ -42,7 +42,7 @@ export default function StartTrip({
       distance: odometer
     }
 
-    const stampInputs = newTrip ? [] : [timeStamp, odomStamp];
+    const stampInputs = [timeStamp, odomStamp];
 
     const tripData = {
       stampInputs,
@@ -78,20 +78,19 @@ export default function StartTrip({
   return (
     <div>
 
-      {!newTrip && (
-        <label htmlFor = "odometer">
-          <input
-            type = "number"
-            name = "odometer"
-            placeholder = "Current Odometer"
-            onChange = {e => setOdometer(e.target.value)}
-            value = {odometer}
-          />
-        </label>
-      )}
+      <label htmlFor = "odometer">
+        <input
+          type = "number"
+          name = "odometer"
+          placeholder = "Current Odometer"
+          onChange = {e => setOdometer(e.target.value)}
+          value = {odometer}
+        />
+      </label>
 
-      {!newTrip && (<br />)}
-      {!newTrip && (<br />)}
+
+      <br />
+      <br />
 
       <Link to = {nextPage}>
         <button type = "submit" onClick = {startTrip}>Head for Pickup</button>

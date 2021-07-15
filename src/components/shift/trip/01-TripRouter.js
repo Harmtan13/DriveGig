@@ -94,8 +94,6 @@ export default function TripRouter(
       return sortedState(newTripData);
     };
 
-    addOnSequence();
-
     const determineSequence = sequenceTrigger ? addOnSequence() : standardSequence();
 
     const { updatedTrip, updatedTrips, sortedStamps } = determineSequence;

@@ -1,3 +1,5 @@
+import { currencyAddition } from "../AppHelpers";
+
 const stampManager = (stamps, stampInputs) => {
   const stampCopy = stamps;
 
@@ -65,8 +67,26 @@ const setUpdatedTrips = (trips, trip) => {
   return determineTripPlacement() ? replaceTripsArray() : updateTripsArray();
 };
 
+const statsCalculator = (item, stamps) => {
+  const total = {}
+   
+  stamps.forEach((stamp) => {
+    const currentValue = stamp.stampValue;
+    const startValue = item?.start?.[stamp?.title] || null;
+    const shiftBreak = item?.total?.break || 0;
+
+    const totalValue = (currentValue - startValue) - shiftBreak;
+    
+    total[stamp.title] = startValue !== null ? totalValue : null
+  })
+
+  return total;
+}
+
 export default function sortedState(tripData) {
   const { stamps, trip, trips, stampInputs, ...tripProps } = tripData;
+
+  tripProps.total = {...statsCalculator(trip, stampInputs)};
 
   const sortedStamps = stampManager(stamps, stampInputs, trip.id);
   const updatedTrip = setUpdatedTrip(trip, tripProps, sortedStamps);

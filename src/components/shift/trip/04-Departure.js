@@ -11,8 +11,6 @@ export default function Departure({trip, updateTrip, tripsSort, setStage }) {
     title: 'time', 
     stampValue: stampDate, 
     stage: 'waitTime'});
-
-  console.log(stampDate);
   
   const stampInputs = [timeStamp];
 
@@ -28,6 +26,7 @@ export default function Departure({trip, updateTrip, tripsSort, setStage }) {
     setStage(headOutLink());
 
     const total = {
+      ...trip.total,
       time: stampDate - trip.start.time,
     }
 

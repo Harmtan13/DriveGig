@@ -98,7 +98,6 @@ export default function EndTrip({
     updateTrip(tripData);
 
     if (!currentTrips) {
-      console.log('I ran');
       updateShift(exportShiftData());
     };
   };
